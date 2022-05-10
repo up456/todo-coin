@@ -8,13 +8,15 @@ import MyPage from './page/my_page/my_page';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/calendar" element={<CalendarPage />} />
-        <Route path="/my" element={<MyPage />} />
-      </Routes>
-    </BrowserRouter>
+    <div className={styles.app}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/calendar" element={<CalendarPage />} />
+          <Route path="/my" element={<MyPage />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
