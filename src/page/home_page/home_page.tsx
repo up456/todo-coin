@@ -1,6 +1,12 @@
-import styles from './home_page.module.css';
 import React from 'react';
+import styles from './home_page.module.css';
 
-const HomePage = () => <h1>홈 페이지입니다.</h1>;
+import Header from '../../components/header/header';
+
+const HomePage = () => (
+  <section className={styles.homePage}>
+    <Header />
+  </section>
+);
 
 export default HomePage;

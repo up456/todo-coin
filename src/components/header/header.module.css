@@ -1,0 +1,73 @@
+@value mainGray, mainGreen, mainWhite, makerBoxShadow from '/src/common/color.css';
+
+.header {
+  font-size: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 0.3em;
+  padding-bottom: 0.7em;
+}
+.itemBox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.itemIcon {
+  width: 3em;
+  height: 3em;
+  background-color: mainGreen;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+
+  color: mainWhite;
+}
+.itemInfo {
+  height: 2em;
+  border: 3px solid mainGreen;
+  border-radius: 0.3em;
+  box-shadow: makerBoxShadow;
+  padding-left: 1.5em;
+  padding-right: 1em;
+  flex-shrink: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+
+  transform: translateX(-1em);
+  z-index: -1;
+}
+.imageBox {
+  width: 3em;
+  height: 3em;
+  border: 4px solid mainGreen;
+  border-radius: 50%;
+
+  background-image: url('/public/asset/default_profile.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  cursor: pointer;
+}
+.imageBox > img {
+  visibility: hidden;
+}
+
+.line {
+  width: 90%;
+  max-width: 35em;
+  height: 1.2px;
+  border-radius: 1em;
+  background-color: mainGray;
+  margin: 0 auto;
+}

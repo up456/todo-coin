@@ -1,0 +1,7 @@
+/* Main Color */
+@value mainGreen: #5FBE7A;
+@value mainWhite: #fff;
+@value mainGray: #999;
+
+/* Shadow */
+@value makerBoxShadow: 4px 4px 5px -2px rgba(96, 96, 96, 0.6);
