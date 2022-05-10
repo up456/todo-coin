@@ -1,7 +1,7 @@
 @value mainGray, mainGreen, mainWhite, makerBoxShadow from '/src/common/color.css';
 
 .header {
-  font-size: 20px;
+  font-size: 1.2rem;
 
   display: flex;
   justify-content: center;
