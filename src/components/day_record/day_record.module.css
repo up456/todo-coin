@@ -1,0 +1,74 @@
+@value textGray, mainGreen, pointGray, makerBoxShadow, mainWhite, mainGray from '/src/common/color.css';
+
+.dayRecord {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid #000;
+  border-radius: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  margin: 1em;
+
+  background-color: mainWhite;
+  border: none;
+  box-shadow: makerBoxShadow;
+}
+.date {
+  align-self: start;
+  margin: 0;
+}
+
+.dayInfoContainer {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(auto, 75px));
+  justify-content: space-around;
+  margin: 2em;
+}
+.dayInfoBox {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.8em 0;
+
+  border-radius: 0.5em;
+  background-color: mainGray;
+
+  transition: all 200ms ease-in;
+  cursor: default;
+}
+.dayInfoBox:hover {
+  box-shadow: makerBoxShadow;
+  transform: scale(1.1);
+}
+.infoTitle {
+  margin: 0;
+  font-size: 0.5rem;
+  color: textGray;
+  font-weight: bold;
+}
+.infoValue {
+  margin: 0;
+  margin-top: 0.1em;
+  font-size: 1.5rem;
+  color: mainGreen;
+}
+.dayInfoBox:first-child .infoValue {
+  margin-left: 0.4em;
+}
+.percent {
+  margin-left: -0.5em;
+  font-size: 0.8rem;
+}
+.starsBox {
+  font-size: 1rem;
+}
+.offStar {
+  font-size: 1.3rem;
+  color: pointGray;
+}

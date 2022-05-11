@@ -1,0 +1,19 @@
+@value mainGreen,makerBoxShadow,  mainWhite from '/src/common/color.css';
+
+.btn {
+  width: 68%;
+  border: none;
+  border-radius: 0.3em;
+  font-size: 1.2rem;
+  padding: 0.4em 0;
+
+  background-color: mainGreen;
+  color: mainWhite;
+  opacity: 0.9;
+
+  cursor: pointer;
+}
+.btn:hover {
+  box-shadow: makerBoxShadow;
+  opacity: 1;
+}
