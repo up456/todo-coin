@@ -3,14 +3,16 @@ import React from 'react';
 import Button from '../button/button';
 import { IDummy } from '../../App';
 import StarsBox from '../stars_box/stars_box';
+import { useNavigate } from 'react-router-dom';
 
 interface IDayRecord {
   data: IDummy;
   date: string;
 }
 const DayRecord = ({ data, date }: IDayRecord) => {
+  const navigate = useNavigate();
   const goToTodoList = () => {
-    console.log('todo-list페이지로 이동');
+    navigate(`/todo/${date}`);
   };
   const dateObj = new Date(date);
   const recordData = data[1].record[date];

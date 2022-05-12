@@ -97,7 +97,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/todo" element={<TodoPage />} />
+          <Route path="/todo/:id" element={<TodoPage />} />
           <Route path="/calendar" element={<CalendarPage dummy={dummy} />} />
           <Route path="/my" element={<MyPage />} />
         </Routes>
