@@ -1,0 +1,15 @@
+@value pointGray from '/src/common/color.css';
+
+.starsBox {
+  font-size: 1rem;
+  position: relative;
+}
+.onStar {
+  width: 1.2rem;
+  transform: translateY(3px);
+  margin-right: 2.5px;
+}
+.offStar {
+  font-size: 1.35rem;
+  color: pointGray;
+}

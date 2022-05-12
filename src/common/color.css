@@ -1,13 +1,15 @@
 /* Main Color */
-@value mainGreen: #5FBE7A;
+@value mainGreen: #5EDE99;
 @value mainWhite: #fff;
 @value mainGray: #ebeef0;
 
 /* Pint Color */
 @value pointGray: #a0a2a3;
+@value pointGreen: #E9FCE9;
 
 /* textColor */
 @value textGray: #606060;
+@value textGreen: #379457;
 
 /* Shadow */
 @value makerBoxShadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.25);
