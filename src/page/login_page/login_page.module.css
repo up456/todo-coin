@@ -1,0 +1,30 @@
+@value textGreen, mainGreen, pointGray, pointGreen from '/src/common/color.css';
+
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5em;
+}
+
+.logoContainer {
+  display: flex;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.logoTitle {
+  margin-left: 0.2em;
+}
+
+.mainText {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+.subText {
+  margin-top: 0.5em;
+  margin-bottom: 3em;
+  font-size: 0.8rem;
+  color: mainGreen;
+}
