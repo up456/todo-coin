@@ -2,9 +2,10 @@ import React from 'react';
 import styles from './app.module.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from './page/home_page/home_page';
+import TodoPage from './page/todo_page/todo_page';
 import CalendarPage from './page/calendar_page/calendar_page';
 import MyPage from './page/my_page/my_page';
+import LoginPage from './page/login_page/login_page';
 
 export interface TypeTodoList {
   todo: string;
@@ -95,8 +96,8 @@ function App() {
     <div className={styles.app}>
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<LoginPage />} /> */}
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/todo" element={<TodoPage />} />
           <Route path="/calendar" element={<CalendarPage dummy={dummy} />} />
           <Route path="/my" element={<MyPage />} />
         </Routes>
