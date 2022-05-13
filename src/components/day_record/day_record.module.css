@@ -71,3 +71,10 @@
   font-weight: bold;
   padding: 4em;
 }
+
+.createTodoBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 4em;
+}

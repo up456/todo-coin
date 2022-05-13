@@ -4,6 +4,7 @@ import Button from '../button/button';
 import { IDummy } from '../../App';
 import StarsBox from '../stars_box/stars_box';
 import { useNavigate } from 'react-router-dom';
+import { isDayAfterTodayOrToday } from '../../util/calc';
 
 interface IDayRecord {
   data: IDummy;
@@ -14,8 +15,9 @@ const DayRecord = ({ data, date }: IDayRecord) => {
   const goToTodoList = () => {
     navigate(`/todo/${date}`);
   };
+  const userId = sessionStorage.getItem('userId') || '';
   const dateObj = new Date(date);
-  const recordData = data[1].record[date];
+  const recordData = data[userId]?.record[date];
 
   return (
     <section className={styles.dayRecord}>
@@ -46,10 +48,12 @@ const DayRecord = ({ data, date }: IDayRecord) => {
           </div>
           <Button text={'to-do 리스트 자세히 보기'} onClick={goToTodoList} />
         </>
+      ) : isDayAfterTodayOrToday(date) ? (
+        <div className={styles.createTodoBox}>
+          <Button text={'to-do 리스트 작성하기'} onClick={goToTodoList} />
+        </div>
       ) : (
-        <>
-          <p className={styles.noData}>저장된 기록이 없습니다.</p>
-        </>
+        <p className={styles.noData}>저장된 기록이 없습니다.</p>
       )}
     </section>
   );

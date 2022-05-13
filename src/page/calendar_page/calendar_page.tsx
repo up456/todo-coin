@@ -1,13 +1,26 @@
 import styles from './calendar_page.module.css';
-import React, { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import Header from '../../components/header/header';
 import DayRecord from '../../components/day_record/day_record';
 import { IDummy } from '../../App';
 import Calendar from '../../components/calendar/calendar';
+import AuthService from '../../service/authService';
+import { useNavigate } from 'react-router-dom';
+import { callToday } from '../../util/calc';
 
-const CalendarPage = ({ dummy }: { dummy: IDummy }) => {
-  const [date, setDate] = useState('2022-05-13');
+interface ICalendarPage {
+  dummy: IDummy;
+}
+const CalendarPage = ({ dummy }: ICalendarPage) => {
+  const navigate = useNavigate();
+  const [date, setDate] = useState(callToday());
+
+  const userId = sessionStorage.getItem('userId');
+
+  if (!userId) {
+    navigate('/', { replace: false });
+  }
 
   return (
     <section className={styles.calendarPage}>

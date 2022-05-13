@@ -1,8 +1,26 @@
 import styles from './login_page.module.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '../../components/button/button';
+import AuthService from '../../service/authService';
+import { useNavigate } from 'react-router-dom';
 
-const LoginPage = () => {
+interface ILoginPage {
+  authService: AuthService;
+}
+const LoginPage = ({ authService }: ILoginPage) => {
+  const navigate = useNavigate();
+
+  const onClick = async () => {
+    await authService.login();
+    const today = new Date().toISOString().slice(0, 10);
+    navigate(`/calendar`);
+  };
+
+  useEffect(() => {
+    const userId = sessionStorage.getItem('userId');
+    if (userId) navigate(`/calendar`);
+  }, []);
+
   return (
     <section className={styles.loginPage}>
       <div className={styles.logoContainer}>
@@ -14,7 +32,7 @@ const LoginPage = () => {
         <p className={styles.subText}>Welcome to To-do Coin</p>
       </div>
 
-      <Button text="Google Login" onClick={() => {}} />
+      <Button text="Google Login" onClick={onClick} />
     </section>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './app.module.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -6,6 +6,7 @@ import TodoPage from './page/todo_page/todo_page';
 import CalendarPage from './page/calendar_page/calendar_page';
 import MyPage from './page/my_page/my_page';
 import LoginPage from './page/login_page/login_page';
+import AuthService from './service/authService';
 
 export interface TypeTodoList {
   todo: string;
@@ -22,7 +23,7 @@ export interface TypeRecord {
   };
 }
 export interface IDummy {
-  [key: number]: {
+  [key: string]: {
     myInfo: {
       lv: number;
       exp: number;
@@ -34,7 +35,7 @@ export interface IDummy {
   };
 }
 const dummy: IDummy = {
-  1: {
+  UJfZT67ctBTaTp5y3otcU94xEYH2: {
     myInfo: {
       lv: 1,
       exp: 2,
@@ -91,15 +92,20 @@ const dummy: IDummy = {
   },
 };
 
+const authService = new AuthService();
+
 function App() {
   return (
     <div className={styles.app}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/todo/:id" element={<TodoPage />} />
+          <Route path="/" element={<LoginPage authService={authService} />} />
+          <Route path="/todo/:date" element={<TodoPage />} />
           <Route path="/calendar" element={<CalendarPage dummy={dummy} />} />
-          <Route path="/my" element={<MyPage />} />
+          <Route
+            path="/mypage"
+            element={<MyPage dummy={dummy} authService={authService} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>
