@@ -2,10 +2,10 @@ import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCgDnvM4emX4GtfS8RSu9XDvSKnAqFGCcM',
-  authDomain: 'todo-coin.firebaseapp.com',
-  projectId: 'todo-coin',
-  storageBucket: 'todo-coin.appspot.com',
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
 };
 
 // Initialize Firebase
