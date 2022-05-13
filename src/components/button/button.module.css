@@ -1,7 +1,7 @@
 @value mainGreen,makerBoxShadow,  mainWhite from '/src/common/color.css';
 
 .btn {
-  width: 68%;
+  width: 100%;
   border: none;
   border-radius: 0.3em;
   font-size: 1.2rem;
@@ -16,4 +16,10 @@
 .btn:hover {
   box-shadow: makerBoxShadow;
   opacity: 1;
+}
+
+.btn.reverse {
+  background-color: mainWhite;
+  color: mainGreen;
+  border: 1px solid mainGreen;
 }
