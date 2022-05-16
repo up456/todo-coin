@@ -1,8 +1,22 @@
 import styles from './line.module.css';
 import React from 'react';
 
-const Line = ({ width = '100%' }: { width?: string }) => {
-  return <div className={styles.line} style={{ width: width }}></div>;
+interface TypeLine {
+  width?: string;
+  mT?: string;
+  mB?: string;
+}
+const Line = ({ width = '100%', mT = '1em', mB = '1em' }: TypeLine) => {
+  return (
+    <div
+      className={styles.line}
+      style={{
+        width: width,
+        marginTop: mT,
+        marginBottom: mB,
+      }}
+    ></div>
+  );
 };
 
 export default Line;
