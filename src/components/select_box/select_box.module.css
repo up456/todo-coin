@@ -1,9 +1,12 @@
+@value textGray from '/src/common/color.css';
+
 .select {
   border: none;
   border-radius: 0.5em;
   background-color: #ffd911;
+  outline: none;
 
   text-align: center;
   font-weight: bold;
-  color: #fff;
+  color: textGray;
 }

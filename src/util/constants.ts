@@ -1,5 +1,5 @@
 export const SORT_OPTION_LIST = [
-  { text: '등록순', value: 'default' },
+  { text: '등록 순', value: 'default' },
   { text: '데드라인 순', value: 'time' },
 ];
 
