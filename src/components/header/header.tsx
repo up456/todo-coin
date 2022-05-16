@@ -44,11 +44,11 @@ const Header = ({ dummy }: IHeader) => {
           <p className={styles.itemInfo}>
             {todayData
               ? `${
-                  dummy[userId].record[today].toDoList.filter(
-                    (todo) => todo.isCompletion === true
+                  dummy[userId].record[today].todoList.filter(
+                    (todo) => todo.completeTime
                   ).length
                 }
-            / ${dummy[userId].record[today].toDoList.length || ''}`
+            / ${dummy[userId].record[today].todoList.length || ''}`
               : 'Let`s go todo'}
           </p>
         </div>

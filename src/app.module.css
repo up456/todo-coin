@@ -2,7 +2,7 @@
 
 .app {
   width: 570px;
-  min-height: 100vh;
+  min-height: calc(100vh + 30em);
   margin: 0 auto;
   background-color: BgGreen;
 }

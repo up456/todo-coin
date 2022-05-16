@@ -13,18 +13,20 @@ export interface TypeTodoList {
   todo: string;
   rewardExp: number;
   rewardCoin: number;
-  isCompletion: boolean;
+  completeTime: string;
+  deadline: string;
+  category: string;
 }
 export interface TypeRecord {
-  [key: string]: {
-    toDoList: TypeTodoList[];
+  [date: string]: {
+    todoList: TypeTodoList[];
     percent: number;
     acquiredCoin: number;
     satisfaction: number;
   };
 }
 export interface IDummy {
-  [key: string]: {
+  [id: string]: {
     myInfo: {
       lv: number;
       exp: number;
@@ -47,24 +49,30 @@ const dummy: IDummy = {
     },
     record: {
       '2022-05-11': {
-        toDoList: [
+        todoList: [
           {
             todo: '개 밥주기',
             rewardExp: 3,
             rewardCoin: 2,
-            isCompletion: true,
+            completeTime: '14:20',
+            deadline: '07:30',
+            category: '펫',
           },
           {
             todo: '운동하기',
             rewardExp: 2,
             rewardCoin: 1,
-            isCompletion: true,
+            completeTime: '',
+            deadline: '06:30',
+            category: '운동',
           },
           {
             todo: '개 산책',
             rewardExp: 1,
             rewardCoin: 3,
-            isCompletion: false,
+            completeTime: '',
+            deadline: '14:30',
+            category: '펫',
           },
         ],
         percent: 30,
@@ -72,18 +80,22 @@ const dummy: IDummy = {
         satisfaction: 2,
       },
       '2022-05-12': {
-        toDoList: [
+        todoList: [
           {
             todo: '계획짜기',
             rewardExp: 3,
             rewardCoin: 2,
-            isCompletion: true,
+            completeTime: '',
+            deadline: '',
+            category: '공부',
           },
           {
             todo: '산책가기',
             rewardExp: 3,
             rewardCoin: 2,
-            isCompletion: false,
+            completeTime: '',
+            deadline: '23:30',
+            category: '취미',
           },
         ],
         percent: 90,

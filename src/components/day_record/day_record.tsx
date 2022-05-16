@@ -13,7 +13,7 @@ interface IDayRecord {
 const DayRecord = ({ data, date }: IDayRecord) => {
   const navigate = useNavigate();
   const goToTodoList = () => {
-    navigate(`/todo/${date}`);
+    navigate(`/todo/${date}`, { state: { date: date } });
   };
   const userId = sessionStorage.getItem('userId') || '';
   const dateObj = new Date(date);

@@ -1,0 +1,125 @@
+.todo {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin-bottom: 1em;
+  padding: 0.5em 0.8em;
+  font-size: 0.8rem;
+}
+.todoHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 0.7rem;
+}
+.deadLine {
+  margin: 0.5em;
+}
+.category {
+  background-color: lightyellow;
+  color: orange;
+  border-radius: 1em;
+  padding: 0.5em;
+
+  margin: 0.5em;
+  margin-left: auto;
+}
+
+.todoBody {
+  display: flex;
+  margin-bottom: 0.5em;
+}
+.todoState {
+  flex-basis: 15%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: 300ms ease-in;
+}
+.todoState.onFocus {
+  flex-basis: 35%;
+}
+.todoState > select {
+  display: none;
+}
+.todoStateIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.todoStateIcon.onFocus {
+}
+.todoStateIcon > img {
+  position: absolute;
+  transition: 300ms ease-in;
+  padding-right: 1.5em;
+}
+.todoStateIcon > img:nth-child(1) {
+  z-index: 3;
+}
+.todoStateIcon > img:nth-child(2) {
+  z-index: 2;
+}
+.todoStateIcon.onFocus > img:nth-child(1) {
+  transform: translateX(-47px);
+}
+.todoStateIcon.onFocus > img:nth-child(2) {
+  transform: translateX(1.5px);
+}
+.todoStateIcon.onFocus > img:nth-child(3) {
+  transform: translateX(50px);
+}
+
+.todoDescription {
+  flex-grow: 1;
+  flex-shrink: 1;
+  margin-left: -0.7em;
+}
+.title {
+  margin: 0;
+  margin-bottom: 0.2em;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.rewardContainer {
+  display: flex;
+}
+.rewardBox {
+  display: flex;
+  align-items: center;
+  margin-right: 0.7em;
+}
+.rewardIcon {
+  width: 1.5em;
+}
+
+.rewardValue {
+  padding-bottom: 0.3em;
+  padding-left: 0.05em;
+}
+.expIcon {
+  width: 1.1em;
+}
+
+.completeBox {
+  font-size: 0.7rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.completeText,
+.completeTime {
+  margin: 0;
+}
+.completeText {
+  font-weight: bold;
+}
+.completeTime {
+  font-size: 0.6rem;
+  margin-top: 0.2em;
+}

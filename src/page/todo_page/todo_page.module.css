@@ -1,16 +1,16 @@
-@value makerBoxShadowGreen from '/src/common/color.css';
+@value makerBoxShadowGreen, mainGray from '/src/common/color.css';
 
 .todoPage {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.todoContents {
+.todoContent {
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: 90%;
-  padding: 1em;
+  padding: 0.7em 1.3em;
 }
 
 .pageBtnContainer {
@@ -18,7 +18,8 @@
   grid-template-columns: 50% 50%;
   justify-content: space-evenly;
   gap: 1em;
-  padding: 0.5em;
+  padding: 0 0.5em;
+  padding-bottom: 1.1em;
 }
 .pageBtnContainer > button {
   font-size: 0.8rem;
@@ -36,4 +37,10 @@
 }
 .controlMenu > button:hover {
   box-shadow: makerBoxShadowGreen;
+}
+
+.todoList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
