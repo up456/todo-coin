@@ -78,3 +78,12 @@
   justify-content: center;
   padding: 4em;
 }
+
+.dayRecord > button {
+  width: 18em;
+  margin-bottom: 0.5em;
+}
+.createTodoBox > button {
+  width: 80%;
+  margin-bottom: 0.5em;
+}
