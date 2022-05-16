@@ -1,0 +1,39 @@
+@value makerBoxShadowGreen from '/src/common/color.css';
+
+.todoPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.todoContents {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
+  padding: 1em;
+}
+
+.pageBtnContainer {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-content: space-evenly;
+  gap: 1em;
+  padding: 0.5em;
+}
+.pageBtnContainer > button {
+  font-size: 0.8rem;
+}
+.pageBtnContainer > button:hover {
+  box-shadow: makerBoxShadowGreen;
+}
+.controlMenu {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20%, auto));
+  gap: 0.5em;
+}
+.controlMenu > button {
+  font-size: 0.8rem;
+}
+.controlMenu > button:hover {
+  box-shadow: makerBoxShadowGreen;
+}

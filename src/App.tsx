@@ -7,6 +7,7 @@ import CalendarPage from './page/calendar_page/calendar_page';
 import MyPage from './page/my_page/my_page';
 import LoginPage from './page/login_page/login_page';
 import AuthService from './service/authService';
+import AddTodoPage from './page/add_todo_page/add_todo_page';
 
 export interface TypeTodoList {
   todo: string;
@@ -28,7 +29,8 @@ export interface IDummy {
       lv: number;
       exp: number;
       coin: number;
-      items: never[];
+      items: {}[];
+      category: string[];
     };
     record: TypeRecord;
     shop: {};
@@ -41,6 +43,7 @@ const dummy: IDummy = {
       exp: 2,
       coin: 20,
       items: [],
+      category: ['펫'],
     },
     record: {
       '2022-05-11': {
@@ -100,12 +103,16 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage authService={authService} />} />
-          <Route path="/todo/:date" element={<TodoPage />} />
+          <Route
+            path="/todo/:date"
+            element={<TodoPage dummy={dummy} authService={authService} />}
+          />
           <Route path="/calendar" element={<CalendarPage dummy={dummy} />} />
           <Route
             path="/mypage"
             element={<MyPage dummy={dummy} authService={authService} />}
           />
+          <Route path="/addTodo" element={<AddTodoPage />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -5,7 +5,6 @@ import Header from '../../components/header/header';
 import DayRecord from '../../components/day_record/day_record';
 import { IDummy } from '../../App';
 import Calendar from '../../components/calendar/calendar';
-import AuthService from '../../service/authService';
 import { useNavigate } from 'react-router-dom';
 import { callToday } from '../../util/calc';
 

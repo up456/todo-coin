@@ -13,6 +13,7 @@
 
 /* Shadow */
 @value makerBoxShadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.25);
+@value makerBoxShadowGreen: 0 0 3px 4px #E9FCE9;
 
 /* Background Color */
 @value BgGreen: #f7fef5;
