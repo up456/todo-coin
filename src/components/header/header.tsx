@@ -60,7 +60,7 @@ const Header = ({ dummy }: IHeader) => {
           <img src="/asset/default_profile.jpg" alt="profile" />
         </div>
       </header>
-      <Line width="90%" />
+      <Line />
     </div>
   );
 };
