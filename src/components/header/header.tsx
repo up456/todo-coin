@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { IDummy } from '../../App';
 import { getMaxExp } from '../../util/calc';
 import Button from '../button/button';
+import Line from '../line/line';
 import styles from './header.module.css';
 
 interface IHeader {
@@ -59,7 +60,7 @@ const Header = ({ dummy }: IHeader) => {
           <img src="/asset/default_profile.jpg" alt="profile" />
         </div>
       </header>
-      <div className={styles.line}></div>
+      <Line width="90%" />
     </div>
   );
 };

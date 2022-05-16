@@ -1,0 +1,8 @@
+@value mainGray from '/src/common/color.css';
+
+.line {
+  height: 1.3px;
+  border-radius: 1em;
+  background-color: mainGray;
+  margin: 0 auto;
+}

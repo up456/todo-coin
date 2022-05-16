@@ -1,7 +1,7 @@
 @value mainGray, mainGreen, mainWhite, makerBoxShadow from '/src/common/color.css';
 
 .header {
-  font-size: 1.2rem;
+  font-size: 1.05rem;
 
   display: flex;
   justify-content: center;
@@ -62,15 +62,6 @@
 }
 .imageBox > img {
   visibility: hidden;
-}
-
-.line {
-  width: 90%;
-  max-width: 35em;
-  height: 1.2px;
-  border-radius: 1em;
-  background-color: mainGray;
-  margin: 0 auto;
 }
 
 .offUser {
