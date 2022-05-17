@@ -9,8 +9,6 @@ import Todo from '../../components/todo/todo';
 import styles from './todo_page.module.css';
 
 // constants
-const DEFAULT_CATEGORY = ['운동', '취미', '공부'];
-
 const SORT_OPTION_LIST = [
   { text: '등록 순', value: 'default' },
   { text: '데드라인 순', value: 'time' },
@@ -30,9 +28,7 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
   const dateData = date || '';
 
   const userId = sessionStorage.getItem('userId') || '';
-  const userCategory = data[userId]?.myInfo.category || [];
-  const categoryList = [...DEFAULT_CATEGORY, ...userCategory];
-
+  const categoryList = data[userId]?.record[dateData]?.categoryList || [];
   const todoListData = data[userId].record[dateData]?.todoList;
 
   return (
@@ -63,12 +59,12 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
                   console.log(`전체 클릭!`);
                 }}
               />
-              {categoryList.map((category, idx) => (
+              {Array.from(categoryList).map((category, idx) => (
                 <Button
                   typeReverse={true}
                   isToggle={true}
                   key={idx}
-                  text={category}
+                  text={category || '미지정'}
                   onClick={(event) => {
                     console.log(event.target);
                   }}

@@ -12,14 +12,22 @@ interface TypeMyPage {
 }
 const MyPage = ({ data, authService }: TypeMyPage) => {
   const navigate = useNavigate();
+  const userId = sessionStorage.getItem('userId') || '';
   const onLogout = () => {
     authService.logout();
     window.location.reload();
   };
+
+  const categoryRecord = Array.from(data[userId].myInfo.categoryRecord);
+
   return (
     <section className={styles.myPage}>
       <Header data={data} />
       <h1>마이 페이지입니다.</h1>
+      <h2>나의 카테고리</h2>
+      {categoryRecord.map((category, idx) => (
+        <p key={idx}>{category}</p>
+      ))}
       <Button text="로그아웃" onClick={onLogout} />
     </section>
   );

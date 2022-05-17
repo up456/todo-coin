@@ -21,6 +21,7 @@ export interface TypeTodoList {
 export interface TypeRecord {
   [date: string]: {
     todoList: { [todoId: string]: TypeTodoList };
+    categoryList: Set<string>;
     percent: number;
     acquiredCoin: number;
     satisfaction: number;
@@ -33,7 +34,7 @@ export interface TypeData {
       exp: number;
       coin: number;
       items: {}[];
-      category: string[];
+      categoryRecord: Set<string>;
     };
     record: TypeRecord;
     shop: {};
@@ -46,10 +47,11 @@ const dummy: TypeData = {
       exp: 2,
       coin: 20,
       items: [],
-      category: ['펫'],
+      categoryRecord: new Set(['펫', '공부', '취미', '운동']),
     },
     record: {
       '2022-05-11': {
+        categoryList: new Set(['펫', '운동']),
         todoList: {
           1652765828908: {
             todo: '개 밥주기',
@@ -84,6 +86,7 @@ const dummy: TypeData = {
         satisfaction: 2,
       },
       '2022-05-12': {
+        categoryList: new Set(['공부', '취미']),
         todoList: {
           1652765828923: {
             todo: '계획짜기',
@@ -168,19 +171,23 @@ function App() {
       if (!recordDate) {
         newData[userId].record[date] = {
           todoList: {},
+          categoryList: new Set([]),
           percent: 0,
           acquiredCoin: 0,
           satisfaction: 0,
         };
       }
+      // todo 추가
+      const todoList = recordDate.todoList;
+      const todoId = Date.now();
+      todoList[todoId] = inputValue;
+      // 당일 카테고리 추가
+      const categoryList = recordDate.categoryList;
+      categoryList.add(inputValue.category);
+      // 나의 카테고리 목록 추가
+      const categoryRecord = newData[userId].myInfo.categoryRecord;
+      categoryRecord.add(inputValue.category);
 
-      const todoList = newData[userId]?.record[date]?.todoList;
-      console.log(newData[userId]?.record[date]);
-
-      if (todoList) {
-        const todoId = Date.now();
-        todoList[todoId] = inputValue;
-      }
       return newData;
     });
   };
