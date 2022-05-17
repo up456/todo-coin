@@ -13,8 +13,6 @@ const TODO_STATE_OPTION_LIST = [
 ];
 const TODO_STATE_LIST = ['ing', 'complete', 'fail'];
 
-console.log();
-
 // 타입
 interface TypeTodo {
   todo: TypeTodoList;
@@ -58,6 +56,7 @@ const Todo = ({ todo }: TypeTodo) => {
                   key={idx}
                   src={`/asset/${imageName}.png`}
                   alt={imageName}
+                  onClick={() => setTodoState(imageName)}
                 />
               )
             )}
