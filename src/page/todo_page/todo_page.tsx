@@ -50,7 +50,7 @@ const TodoPage = ({ data, setCompleteTime }: TypeHompPage) => {
               <Button text="달력 보기" onClick={() => navigate('/calendar')} />
               <Button
                 text="할일 추가하기"
-                onClick={() => navigate('/addTodo', { state: { date } })}
+                onClick={() => navigate(`/${date}/addTodo`)}
               />
             </div>
             <div className={styles.controlMenu}>

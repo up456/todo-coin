@@ -162,7 +162,7 @@ function App() {
             path="/mypage"
             element={<MyPage data={data} authService={authService} />}
           />
-          <Route path="/addTodo" element={<AddTodoPage />} />
+          <Route path="/:date/addTodo" element={<AddTodoPage />} />
         </Routes>
       </BrowserRouter>
     </div>
