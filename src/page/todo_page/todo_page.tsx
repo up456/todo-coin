@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { TypeData } from '../../App';
+import { TypeData, TypeChangeTodoState } from '../../App';
 import Button from '../../components/button/button';
 import Header from '../../components/header/header';
 import Line from '../../components/line/line';
@@ -19,15 +19,11 @@ const SORT_OPTION_LIST = [
 // 타입
 interface TypeHompPage {
   data: TypeData;
-  setCompleteTime: (
-    date: string,
-    targetTodoId: string,
-    reset?: boolean
-  ) => void;
+  changeTodoState: TypeChangeTodoState;
 }
 
 // 컴포넌트
-const TodoPage = ({ data, setCompleteTime }: TypeHompPage) => {
+const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
   const navigate = useNavigate();
   const [sort, setSort] = useState('dafault');
   const { date } = useParams();
@@ -87,7 +83,7 @@ const TodoPage = ({ data, setCompleteTime }: TypeHompPage) => {
                 <Todo
                   key={key}
                   todo={todoListData[key]}
-                  setCompleteTime={setCompleteTime}
+                  changeTodoState={changeTodoState}
                   date={dateData}
                   todoId={key}
                 />

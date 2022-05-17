@@ -1,6 +1,6 @@
 import styles from './todo.module.css';
-import React, { useCallback, useState } from 'react';
-import { TypeTodoList } from '../../App';
+import React, { useState } from 'react';
+import { TypeChangeTodoState, TypeTodoList } from '../../App';
 import { transClockTo12 } from '../../util/calc';
 import SelectBox from '../select_box/select_box';
 import Line from '../line/line';
@@ -17,17 +17,13 @@ const TODO_STATE_LIST = ['ing', 'complete', 'fail'];
 interface TypeTodo {
   todo: TypeTodoList;
   date: string;
-  setCompleteTime: (
-    date: string,
-    targetTodoId: string,
-    reset?: boolean
-  ) => void;
+  changeTodoState: TypeChangeTodoState;
   todoId: string;
 }
 
 // 컴포넌트
-const Todo = ({ todo, date, setCompleteTime, todoId }: TypeTodo) => {
-  const [todoState, setTodoState] = useState('ing');
+const Todo = ({ todo, date, changeTodoState, todoId }: TypeTodo) => {
+  const [todoState, setTodoState] = useState(todo.todoState);
   const [onFocus, setOnFocus] = useState(false);
   const deadLine = transClockTo12(todo.deadline);
   const userId = sessionStorage.getItem('userId');
@@ -35,11 +31,7 @@ const Todo = ({ todo, date, setCompleteTime, todoId }: TypeTodo) => {
   const transTodoState = (selectedState: string) => {
     setTodoState(selectedState);
     if (!userId) return;
-    if (selectedState === 'complete') {
-      setCompleteTime(date, todoId);
-    } else {
-      setCompleteTime(date, todoId, true);
-    }
+    changeTodoState(date, todoId, selectedState);
   };
 
   return (

@@ -16,6 +16,7 @@ export interface TypeTodoList {
   completeTime: string;
   deadline: string;
   category: string;
+  todoState: string;
 }
 export interface TypeRecord {
   [date: string]: {
@@ -57,6 +58,7 @@ const dummy: TypeData = {
             completeTime: '오후 1:45:28',
             deadline: '07:30',
             category: '펫',
+            todoState: 'complete',
           },
           1652765828910: {
             todo: '운동하기',
@@ -65,6 +67,7 @@ const dummy: TypeData = {
             completeTime: '',
             deadline: '06:30',
             category: '운동',
+            todoState: 'fail',
           },
           1652765828913: {
             todo: '개 산책',
@@ -73,6 +76,7 @@ const dummy: TypeData = {
             completeTime: '',
             deadline: '14:30',
             category: '펫',
+            todoState: 'ing',
           },
         },
         percent: 30,
@@ -88,6 +92,7 @@ const dummy: TypeData = {
             completeTime: '',
             deadline: '',
             category: '공부',
+            todoState: 'complete',
           },
           1652765828933: {
             todo: '산책가기',
@@ -96,6 +101,7 @@ const dummy: TypeData = {
             completeTime: '',
             deadline: '23:30',
             category: '취미',
+            todoState: 'ing',
           },
         },
         percent: 90,
@@ -109,26 +115,43 @@ const dummy: TypeData = {
 
 const authService = new AuthService();
 
+export type TypeChangeTodoState = (
+  date: string,
+  targetTodoId: string,
+  todoState: string
+) => void;
+
 function App() {
   const [data, setData] = useState(dummy);
   const userId = sessionStorage.getItem('userId') || '';
 
-  const setCompleteTime = (
-    date: string,
-    targetTodoId: string,
-    reset = false
+  const changeTodoState: TypeChangeTodoState = (
+    date,
+    targetTodoId,
+    todoState
   ) => {
     setData((prevData) => {
       const newData = {
         ...prevData,
       };
-      const targetTodo = newData[userId].record[date].todoList[targetTodoId];
+      const targetTodo = newData[userId]?.record[date]?.todoList[targetTodoId];
 
       if (targetTodo) {
-        if (!reset) {
-          targetTodo.completeTime = new Date().toLocaleTimeString();
-        } else {
-          targetTodo.completeTime = '';
+        switch (todoState) {
+          case 'complete':
+            targetTodo.completeTime = new Date().toLocaleTimeString();
+            targetTodo.todoState = 'complete';
+            break;
+          case 'fail':
+            targetTodo.completeTime = '';
+            targetTodo.todoState = 'fail';
+            break;
+          case 'ing':
+            targetTodo.completeTime = '';
+            targetTodo.todoState = 'ing';
+            break;
+          default:
+            throw new Error(`없는 상태입니다 ${todoState} `);
         }
       }
       return newData;
@@ -169,7 +192,7 @@ function App() {
           <Route path="/" element={<LoginPage authService={authService} />} />
           <Route
             path="/todo/:date"
-            element={<TodoPage data={data} setCompleteTime={setCompleteTime} />}
+            element={<TodoPage data={data} changeTodoState={changeTodoState} />}
           />
           <Route
             path="/:date/addTodo"

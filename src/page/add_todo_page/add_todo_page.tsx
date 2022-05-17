@@ -11,6 +11,7 @@ const DEFAULT_INPUT_VALUE = {
   completeTime: '',
   deadline: '',
   category: '',
+  todoState: 'ing',
 };
 interface TypeAddTodoPage {
   addTodo: (date: string, inputValue: TypeTodoList) => void;
