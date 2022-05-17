@@ -16,4 +16,5 @@
 @value makerBoxShadowGreen: 0 0 3px 4px #E9FCE9;
 
 /* Background Color */
-@value BgGreen: #f7fef5;
+@value mainBg: #f7fef5;
+@value mainBg: #f7f7f7;
