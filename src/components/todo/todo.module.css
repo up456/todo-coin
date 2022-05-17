@@ -5,6 +5,8 @@
   margin-bottom: 1em;
   padding: 0.5em 0.8em;
   font-size: 0.8rem;
+
+  position: relative;
 }
 .todoHeader {
   width: 100%;
@@ -122,4 +124,46 @@
 .completeTime {
   font-size: 0.6rem;
   margin-top: 0.2em;
+}
+
+.resultFail {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  z-index: 4;
+
+  transform: translate(200px, -5px) scale(1.15);
+  background-image: url('/public/asset/fail_result.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  opacity: 1;
+  transition: 300ms ease-in;
+}
+.resultFail.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+.resultComplete {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  z-index: 4;
+
+  transform: translate(205px, -5px) rotate(20deg) scale(1.4);
+  background-image: url('/public/asset/complete_result.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  opacity: 1;
+  transition: 300ms ease-in;
+}
+.resultComplete.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0.5);
 }

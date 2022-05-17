@@ -90,6 +90,20 @@ const Todo = ({ todo }: TypeTodo) => {
           </p>
         </div>
       </div>
+      <div
+        className={
+          todoState === 'fail'
+            ? styles.resultFail
+            : `${styles.resultFail} ${styles.hidden}`
+        }
+      ></div>
+      <div
+        className={
+          todoState === 'complete'
+            ? styles.resultComplete
+            : `${styles.resultComplete} ${styles.hidden}`
+        }
+      ></div>
     </li>
   );
 };
