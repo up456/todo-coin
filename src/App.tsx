@@ -1,9 +1,4 @@
-import React, {
-  ReducerWithoutAction,
-  useContext,
-  useReducer,
-  useState,
-} from 'react';
+import React, { useState } from 'react';
 import styles from './app.module.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -13,7 +8,6 @@ import MyPage from './page/my_page/my_page';
 import LoginPage from './page/login_page/login_page';
 import AuthService from './service/authService';
 import AddTodoPage from './page/add_todo_page/add_todo_page';
-import Todo from './components/todo/todo';
 
 export interface TypeTodoList {
   todo: string;
@@ -117,9 +111,9 @@ const authService = new AuthService();
 
 function App() {
   const [data, setData] = useState(dummy);
+  const userId = sessionStorage.getItem('userId') || '';
 
   const setCompleteTime = (
-    userId: string,
     date: string,
     targetTodoId: string,
     reset = false
@@ -141,6 +135,33 @@ function App() {
     });
   };
 
+  const addTodo = (date: string, inputValue: TypeTodoList) => {
+    setData((prevData) => {
+      let newData = {
+        ...prevData,
+      };
+      // 해당 날짜의 기록을 넣는 칸이 없으면 해당 날짜로 빈공간 생성
+      let recordDate = newData[userId]?.record[date];
+      if (!recordDate) {
+        newData[userId].record[date] = {
+          todoList: {},
+          percent: 0,
+          acquiredCoin: 0,
+          satisfaction: 0,
+        };
+      }
+
+      const todoList = newData[userId]?.record[date]?.todoList;
+      console.log(newData[userId]?.record[date]);
+
+      if (todoList) {
+        const todoId = Date.now();
+        todoList[todoId] = inputValue;
+      }
+      return newData;
+    });
+  };
+
   return (
     <div className={styles.app}>
       <BrowserRouter>
@@ -150,12 +171,15 @@ function App() {
             path="/todo/:date"
             element={<TodoPage data={data} setCompleteTime={setCompleteTime} />}
           />
+          <Route
+            path="/:date/addTodo"
+            element={<AddTodoPage addTodo={addTodo} />}
+          />
           <Route path="/calendar" element={<CalendarPage data={data} />} />
           <Route
             path="/mypage"
             element={<MyPage data={data} authService={authService} />}
           />
-          <Route path="/:date/addTodo" element={<AddTodoPage />} />
         </Routes>
       </BrowserRouter>
     </div>

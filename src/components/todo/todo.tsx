@@ -18,7 +18,6 @@ interface TypeTodo {
   todo: TypeTodoList;
   date: string;
   setCompleteTime: (
-    userId: string,
     date: string,
     targetTodoId: string,
     reset?: boolean
@@ -37,9 +36,9 @@ const Todo = ({ todo, date, setCompleteTime, todoId }: TypeTodo) => {
     setTodoState(selectedState);
     if (!userId) return;
     if (selectedState === 'complete') {
-      setCompleteTime(userId, date, todoId);
+      setCompleteTime(date, todoId);
     } else {
-      setCompleteTime(userId, date, todoId, true);
+      setCompleteTime(date, todoId, true);
     }
   };
 
@@ -47,7 +46,7 @@ const Todo = ({ todo, date, setCompleteTime, todoId }: TypeTodo) => {
     <li className={styles.todo}>
       <div className={styles.todoHeader}>
         <p className={styles.deadLine}>{`데드라인: ${deadLine || '없음'}`}</p>
-        <p className={styles.category}>{todo.category}</p>
+        <p className={styles.category}>{todo.category || '미지정'}</p>
       </div>
       <Line mT="0" />
       <div className={styles.todoBody}>

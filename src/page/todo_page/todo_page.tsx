@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { TypeData } from '../../App';
+import { TypeData, TypeTodoList } from '../../App';
 import Button from '../../components/button/button';
 import Header from '../../components/header/header';
 import Line from '../../components/line/line';
@@ -20,7 +20,6 @@ const SORT_OPTION_LIST = [
 interface TypeHompPage {
   data: TypeData;
   setCompleteTime: (
-    userId: string,
     date: string,
     targetTodoId: string,
     reset?: boolean
