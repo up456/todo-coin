@@ -1,4 +1,4 @@
-@value textGreen, mainGreen, pointGray, pointGreen from '/src/common/color.css';
+@value textGreen, mainGreen, pointGreen from '/src/common/color.css';
 
 .loginPage {
   display: flex;

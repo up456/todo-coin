@@ -9,6 +9,7 @@
 
 /* textColor */
 @value textGray: #606060;
+@value textLightGray: #BEBEBE;
 @value textGreen: #379457;
 
 /* Shadow */
@@ -16,5 +17,4 @@
 @value makerBoxShadowGreen: 0 0 3px 4px #E9FCE9;
 
 /* Background Color */
-@value mainBg: #f7fef5;
 @value mainBg: #f7f7f7;

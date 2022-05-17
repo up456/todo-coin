@@ -1,4 +1,4 @@
-@value textGreen, textGray, mainGreen, pointGray, makerBoxShadow, mainWhite, mainGray from '/src/common/color.css';
+@value textGreen, textGray, mainGreen, makerBoxShadow, mainWhite, mainGray from '/src/common/color.css';
 
 .dayRecord {
   display: flex;
