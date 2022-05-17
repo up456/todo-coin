@@ -22,7 +22,7 @@ const Header = ({ data }: TypeHeader) => {
     );
   }
 
-  const todayData = today in data[userId].record;
+  const todoListData = data[userId].record[today]?.todoList;
 
   const goToMyPage = () => {
     navigate('/mypage');
@@ -42,13 +42,13 @@ const Header = ({ data }: TypeHeader) => {
         <div className={styles.itemBox} onClick={goToTodayTodoPage}>
           <p className={styles.itemIcon}>to-do</p>
           <p className={styles.itemInfo}>
-            {todayData
+            {todoListData
               ? `${
-                  data[userId].record[today].todoList.filter(
-                    (todo) => todo.completeTime
+                  Object.keys(todoListData).filter(
+                    (key) => todoListData[key].completeTime
                   ).length
                 }
-            / ${data[userId].record[today].todoList.length || ''}`
+            / ${Object.keys(todoListData).length || ''}`
               : 'Let`s go todo'}
           </p>
         </div>

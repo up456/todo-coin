@@ -22,7 +22,7 @@ interface TypeHompPage {
   setCompleteTime: (
     userId: string,
     date: string,
-    targetTodoId: number,
+    targetTodoId: string,
     reset?: boolean
   ) => void;
 }
@@ -38,7 +38,7 @@ const TodoPage = ({ data, setCompleteTime }: TypeHompPage) => {
   const userCategory = data[userId]?.myInfo.category || [];
   const categoryList = [...DEFAULT_CATEGORY, ...userCategory];
 
-  const todoListData = data[userId].record[dateData];
+  const todoListData = data[userId].record[dateData]?.todoList;
 
   return (
     <>
@@ -84,12 +84,13 @@ const TodoPage = ({ data, setCompleteTime }: TypeHompPage) => {
           <Line />
           <ul className={styles.todoList}>
             {todoListData &&
-              todoListData.todoList.map((todo, idx) => (
+              Object.keys(todoListData).map((key) => (
                 <Todo
-                  key={idx}
-                  todo={todo}
+                  key={key}
+                  todo={todoListData[key]}
                   setCompleteTime={setCompleteTime}
                   date={dateData}
+                  todoId={key}
                 />
               ))}
           </ul>

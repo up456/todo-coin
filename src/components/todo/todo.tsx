@@ -20,13 +20,14 @@ interface TypeTodo {
   setCompleteTime: (
     userId: string,
     date: string,
-    targetTodoId: number,
+    targetTodoId: string,
     reset?: boolean
   ) => void;
+  todoId: string;
 }
 
 // 컴포넌트
-const Todo = ({ todo, date, setCompleteTime }: TypeTodo) => {
+const Todo = ({ todo, date, setCompleteTime, todoId }: TypeTodo) => {
   const [todoState, setTodoState] = useState('ing');
   const [onFocus, setOnFocus] = useState(false);
   const deadLine = transClockTo12(todo.deadline);
@@ -36,9 +37,9 @@ const Todo = ({ todo, date, setCompleteTime }: TypeTodo) => {
     setTodoState(selectedState);
     if (!userId) return;
     if (selectedState === 'complete') {
-      setCompleteTime(userId, date, todo.todoId);
+      setCompleteTime(userId, date, todoId);
     } else {
-      setCompleteTime(userId, date, todo.todoId, true);
+      setCompleteTime(userId, date, todoId, true);
     }
   };
 
