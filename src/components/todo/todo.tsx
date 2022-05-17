@@ -47,11 +47,6 @@ const Todo = ({ todo, date, changeTodoState, todoId }: TypeTodo) => {
             onFocus ? `${styles.todoState} ${styles.onFocus}` : styles.todoState
           }
         >
-          <SelectBox
-            value={todoState}
-            onChange={setTodoState}
-            optionList={TODO_STATE_OPTION_LIST}
-          />
           <div
             className={
               onFocus

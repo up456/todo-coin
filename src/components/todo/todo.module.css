@@ -43,9 +43,6 @@
 .todoState.onFocus {
   flex-basis: 35%;
 }
-.todoState > select {
-  display: none;
-}
 .todoStateIcon {
   display: flex;
   justify-content: center;
