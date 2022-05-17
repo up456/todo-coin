@@ -14,10 +14,10 @@ const MyPage = ({ data, authService }: TypeMyPage) => {
   const navigate = useNavigate();
   const onLogout = () => {
     authService.logout();
-    navigate('/');
+    window.location.reload();
   };
   return (
-    <section>
+    <section className={styles.myPage}>
       <Header data={data} />
       <h1>마이 페이지입니다.</h1>
       <Button text="로그아웃" onClick={onLogout} />

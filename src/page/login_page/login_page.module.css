@@ -28,3 +28,8 @@
   font-size: 0.8rem;
   color: mainGreen;
 }
+
+.loginPage > button {
+  width: 60%;
+  margin-top: 2em;
+}
