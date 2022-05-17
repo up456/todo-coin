@@ -1,8 +1,8 @@
 @value mainBg from '/src/common/color.css';
 
 .app {
-  width: 570px;
-  min-height: calc(100vh + 30em);
+  width: 100%;
+  max-width: 570px;
   margin: 0 auto;
   background-color: mainBg;
 }
