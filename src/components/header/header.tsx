@@ -1,15 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IDummy } from '../../App';
+import { TypeData } from '../../App';
 import { getMaxExp } from '../../util/calc';
 import Button from '../button/button';
 import Line from '../line/line';
 import styles from './header.module.css';
 
-interface IHeader {
-  dummy: IDummy;
+interface TypeHeader {
+  data: TypeData;
 }
-const Header = ({ dummy }: IHeader) => {
+const Header = ({ data }: TypeHeader) => {
   const navigate = useNavigate();
   const today = new Date().toISOString().slice(0, 10);
   const userId: string = sessionStorage.getItem('userId') || '';
@@ -22,7 +22,7 @@ const Header = ({ dummy }: IHeader) => {
     );
   }
 
-  const todayData = today in dummy[userId].record;
+  const todayData = today in data[userId].record;
 
   const goToMyPage = () => {
     navigate('/mypage');
@@ -34,27 +34,27 @@ const Header = ({ dummy }: IHeader) => {
     <div className={styles.headerContainer}>
       <header className={styles.header}>
         <div className={styles.itemBox}>
-          <p className={styles.itemIcon}>{`Lv${dummy[userId].myInfo.lv}`}</p>
+          <p className={styles.itemIcon}>{`Lv${data[userId].myInfo.lv}`}</p>
           <p className={styles.itemInfo}>{`${
-            dummy[userId].myInfo.exp
-          } / ${getMaxExp(dummy[userId].myInfo.lv)}`}</p>
+            data[userId].myInfo.exp
+          } / ${getMaxExp(data[userId].myInfo.lv)}`}</p>
         </div>
         <div className={styles.itemBox} onClick={goToTodayTodoPage}>
           <p className={styles.itemIcon}>to-do</p>
           <p className={styles.itemInfo}>
             {todayData
               ? `${
-                  dummy[userId].record[today].todoList.filter(
+                  data[userId].record[today].todoList.filter(
                     (todo) => todo.completeTime
                   ).length
                 }
-            / ${dummy[userId].record[today].todoList.length || ''}`
+            / ${data[userId].record[today].todoList.length || ''}`
               : 'Let`s go todo'}
           </p>
         </div>
         <div className={styles.itemBox}>
           <p className={styles.itemIcon}>coin</p>
-          <p className={styles.itemInfo}> {`${dummy[userId].myInfo.coin}`}</p>
+          <p className={styles.itemInfo}> {`${data[userId].myInfo.coin}`}</p>
         </div>
         <div className={styles.imageBox} onClick={goToMyPage}>
           <img src="/asset/default_profile.jpg" alt="profile" />

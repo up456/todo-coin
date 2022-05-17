@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { IDummy } from '../../App';
+import { TypeData } from '../../App';
 import Button from '../../components/button/button';
 import Header from '../../components/header/header';
 import Line from '../../components/line/line';
 import SelectBox from '../../components/select_box/select_box';
 import Todo from '../../components/todo/todo';
-import AuthService from '../../service/authService';
 import styles from './todo_page.module.css';
 
 // constants
@@ -18,28 +17,33 @@ const SORT_OPTION_LIST = [
 ];
 
 // 타입
-interface IHompPage {
-  dummy: IDummy;
-  authService: AuthService;
+interface TypeHompPage {
+  data: TypeData;
+  setCompleteTime: (
+    userId: string,
+    date: string,
+    targetTodoId: number,
+    reset?: boolean
+  ) => void;
 }
 
 // 컴포넌트
-const TodoPage = ({ dummy, authService }: IHompPage) => {
+const TodoPage = ({ data, setCompleteTime }: TypeHompPage) => {
   const navigate = useNavigate();
   const [sort, setSort] = useState('dafault');
   const { date } = useParams();
   const dateData = date || '';
 
   const userId = sessionStorage.getItem('userId') || '';
-  const userCategory = dummy[userId]?.myInfo.category || [];
+  const userCategory = data[userId]?.myInfo.category || [];
   const categoryList = [...DEFAULT_CATEGORY, ...userCategory];
 
-  const todoListData = dummy[userId].record[dateData];
+  const todoListData = data[userId].record[dateData];
 
   return (
     <>
       <section className={styles.todoPage}>
-        <Header dummy={dummy} />
+        <Header data={data} />
         <div className={styles.todoContent}>
           <section className={styles.contentHeader}>
             <div className={styles.pageBtnContainer}>
@@ -81,7 +85,12 @@ const TodoPage = ({ dummy, authService }: IHompPage) => {
           <ul className={styles.todoList}>
             {todoListData &&
               todoListData.todoList.map((todo, idx) => (
-                <Todo key={idx} todo={todo} />
+                <Todo
+                  key={idx}
+                  todo={todo}
+                  setCompleteTime={setCompleteTime}
+                  date={dateData}
+                />
               ))}
           </ul>
         </div>

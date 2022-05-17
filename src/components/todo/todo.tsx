@@ -1,5 +1,5 @@
 import styles from './todo.module.css';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { TypeTodoList } from '../../App';
 import { transClockTo12 } from '../../util/calc';
 import SelectBox from '../select_box/select_box';
@@ -16,13 +16,32 @@ const TODO_STATE_LIST = ['ing', 'complete', 'fail'];
 // 타입
 interface TypeTodo {
   todo: TypeTodoList;
+  date: string;
+  setCompleteTime: (
+    userId: string,
+    date: string,
+    targetTodoId: number,
+    reset?: boolean
+  ) => void;
 }
 
 // 컴포넌트
-const Todo = ({ todo }: TypeTodo) => {
+const Todo = ({ todo, date, setCompleteTime }: TypeTodo) => {
   const [todoState, setTodoState] = useState('ing');
   const [onFocus, setOnFocus] = useState(false);
   const deadLine = transClockTo12(todo.deadline);
+  const userId = sessionStorage.getItem('userId');
+
+  const transTodoState = (selectedState: string) => {
+    setTodoState(selectedState);
+    if (!userId) return;
+    if (selectedState === 'complete') {
+      setCompleteTime(userId, date, todo.todoId);
+    } else {
+      setCompleteTime(userId, date, todo.todoId, true);
+    }
+  };
+
   return (
     <li className={styles.todo}>
       <div className={styles.todoHeader}>
@@ -56,7 +75,7 @@ const Todo = ({ todo }: TypeTodo) => {
                   key={idx}
                   src={`/asset/${imageName}.png`}
                   alt={imageName}
-                  onClick={() => setTodoState(imageName)}
+                  onClick={() => transTodoState(imageName)}
                 />
               )
             )}
@@ -86,7 +105,7 @@ const Todo = ({ todo }: TypeTodo) => {
         <div className={styles.completeBox}>
           <p className={styles.completeText}>완료시간</p>
           <p className={styles.completeTime}>
-            {todo.completeTime ? transClockTo12(todo.completeTime) : '미완료'}
+            {todo.completeTime ? todo.completeTime : '미완료'}
           </p>
         </div>
       </div>

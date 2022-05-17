@@ -1,4 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, {
+  ReducerWithoutAction,
+  useContext,
+  useReducer,
+  useState,
+} from 'react';
 import styles from './app.module.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -8,8 +13,10 @@ import MyPage from './page/my_page/my_page';
 import LoginPage from './page/login_page/login_page';
 import AuthService from './service/authService';
 import AddTodoPage from './page/add_todo_page/add_todo_page';
+import Todo from './components/todo/todo';
 
 export interface TypeTodoList {
+  todoId: number;
   todo: string;
   rewardExp: number;
   rewardCoin: number;
@@ -25,7 +32,7 @@ export interface TypeRecord {
     satisfaction: number;
   };
 }
-export interface IDummy {
+export interface TypeData {
   [id: string]: {
     myInfo: {
       lv: number;
@@ -38,7 +45,7 @@ export interface IDummy {
     shop: {};
   };
 }
-const dummy: IDummy = {
+const dummy: TypeData = {
   UJfZT67ctBTaTp5y3otcU94xEYH2: {
     myInfo: {
       lv: 1,
@@ -51,14 +58,16 @@ const dummy: IDummy = {
       '2022-05-11': {
         todoList: [
           {
+            todoId: 1652765828908,
             todo: '개 밥주기',
             rewardExp: 3,
             rewardCoin: 2,
-            completeTime: '14:20',
+            completeTime: '오후 1:45:28',
             deadline: '07:30',
             category: '펫',
           },
           {
+            todoId: 1652765828910,
             todo: '운동하기',
             rewardExp: 2,
             rewardCoin: 1,
@@ -67,6 +76,7 @@ const dummy: IDummy = {
             category: '운동',
           },
           {
+            todoId: 1652765828913,
             todo: '개 산책',
             rewardExp: 1,
             rewardCoin: 3,
@@ -82,6 +92,7 @@ const dummy: IDummy = {
       '2022-05-12': {
         todoList: [
           {
+            todoId: 1652765828923,
             todo: '계획짜기',
             rewardExp: 3,
             rewardCoin: 2,
@@ -90,6 +101,7 @@ const dummy: IDummy = {
             category: '공부',
           },
           {
+            todoId: 1652765828933,
             todo: '산책가기',
             rewardExp: 3,
             rewardCoin: 2,
@@ -110,6 +122,32 @@ const dummy: IDummy = {
 const authService = new AuthService();
 
 function App() {
+  const [data, setData] = useState(dummy);
+
+  const setCompleteTime = (
+    userId: string,
+    date: string,
+    targetTodoId: number,
+    reset = false
+  ) => {
+    setData((prevData) => {
+      const newData = {
+        ...prevData,
+      };
+      const targetTodo = newData[userId].record[date].todoList.find(
+        (item) => item.todoId === targetTodoId
+      );
+      if (targetTodo) {
+        if (!reset) {
+          targetTodo.completeTime = new Date().toLocaleTimeString();
+        } else {
+          targetTodo.completeTime = '';
+        }
+      }
+      return newData;
+    });
+  };
+
   return (
     <div className={styles.app}>
       <BrowserRouter>
@@ -117,12 +155,12 @@ function App() {
           <Route path="/" element={<LoginPage authService={authService} />} />
           <Route
             path="/todo/:date"
-            element={<TodoPage dummy={dummy} authService={authService} />}
+            element={<TodoPage data={data} setCompleteTime={setCompleteTime} />}
           />
-          <Route path="/calendar" element={<CalendarPage dummy={dummy} />} />
+          <Route path="/calendar" element={<CalendarPage data={data} />} />
           <Route
             path="/mypage"
-            element={<MyPage dummy={dummy} authService={authService} />}
+            element={<MyPage data={data} authService={authService} />}
           />
           <Route path="/addTodo" element={<AddTodoPage />} />
         </Routes>

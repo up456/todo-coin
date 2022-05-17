@@ -3,15 +3,15 @@ import { useContext, useEffect, useState } from 'react';
 
 import Header from '../../components/header/header';
 import DayRecord from '../../components/day_record/day_record';
-import { IDummy } from '../../App';
+import { TypeData } from '../../App';
 import Calendar from '../../components/calendar/calendar';
 import { useNavigate } from 'react-router-dom';
 import { callToday } from '../../util/calc';
 
-interface ICalendarPage {
-  dummy: IDummy;
+interface TypeCalendarPage {
+  data: TypeData;
 }
-const CalendarPage = ({ dummy }: ICalendarPage) => {
+const CalendarPage = ({ data }: TypeCalendarPage) => {
   const navigate = useNavigate();
   const [date, setDate] = useState(callToday());
 
@@ -23,9 +23,9 @@ const CalendarPage = ({ dummy }: ICalendarPage) => {
 
   return (
     <section className={styles.calendarPage}>
-      <Header dummy={dummy} />
+      <Header data={data} />
       <Calendar setDate={setDate} />
-      <DayRecord data={dummy} date={date} />
+      <DayRecord data={data} date={date} />
     </section>
   );
 };

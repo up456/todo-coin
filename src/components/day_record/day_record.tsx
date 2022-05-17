@@ -1,13 +1,13 @@
 import styles from './day_record.module.css';
 import React from 'react';
 import Button from '../button/button';
-import { IDummy } from '../../App';
+import { TypeData } from '../../App';
 import StarsBox from '../stars_box/stars_box';
 import { useNavigate } from 'react-router-dom';
 import { isDayAfterTodayOrToday } from '../../util/calc';
 
 interface IDayRecord {
-  data: IDummy;
+  data: TypeData;
   date: string;
 }
 const DayRecord = ({ data, date }: IDayRecord) => {

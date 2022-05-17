@@ -3,14 +3,14 @@ import React from 'react';
 import Button from '../../components/button/button';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/header/header';
-import { IDummy } from '../../App';
+import { TypeData } from '../../App';
 import AuthService from '../../service/authService';
 
-interface IMyPage {
-  dummy: IDummy;
+interface TypeMyPage {
+  data: TypeData;
   authService: AuthService;
 }
-const MyPage = ({ dummy, authService }: IMyPage) => {
+const MyPage = ({ data, authService }: TypeMyPage) => {
   const navigate = useNavigate();
   const onLogout = () => {
     authService.logout();
@@ -18,7 +18,7 @@ const MyPage = ({ dummy, authService }: IMyPage) => {
   };
   return (
     <section>
-      <Header dummy={dummy} />
+      <Header data={data} />
       <h1>마이 페이지입니다.</h1>
       <Button text="로그아웃" onClick={onLogout} />
     </section>
