@@ -42,6 +42,9 @@ const AddTodoPage = ({ addTodo }: TypeAddTodoPage) => {
         todoRef.current?.focus();
         return;
       }
+      if (inputValue.deadline === '') {
+        inputValue.deadline = '9';
+      }
       addTodo(date, inputValue);
       navigate(-1);
     }
