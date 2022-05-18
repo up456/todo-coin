@@ -1,9 +1,9 @@
 import styles from './my_page.module.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from '../../components/button/button';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/header/header';
-import { TypeData } from '../../App';
+import { TypeData, UserIdContext } from '../../App';
 import AuthService from '../../service/authService';
 
 interface TypeMyPage {
@@ -13,7 +13,7 @@ interface TypeMyPage {
 }
 const MyPage = ({ data, authService, setUserId }: TypeMyPage) => {
   const navigate = useNavigate();
-  const userId = sessionStorage.getItem('userId') || '';
+  const userId = useContext(UserIdContext);
   const onLogout = () => {
     authService.logout(setUserId);
     navigate('/');

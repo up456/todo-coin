@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TypeData } from '../../App';
+import { TypeData, UserIdContext } from '../../App';
 import { getMaxExp } from '../../util/calc';
 import Button from '../button/button';
 import Line from '../line/line';
@@ -12,7 +12,7 @@ interface TypeHeader {
 const Header = ({ data }: TypeHeader) => {
   const navigate = useNavigate();
   const today = new Date().toISOString().slice(0, 10);
-  const userId: string = sessionStorage.getItem('userId') || '';
+  const userId: string = useContext(UserIdContext);
   if (userId === '') {
     return (
       <div className={styles.offUser}>

@@ -1,6 +1,6 @@
 import styles from './todo.module.css';
-import React, { useState } from 'react';
-import { TypeChangeTodoState, TypeTodoList } from '../../App';
+import React, { useContext, useState } from 'react';
+import { TypeChangeTodoState, TypeTodoList, UserIdContext } from '../../App';
 import { transClockTo12 } from '../../util/calc';
 import SelectBox from '../select_box/select_box';
 import Line from '../line/line';
@@ -26,7 +26,7 @@ const Todo = ({ todo, date, changeTodoState, todoId }: TypeTodo) => {
   const [todoState, setTodoState] = useState(todo.todoState);
   const [onFocus, setOnFocus] = useState(false);
   const deadLine = transClockTo12(todo.deadline);
-  const userId = sessionStorage.getItem('userId');
+  const userId = useContext(UserIdContext);
 
   const transTodoState = (selectedState: string) => {
     setTodoState(selectedState);

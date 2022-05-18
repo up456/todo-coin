@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 
 import Header from '../../components/header/header';
 import DayRecord from '../../components/day_record/day_record';
-import { TypeData } from '../../App';
+import { TypeData, UserIdContext } from '../../App';
 import Calendar from '../../components/calendar/calendar';
 import { useNavigate } from 'react-router-dom';
 import { callToday } from '../../util/calc';
@@ -15,7 +15,7 @@ const CalendarPage = ({ data }: TypeCalendarPage) => {
   const navigate = useNavigate();
   const [date, setDate] = useState(callToday());
 
-  const userId = sessionStorage.getItem('userId');
+  const userId = useContext(UserIdContext);
 
   if (!userId) {
     navigate('/', { replace: false });

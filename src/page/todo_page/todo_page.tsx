@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { TypeData, TypeChangeTodoState } from '../../App';
+import { TypeData, TypeChangeTodoState, UserIdContext } from '../../App';
 import Button from '../../components/button/button';
 import Header from '../../components/header/header';
 import Line from '../../components/line/line';
@@ -27,7 +27,7 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
   const { date } = useParams();
   const dateData = date || '';
 
-  const userId = sessionStorage.getItem('userId') || '';
+  const userId = useContext(UserIdContext);
   const categoryList = data[userId]?.record[dateData]?.categoryList || [];
   const todoListData = data[userId]?.record[dateData]?.todoList;
 

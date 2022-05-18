@@ -1,8 +1,9 @@
 import styles from './login_page.module.css';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Button from '../../components/button/button';
 import AuthService from '../../service/authService';
 import { useNavigate } from 'react-router-dom';
+import { UserIdContext } from '../../App';
 
 interface ILoginPage {
   authService: AuthService;
@@ -15,11 +16,11 @@ const LoginPage = ({ authService, setUserId }: ILoginPage) => {
     await authService.login(setUserId);
     navigate(`/calendar`);
   };
+  const userId = useContext(UserIdContext);
 
   useEffect(() => {
-    const userId = sessionStorage.getItem('userId');
     if (userId) navigate(`/calendar`);
-  }, []);
+  }, [userId, navigate]);
 
   return (
     <section className={styles.loginPage}>

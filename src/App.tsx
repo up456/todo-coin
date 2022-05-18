@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './app.module.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -118,6 +118,8 @@ const dummy: TypeData = {
 
 const authService = new AuthService();
 
+export const UserIdContext = React.createContext('');
+
 export type TypeChangeTodoState = (
   date: string,
   targetTodoId: string,
@@ -194,35 +196,39 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <LoginPage authService={authService} setUserId={setUserId} />
-            }
-          />
-          <Route
-            path="/todo/:date"
-            element={<TodoPage data={data} changeTodoState={changeTodoState} />}
-          />
-          <Route
-            path="/:date/addTodo"
-            element={<AddTodoPage addTodo={addTodo} />}
-          />
-          <Route path="/calendar" element={<CalendarPage data={data} />} />
-          <Route
-            path="/mypage"
-            element={
-              <MyPage
-                data={data}
-                authService={authService}
-                setUserId={setUserId}
-              />
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+      <UserIdContext.Provider value={userId}>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <LoginPage authService={authService} setUserId={setUserId} />
+              }
+            />
+            <Route
+              path="/todo/:date"
+              element={
+                <TodoPage data={data} changeTodoState={changeTodoState} />
+              }
+            />
+            <Route
+              path="/:date/addTodo"
+              element={<AddTodoPage addTodo={addTodo} />}
+            />
+            <Route path="/calendar" element={<CalendarPage data={data} />} />
+            <Route
+              path="/mypage"
+              element={
+                <MyPage
+                  data={data}
+                  authService={authService}
+                  setUserId={setUserId}
+                />
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </UserIdContext.Provider>
     </div>
   );
 }
