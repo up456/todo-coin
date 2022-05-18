@@ -15,6 +15,7 @@ const MyPage = ({ data, authService }: TypeMyPage) => {
   const userId = sessionStorage.getItem('userId') || '';
   const onLogout = () => {
     authService.logout();
+    navigate('/');
     window.location.reload();
   };
 
