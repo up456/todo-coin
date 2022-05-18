@@ -6,13 +6,13 @@ import { useNavigate } from 'react-router-dom';
 
 interface ILoginPage {
   authService: AuthService;
+  setUserId: React.Dispatch<React.SetStateAction<string>>;
 }
-const LoginPage = ({ authService }: ILoginPage) => {
+const LoginPage = ({ authService, setUserId }: ILoginPage) => {
   const navigate = useNavigate();
 
   const onClick = async () => {
-    await authService.login();
-    const today = new Date().toISOString().slice(0, 10);
+    await authService.login(setUserId);
     navigate(`/calendar`);
   };
 

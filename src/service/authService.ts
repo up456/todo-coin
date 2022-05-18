@@ -1,12 +1,4 @@
-import {
-  signInWithPopup,
-  signOut,
-  onAuthStateChanged,
-  browserSessionPersistence,
-  setPersistence,
-  User,
-} from 'firebase/auth';
-import { NavigateFunction } from 'react-router-dom';
+import { signInWithPopup, signOut } from 'firebase/auth';
 import { myAuth, googleProvider } from './my_firebase';
 
 class AuthService {
@@ -15,13 +7,14 @@ class AuthService {
     this.auth = myAuth;
   }
 
-  async login() {
+  async login(setUserId: React.Dispatch<React.SetStateAction<string>>) {
     try {
       const result = await signInWithPopup(this.auth, googleProvider);
       const user = result.user;
       if (result) {
         if (user) {
           sessionStorage.setItem('userId', user.uid);
+          setUserId(user.uid);
         }
       }
     } catch (error) {

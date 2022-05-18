@@ -126,7 +126,7 @@ export type TypeChangeTodoState = (
 
 function App() {
   const [data, setData] = useState(dummy);
-  const userId = sessionStorage.getItem('userId') || '';
+  const [userId, setUserId] = useState('');
 
   const changeTodoState: TypeChangeTodoState = (
     date,
@@ -196,7 +196,12 @@ function App() {
     <div className={styles.app}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage authService={authService} />} />
+          <Route
+            path="/"
+            element={
+              <LoginPage authService={authService} setUserId={setUserId} />
+            }
+          />
           <Route
             path="/todo/:date"
             element={<TodoPage data={data} changeTodoState={changeTodoState} />}
