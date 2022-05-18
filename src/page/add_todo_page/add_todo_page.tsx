@@ -99,7 +99,7 @@ const AddTodoPage = ({ addTodo }: TypeAddTodoPage) => {
             type="time"
             className={styles.input}
             value={inputValue.deadline}
-            onChange={(event) => onChangeValue(event, 'deadLine')}
+            onChange={(event) => onChangeValue(event, 'deadline')}
           />
         </div>
       </form>
