@@ -4,6 +4,7 @@ import { TypeData, TypeChangeTodoState, UserIdContext } from '../../App';
 import Button from '../../components/button/button';
 import Header from '../../components/header/header';
 import Line from '../../components/line/line';
+import NonExistentUser from '../../components/non_existent_user/non_existent_user';
 import SelectBox from '../../components/select_box/select_box';
 import Todo from '../../components/todo/todo';
 import styles from './todo_page.module.css';

@@ -1,8 +1,9 @@
 import styles from './add_todo_page.module.css';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../../components/button/button';
-import { TypeTodoList } from '../../App';
+import { TypeTodoList, UserIdContext } from '../../App';
+import NonExistentUser from '../../components/non_existent_user/non_existent_user';
 
 const DEFAULT_INPUT_VALUE = {
   todo: '',
@@ -22,6 +23,9 @@ const AddTodoPage = ({ addTodo }: TypeAddTodoPage) => {
   const { date } = useParams();
   const todoRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState(DEFAULT_INPUT_VALUE);
+
+  const userId = useContext(UserIdContext);
+  if (!userId) return <NonExistentUser />;
 
   const onChangeValue = (
     event: React.ChangeEvent<HTMLInputElement>,

@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TypeData, UserIdContext } from '../../App';
 import { getMaxExp } from '../../util/calc';
-import Button from '../button/button';
 import Line from '../line/line';
+import NonExistentUser from '../non_existent_user/non_existent_user';
 import styles from './header.module.css';
 
 interface TypeHeader {
@@ -13,16 +13,9 @@ const Header = ({ data }: TypeHeader) => {
   const navigate = useNavigate();
   const today = new Date().toISOString().slice(0, 10);
   const userId: string = useContext(UserIdContext);
-  if (userId === '') {
-    return (
-      <div className={styles.offUser}>
-        <p>{'로그인 정보 없음'}</p>
-        <Button text="로그인 페이지로 이동" onClick={() => navigate('/')} />
-      </div>
-    );
-  }
 
-  const todoListData = data[userId].record[today]?.todoList;
+  if (!userId) return <NonExistentUser />;
+  const todoListData = data[userId]?.record[today]?.todoList;
 
   const goToMyPage = () => {
     navigate('/mypage');
