@@ -126,7 +126,7 @@ export type TypeChangeTodoState = (
 
 function App() {
   const [data, setData] = useState(dummy);
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState(sessionStorage.getItem('userId') || '');
 
   const changeTodoState: TypeChangeTodoState = (
     date,

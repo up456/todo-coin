@@ -29,7 +29,7 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
 
   const userId = sessionStorage.getItem('userId') || '';
   const categoryList = data[userId]?.record[dateData]?.categoryList || [];
-  const todoListData = data[userId].record[dateData]?.todoList;
+  const todoListData = data[userId]?.record[dateData]?.todoList;
 
   return (
     <>
