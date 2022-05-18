@@ -22,6 +22,7 @@ const Header = ({ data }: TypeHeader) => {
   };
   const goToTodayTodoPage = () => {
     navigate(`/todo/${today}`);
+    window.location.reload();
   };
   return (
     <div className={styles.headerContainer}>
