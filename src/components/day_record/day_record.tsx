@@ -1,7 +1,7 @@
 import styles from './day_record.module.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from '../button/button';
-import { TypeData } from '../../App';
+import { TypeData, UserIdContext } from '../../App';
 import StarsBox from '../stars_box/stars_box';
 import { useNavigate } from 'react-router-dom';
 import { isDayAfterTodayOrToday } from '../../util/calc';
@@ -15,7 +15,7 @@ const DayRecord = ({ data, date }: IDayRecord) => {
   const goToTodoList = () => {
     navigate(`/todo/${date}`, { state: { date: date } });
   };
-  const userId = sessionStorage.getItem('userId') || '';
+  const userId = useContext(UserIdContext);
   const dateObj = new Date(date);
   const recordData = data[userId]?.record[date];
 
