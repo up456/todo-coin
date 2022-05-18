@@ -9,12 +9,13 @@ import AuthService from '../../service/authService';
 interface TypeMyPage {
   data: TypeData;
   authService: AuthService;
+  setUserId: React.Dispatch<React.SetStateAction<string>>;
 }
-const MyPage = ({ data, authService }: TypeMyPage) => {
+const MyPage = ({ data, authService, setUserId }: TypeMyPage) => {
   const navigate = useNavigate();
   const userId = sessionStorage.getItem('userId') || '';
   const onLogout = () => {
-    authService.logout();
+    authService.logout(setUserId);
     navigate('/');
     window.location.reload();
   };

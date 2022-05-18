@@ -213,7 +213,13 @@ function App() {
           <Route path="/calendar" element={<CalendarPage data={data} />} />
           <Route
             path="/mypage"
-            element={<MyPage data={data} authService={authService} />}
+            element={
+              <MyPage
+                data={data}
+                authService={authService}
+                setUserId={setUserId}
+              />
+            }
           />
         </Routes>
       </BrowserRouter>

@@ -22,10 +22,11 @@ class AuthService {
     }
   }
 
-  logout() {
+  logout(setUserId: React.Dispatch<React.SetStateAction<string>>) {
     signOut(this.auth)
       .then(() => {
         sessionStorage.removeItem('userId');
+        setUserId('');
       })
       .catch((error) => {
         throw new Error(`로그아웃 실패, 에러메세지:${error}`);
