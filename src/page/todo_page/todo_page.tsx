@@ -12,7 +12,7 @@ import btnStyles from '../../components/button/button.module.css';
 // constants
 const SORT_OPTION_LIST = [
   { text: '등록 순', value: 'default' },
-  { text: '데드라인 순', value: 'time' },
+  { text: '데드라인 순', value: 'deadlineSort' },
 ];
 
 // 타입
@@ -68,6 +68,33 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
     });
   };
 
+  const getCompare = (sortType: string) => {
+    let compare: (a: string, b: string) => 1 | -1;
+    switch (sortType) {
+      case 'deadlineSort':
+        const deadlineCompare = (a: string, b: string) => {
+          if (rawData[a].deadline < rawData[b].deadline) {
+            return -1;
+          } else {
+            return 1;
+          }
+        };
+        compare = deadlineCompare;
+        break;
+      default:
+        const defaultCompare = (a: string, b: string) => {
+          if (a < b) {
+            return -1;
+          } else {
+            return 1;
+          }
+        };
+        compare = defaultCompare;
+        break;
+    }
+    return compare;
+  };
+
   return (
     <>
       <section className={styles.todoPage}>
@@ -117,21 +144,23 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
           <Line />
           <ul className={styles.todoList}>
             {rawData &&
-              Object.keys(rawData).map((key) => {
-                if (!isAll) {
-                  if (!seletedCategoryList.includes(rawData[key].category))
-                    return null;
-                }
-                return (
-                  <Todo
-                    key={key}
-                    todo={rawData[key]}
-                    changeTodoState={changeTodoState}
-                    date={dateData}
-                    todoId={key}
-                  />
-                );
-              })}
+              Object.keys(rawData)
+                .sort(getCompare(sort))
+                .map((key) => {
+                  if (!isAll) {
+                    if (!seletedCategoryList.includes(rawData[key].category))
+                      return null;
+                  }
+                  return (
+                    <Todo
+                      key={key}
+                      todo={rawData[key]}
+                      changeTodoState={changeTodoState}
+                      date={dateData}
+                      todoId={key}
+                    />
+                  );
+                })}
           </ul>
         </div>
       </section>
