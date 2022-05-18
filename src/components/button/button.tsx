@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 type TypeButton = {
   text: string;
-  onClick: (event: React.MouseEvent<HTMLElement>) => void;
+  onClick: () => void;
   isToggle?: boolean;
   typeReverse?: boolean;
 };
@@ -14,13 +14,12 @@ const Button = ({
   typeReverse = false,
 }: TypeButton) => {
   const [isReverse, setIsReverse] = useState(typeReverse);
-  const onSubmit = (event: React.MouseEvent<HTMLElement>) => {
-    onClick(event);
+  const onSubmit = () => {
+    onClick();
   };
-  const onSubmitAndToggle = (event: React.MouseEvent<HTMLElement>) => {
+  const onSubmitAndToggle = () => {
     setIsReverse((prevIsReverse) => !prevIsReverse);
-    console.log(isReverse);
-    onClick(event);
+    onClick();
   };
   return (
     <button

@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { TypeData, TypeChangeTodoState, UserIdContext } from '../../App';
 import Button from '../../components/button/button';
 import Header from '../../components/header/header';
 import Line from '../../components/line/line';
-import NonExistentUser from '../../components/non_existent_user/non_existent_user';
 import SelectBox from '../../components/select_box/select_box';
 import Todo from '../../components/todo/todo';
 import styles from './todo_page.module.css';
+import btnStyles from '../../components/button/button.module.css';
 
 // constants
 const SORT_OPTION_LIST = [
@@ -31,6 +31,44 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
   const userId = useContext(UserIdContext);
   const categoryList = data[userId]?.record[dateData]?.categoryList || [];
   const todoListData = data[userId]?.record[dateData]?.todoList;
+  const [rawData, setRawData] = useState(todoListData);
+  const [seletedCategoryList, setSeletedCategoryList] = useState<string[]>([]);
+  const [isAll, setIsAll] = useState(true);
+
+  const selectCategory = (category: string) => {
+    if (!seletedCategoryList.includes(category)) {
+      setSeletedCategoryList((prevSeletedCategoryList) => {
+        const newSeletedCategoryList = [...prevSeletedCategoryList, category];
+        return newSeletedCategoryList;
+      });
+    } else {
+      setSeletedCategoryList((prevSeletedCategoryList) => {
+        const newSeletedCategoryList = [...prevSeletedCategoryList];
+        return newSeletedCategoryList.filter((it) => it !== category);
+      });
+    }
+  };
+
+  const onClickCategory = () => {
+    const $buttons = document.querySelectorAll('button');
+    const isReverse = $buttons[2].className.split(' ').length;
+    if (isReverse === 1) {
+      $buttons[2].click();
+    }
+  };
+
+  const onClickAll = () => {
+    const $buttons = document.querySelectorAll(`button`);
+    $buttons.forEach(($button, key) => {
+      if (key > 2) {
+        if ($buttons[key].className === `${btnStyles.btn}`) {
+          $buttons[key].click();
+        }
+      }
+    });
+  };
+
+  useEffect(() => {}, [seletedCategoryList]);
 
   return (
     <>
@@ -57,7 +95,9 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
                 isToggle={true}
                 text="전체"
                 onClick={() => {
-                  console.log(`전체 클릭!`);
+                  if (!isAll) setSeletedCategoryList([]);
+                  setIsAll(!isAll);
+                  onClickAll();
                 }}
               />
               {Array.from(categoryList).map((category, idx) => (
@@ -66,8 +106,12 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
                   isToggle={true}
                   key={idx}
                   text={category || '미지정'}
-                  onClick={(event) => {
-                    console.log(event.target);
+                  onClick={() => {
+                    if (isAll) {
+                      setIsAll(false);
+                      onClickCategory();
+                    }
+                    selectCategory(category);
                   }}
                 />
               ))}
@@ -75,16 +119,22 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
           </section>
           <Line />
           <ul className={styles.todoList}>
-            {todoListData &&
-              Object.keys(todoListData).map((key) => (
-                <Todo
-                  key={key}
-                  todo={todoListData[key]}
-                  changeTodoState={changeTodoState}
-                  date={dateData}
-                  todoId={key}
-                />
-              ))}
+            {rawData &&
+              Object.keys(rawData).map((key) => {
+                if (!isAll) {
+                  if (!seletedCategoryList.includes(rawData[key].category))
+                    return null;
+                }
+                return (
+                  <Todo
+                    key={key}
+                    todo={rawData[key]}
+                    changeTodoState={changeTodoState}
+                    date={dateData}
+                    todoId={key}
+                  />
+                );
+              })}
           </ul>
         </div>
       </section>
