@@ -68,8 +68,6 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
     });
   };
 
-  useEffect(() => {}, [seletedCategoryList]);
-
   return (
     <>
       <section className={styles.todoPage}>
@@ -95,7 +93,6 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
                 isToggle={true}
                 text="전체"
                 onClick={() => {
-                  if (!isAll) setSeletedCategoryList([]);
                   setIsAll(!isAll);
                   onClickAll();
                 }}
