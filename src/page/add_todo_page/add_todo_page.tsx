@@ -32,7 +32,11 @@ const AddTodoPage = ({ addTodo }: TypeAddTodoPage) => {
     inputKey: string
   ) => {
     setInputValue((prevInputValue) => {
-      return { ...prevInputValue, [inputKey]: event.target.value };
+      let value: string | number = event.target.value;
+      if (inputKey === 'rewardCoin' || inputKey === 'rewardExp') {
+        value = parseInt(value);
+      }
+      return { ...prevInputValue, [inputKey]: value };
     });
   };
 
