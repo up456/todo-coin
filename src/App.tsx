@@ -134,7 +134,7 @@ function App() {
     // 보상이 유지되는 경우
     if (
       originalState === selectedState ||
-      (originalState === 'complete' && selectedState === 'complete')
+      (originalState !== 'complete' && selectedState !== 'complete')
     ) {
       return 'stay';
     }
@@ -159,6 +159,8 @@ function App() {
       };
       const userInfo = newData[userId]?.myInfo;
       const targetTodo = newData[userId]?.record[date]?.todoList[targetTodoId];
+
+      console.log(targetTodo.todoState, todoState);
 
       // 보상 처리 부분
       if (userInfo && targetTodo) {
