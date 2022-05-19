@@ -130,6 +130,24 @@ function App() {
   const [data, setData] = useState(dummy);
   const [userId, setUserId] = useState(sessionStorage.getItem('userId') || '');
 
+  const handleReward = (originalState: string, selectedState: string) => {
+    // 보상이 유지되는 경우
+    if (
+      originalState === selectedState ||
+      (originalState === 'complete' && selectedState === 'complete')
+    ) {
+      return 'stay';
+    }
+    // 보상이 회수되는 경우
+    else if (originalState === 'complete') {
+      return 'minus';
+    }
+    // 보상이 추가되는 경우
+    else {
+      return 'plus';
+    }
+  };
+
   const changeTodoState: TypeChangeTodoState = (
     date,
     targetTodoId,
@@ -139,9 +157,26 @@ function App() {
       const newData = {
         ...prevData,
       };
+      const userInfo = newData[userId]?.myInfo;
       const targetTodo = newData[userId]?.record[date]?.todoList[targetTodoId];
 
-      if (targetTodo) {
+      // 보상 처리 부분
+      if (userInfo && targetTodo) {
+        switch (handleReward(targetTodo.todoState, todoState)) {
+          case 'plus':
+            userInfo.coin += targetTodo.rewardCoin;
+            userInfo.exp += targetTodo.rewardExp;
+            break;
+          case 'minus':
+            userInfo.coin -= targetTodo.rewardCoin;
+            userInfo.exp -= targetTodo.rewardExp;
+            break;
+          default:
+            break;
+        }
+      }
+      // 보상 처리 후 상태 및 완료시간 저장 부분
+      if (userInfo && targetTodo) {
         switch (todoState) {
           case 'complete':
             targetTodo.completeTime = new Date().toLocaleTimeString();
