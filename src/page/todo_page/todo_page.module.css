@@ -14,11 +14,9 @@
 }
 
 .pageBtnContainer {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  justify-content: space-evenly;
-  gap: 1em;
-  padding: 0 0.5em;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
   padding-bottom: 1.1em;
 }
 .pageBtnContainer > button {
@@ -27,6 +25,10 @@
 .pageBtnContainer > button:hover {
   box-shadow: makerBoxShadowGreen;
 }
+.btnGap {
+  width: 3.5%;
+}
+
 .controlMenu {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20%, auto));

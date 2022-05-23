@@ -145,10 +145,13 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
             <div className={styles.pageBtnContainer}>
               <Button text="달력 보기" onClick={() => navigate('/calendar')} />
               {isDayAfterTodayOrToday(date || '') && isAddBtnPossible() && (
-                <Button
-                  text="할일 추가하기"
-                  onClick={() => navigate(`/${date}/addTodo`)}
-                />
+                <>
+                  <div className={styles.btnGap}></div>
+                  <Button
+                    text="할일 추가하기"
+                    onClick={() => navigate(`/${date}/addTodo`)}
+                  />
+                </>
               )}
             </div>
             <div className={styles.controlMenu}>
