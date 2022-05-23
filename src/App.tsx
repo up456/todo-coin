@@ -150,7 +150,31 @@ function App() {
     }
   };
 
-  console.log(userLv);
+  const calcPercent = (
+    todoList: { [todoId: string]: TypeTodoList },
+    newData: {
+      [x: string]: {
+        myInfo: {
+          lv: number;
+          exp: number;
+          coin: number;
+          items: {}[];
+          categoryRecord: Set<string>;
+        };
+        record: TypeRecord;
+        shop: {};
+      };
+    },
+    date: string
+  ) => {
+    const todoListCount = Object.keys(todoList).length;
+    const completeTodoCount = Object.keys(todoList).filter(
+      (key) => todoList[key].todoState === 'complete'
+    ).length;
+    newData[userId].record[date].percent = Math.floor(
+      (completeTodoCount / todoListCount) * 100
+    );
+  };
 
   const changeTodoState: TypeChangeTodoState = (
     date,
@@ -162,54 +186,57 @@ function App() {
         ...prevData,
       };
       const userInfo = newData[userId]?.myInfo;
-      const targetTodo = newData[userId]?.record[date]?.todoList[targetTodoId];
+      const todoList = newData[userId]?.record[date]?.todoList;
+      const targetTodo = todoList[targetTodoId];
+
+      if (!(userInfo && todoList)) return newData;
 
       // 보상 처리 부분
-      if (userInfo && targetTodo) {
-        switch (handleReward(targetTodo.todoState, todoState)) {
-          case 'plus':
-            userInfo.coin += targetTodo.rewardCoin;
-            userInfo.exp += targetTodo.rewardExp;
-            //경험치 처리 부분
-            if (userInfo.exp >= getMaxExp(userInfo.lv)) {
-              const gap = userInfo.exp - getMaxExp(userInfo.lv);
-              userInfo.exp = 0 + gap;
-              setUserLv(++userInfo.lv);
-            }
-            break;
-          case 'minus':
-            userInfo.coin -= targetTodo.rewardCoin;
-            userInfo.exp -= targetTodo.rewardExp;
-            //경험치 처리 부분
-            if (userInfo.exp < 0) {
-              setUserLv(--userInfo.lv);
-              userInfo.exp += getMaxExp(userInfo.lv);
-            }
+      switch (handleReward(targetTodo.todoState, todoState)) {
+        case 'plus':
+          userInfo.coin += targetTodo.rewardCoin;
+          userInfo.exp += targetTodo.rewardExp;
+          //경험치 처리 부분
+          if (userInfo.exp >= getMaxExp(userInfo.lv)) {
+            const gap = userInfo.exp - getMaxExp(userInfo.lv);
+            userInfo.exp = 0 + gap;
+            setUserLv(++userInfo.lv);
+          }
+          break;
+        case 'minus':
+          userInfo.coin -= targetTodo.rewardCoin;
+          userInfo.exp -= targetTodo.rewardExp;
+          //경험치 처리 부분
+          if (userInfo.exp < 0) {
+            setUserLv(--userInfo.lv);
+            userInfo.exp += getMaxExp(userInfo.lv);
+          }
 
-            break;
-          default:
-            break;
-        }
+          break;
+        default:
+          break;
       }
       // 보상 처리 후 상태 및 완료시간 저장 부분
-      if (userInfo && targetTodo) {
-        switch (todoState) {
-          case 'complete':
-            targetTodo.completeTime = new Date().toLocaleTimeString();
-            targetTodo.todoState = 'complete';
-            break;
-          case 'fail':
-            targetTodo.completeTime = '';
-            targetTodo.todoState = 'fail';
-            break;
-          case 'ing':
-            targetTodo.completeTime = '';
-            targetTodo.todoState = 'ing';
-            break;
-          default:
-            throw new Error(`없는 상태입니다 ${todoState} `);
-        }
+      switch (todoState) {
+        case 'complete':
+          targetTodo.completeTime = new Date().toLocaleTimeString();
+          targetTodo.todoState = 'complete';
+          break;
+        case 'fail':
+          targetTodo.completeTime = '';
+          targetTodo.todoState = 'fail';
+          break;
+        case 'ing':
+          targetTodo.completeTime = '';
+          targetTodo.todoState = 'ing';
+          break;
+        default:
+          throw new Error(`없는 상태입니다 ${todoState} `);
       }
+
+      // 상태 변화 후에는 반드시 todo달성률 업데이트
+      calcPercent(todoList, newData, date);
+
       return newData;
     });
   };
@@ -240,6 +267,9 @@ function App() {
       // 나의 카테고리 목록 추가
       const categoryRecord = newData[userId].myInfo.categoryRecord;
       categoryRecord.add(inputValue.category);
+
+      // todo추가 후에는 반드시 todo달성률 업데이트
+      calcPercent(todoList, newData, date);
 
       return newData;
     });
