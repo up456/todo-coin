@@ -151,28 +151,21 @@ function App() {
 
   const calcPercent = (
     todoList: { [todoId: string]: TypeTodoList },
-    newData: {
-      [x: string]: {
-        myInfo: {
-          lv: number;
-          exp: number;
-          coin: number;
-          items: {}[];
-          categoryRecord: Set<string>;
-        };
-        record: TypeRecord;
-        shop: {};
+    record: {
+      todoList: {
+        [todoId: string]: TypeTodoList;
       };
-    },
-    date: string
+      categoryList: Set<string>;
+      percent: number;
+      acquiredCoin: number;
+      satisfaction: number;
+    }
   ) => {
     const todoListCount = Object.keys(todoList).length;
     const completeTodoCount = Object.keys(todoList).filter(
       (key) => todoList[key].todoState === 'complete'
     ).length;
-    newData[userId].record[date].percent = Math.floor(
-      (completeTodoCount / todoListCount) * 100
-    );
+    record.percent = Math.floor((completeTodoCount / todoListCount) * 100);
   };
 
   const changeTodoState: TypeChangeTodoState = (
@@ -239,7 +232,7 @@ function App() {
       }
 
       // 상태 변화 후에는 반드시 todo달성률 업데이트
-      calcPercent(todoList, newData, date);
+      calcPercent(todoList, record);
 
       return newData;
     });
@@ -251,8 +244,8 @@ function App() {
         ...prevData,
       };
       // 해당 날짜의 기록을 넣는 칸이 없으면 해당 날짜로 빈공간 생성
-      let recordDate = newData[userId]?.record[date];
-      if (!recordDate) {
+      let record = newData[userId]?.record[date];
+      if (!record) {
         newData[userId].record[date] = {
           todoList: {},
           categoryList: new Set([]),
@@ -262,18 +255,18 @@ function App() {
         };
       }
       // todo 추가
-      const todoList = recordDate.todoList;
+      const todoList = record.todoList;
       const todoId = Date.now();
       todoList[todoId] = inputValue;
       // 당일 카테고리 추가
-      const categoryList = recordDate.categoryList;
+      const categoryList = record.categoryList;
       categoryList.add(inputValue.category);
       // 나의 카테고리 목록 추가
       const categoryRecord = newData[userId].myInfo.categoryRecord;
       categoryRecord.add(inputValue.category);
 
       // todo추가 후에는 반드시 todo달성률 업데이트
-      calcPercent(todoList, newData, date);
+      calcPercent(todoList, record);
 
       return newData;
     });
