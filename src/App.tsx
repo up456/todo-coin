@@ -130,7 +130,6 @@ export type TypeChangeTodoState = (
 function App() {
   const [data, setData] = useState(dummy);
   const [userId, setUserId] = useState(sessionStorage.getItem('userId') || '');
-  const [userLv, setUserLv] = useState(data[userId]?.myInfo.lv);
 
   const handleReward = (originalState: string, selectedState: string) => {
     // 보상이 유지되는 경우
@@ -200,7 +199,7 @@ function App() {
           if (userInfo.exp >= getMaxExp(userInfo.lv)) {
             const gap = userInfo.exp - getMaxExp(userInfo.lv);
             userInfo.exp = 0 + gap;
-            setUserLv(++userInfo.lv);
+            userInfo.lv++;
           }
           break;
         case 'minus':
@@ -208,7 +207,7 @@ function App() {
           userInfo.exp -= targetTodo.rewardExp;
           //경험치 처리 부분
           if (userInfo.exp < 0) {
-            setUserLv(--userInfo.lv);
+            userInfo.lv--;
             userInfo.exp += getMaxExp(userInfo.lv);
           }
 
