@@ -185,7 +185,8 @@ function App() {
         ...prevData,
       };
       const userInfo = newData[userId]?.myInfo;
-      const todoList = newData[userId]?.record[date]?.todoList;
+      const record = newData[userId]?.record[date];
+      const todoList = record?.todoList;
       const targetTodo = todoList[targetTodoId];
 
       if (!(userInfo && todoList)) return newData;
@@ -193,9 +194,11 @@ function App() {
       // 보상 처리 부분
       switch (handleReward(targetTodo.todoState, todoState)) {
         case 'plus':
+          // 코인 처리 부분
           userInfo.coin += targetTodo.rewardCoin;
-          userInfo.exp += targetTodo.rewardExp;
+          record.acquiredCoin += targetTodo.rewardCoin;
           //경험치 처리 부분
+          userInfo.exp += targetTodo.rewardExp;
           if (userInfo.exp >= getMaxExp(userInfo.lv)) {
             const gap = userInfo.exp - getMaxExp(userInfo.lv);
             userInfo.exp = 0 + gap;
@@ -203,9 +206,11 @@ function App() {
           }
           break;
         case 'minus':
+          // 코인 처리 부분
           userInfo.coin -= targetTodo.rewardCoin;
-          userInfo.exp -= targetTodo.rewardExp;
+          record.acquiredCoin -= targetTodo.rewardCoin;
           //경험치 처리 부분
+          userInfo.exp -= targetTodo.rewardExp;
           if (userInfo.exp < 0) {
             userInfo.lv--;
             userInfo.exp += getMaxExp(userInfo.lv);
