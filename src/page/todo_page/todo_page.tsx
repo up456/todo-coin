@@ -69,7 +69,10 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
     const $buttons = document.querySelectorAll(`button`);
     $buttons.forEach(($button, key) => {
       if (key > 2) {
-        if ($buttons[key].className === `${btnStyles.btn}`) {
+        if (
+          $buttons[key].textContent !== '하루 완료하기' &&
+          $buttons[key].className === `${btnStyles.btn}`
+        ) {
           $buttons[key].click();
         }
       }
