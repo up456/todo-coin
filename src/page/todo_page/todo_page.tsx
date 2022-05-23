@@ -8,6 +8,7 @@ import SelectBox from '../../components/select_box/select_box';
 import Todo from '../../components/todo/todo';
 import styles from './todo_page.module.css';
 import btnStyles from '../../components/button/button.module.css';
+import { callToday } from '../../util/calc';
 
 // constants
 const SORT_OPTION_LIST = [
@@ -113,6 +114,14 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
     }
   };
 
+  const isPossible = () => {
+    if (record) {
+      return callToday() === date && record.satisfaction === 0;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <>
       <section className={styles.todoPage}>
@@ -180,15 +189,20 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
                   );
                 })}
           </ul>
-          <Line />
-          <section className={styles.contentFooter}>
-            <SelectBox
-              value={satisfaction}
-              onChange={(starValue) => setSatisfaction(parseInt(starValue))}
-              optionList={SATISFACTION_OPTION_LIST}
-            />
-            <Button text={'하루 완료하기'} onClick={completeToday} />
-          </section>
+          {!record && <div></div>}
+          {isPossible() && (
+            <>
+              <Line />
+              <section className={styles.contentFooter}>
+                <SelectBox
+                  value={satisfaction}
+                  onChange={(starValue) => setSatisfaction(parseInt(starValue))}
+                  optionList={SATISFACTION_OPTION_LIST}
+                />
+                <Button text={'하루 완료하기'} onClick={completeToday} />
+              </section>
+            </>
+          )}
         </div>
       </section>
     </>
