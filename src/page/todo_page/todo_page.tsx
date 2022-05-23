@@ -14,6 +14,11 @@ const SORT_OPTION_LIST = [
   { text: '등록 순', value: 'default' },
   { text: '데드라인 순', value: 'deadlineSort' },
 ];
+const SATISFACTION_OPTION_LIST = [
+  { text: '만족도 : Nice', value: 3 },
+  { text: '만족도 : Soso', value: 2 },
+  { text: '만족도 : Bad', value: 1 },
+];
 
 // 타입
 interface TypeHompPage {
@@ -25,12 +30,14 @@ interface TypeHompPage {
 const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
   const navigate = useNavigate();
   const [sort, setSort] = useState('dafault');
+  const [satisfaction, setSatisfaction] = useState(3);
   const { date } = useParams();
   const dateData = date || '';
 
   const userId = useContext(UserIdContext);
-  const categoryList = data[userId]?.record[dateData]?.categoryList || [];
-  const todoListData = data[userId]?.record[dateData]?.todoList;
+  const record = data[userId]?.record[dateData];
+  const categoryList = record?.categoryList || [];
+  const todoListData = record?.todoList;
   const [rawData, setRawData] = useState(todoListData);
   const [seletedCategoryList, setSeletedCategoryList] = useState<string[]>([]);
   const [isAll, setIsAll] = useState(true);
@@ -93,6 +100,17 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
         break;
     }
     return compare;
+  };
+
+  const completeToday = () => {
+    if (record) {
+      if (window.confirm('현재 todo의 상태로 하루를 종료하시겠습니까?')) {
+        record.satisfaction = satisfaction;
+        navigate(-1);
+      }
+    } else {
+      alert('하루를 완료 할 데이터가 없습니다.');
+    }
   };
 
   return (
@@ -162,6 +180,15 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
                   );
                 })}
           </ul>
+          <Line />
+          <section className={styles.contentFooter}>
+            <SelectBox
+              value={satisfaction}
+              onChange={(starValue) => setSatisfaction(parseInt(starValue))}
+              optionList={SATISFACTION_OPTION_LIST}
+            />
+            <Button text={'하루 완료하기'} onClick={completeToday} />
+          </section>
         </div>
       </section>
     </>

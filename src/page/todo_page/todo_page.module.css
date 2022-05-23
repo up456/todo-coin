@@ -1,4 +1,4 @@
-@value makerBoxShadowGreen, mainGray from '/src/common/color.css';
+@value makerBoxShadowGreen, mainGray,mainWhite, mainGreen, textGreen from '/src/common/color.css';
 
 .todoPage {
   display: flex;
@@ -43,4 +43,18 @@
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.contentFooter {
+  display: flex;
+  justify-content: space-between;
+}
+.contentFooter > select {
+  background-color: mainWhite;
+  border: 1px solid textGreen;
+  color: textGreen;
+  width: 25%;
+}
+.contentFooter > button {
+  width: 70%;
 }

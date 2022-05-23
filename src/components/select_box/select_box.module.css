@@ -1,4 +1,4 @@
-@value textGray from '/src/common/color.css';
+@value textGray, pointGreen from '/src/common/color.css';
 
 .select {
   border: none;
@@ -9,4 +9,8 @@
   text-align: center;
   font-weight: bold;
   color: textGray;
+}
+
+.option {
+  font-weight: bold;
 }
