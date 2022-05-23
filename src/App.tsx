@@ -8,6 +8,7 @@ import MyPage from './page/my_page/my_page';
 import LoginPage from './page/login_page/login_page';
 import AuthService from './service/authService';
 import AddTodoPage from './page/add_todo_page/add_todo_page';
+import { getMaxExp } from './util/calc';
 
 export interface TypeTodoList {
   todo: string;
@@ -129,6 +130,7 @@ export type TypeChangeTodoState = (
 function App() {
   const [data, setData] = useState(dummy);
   const [userId, setUserId] = useState(sessionStorage.getItem('userId') || '');
+  const [userLv, setUserLv] = useState(data[userId]?.myInfo.lv);
 
   const handleReward = (originalState: string, selectedState: string) => {
     // 보상이 유지되는 경우
@@ -148,6 +150,8 @@ function App() {
     }
   };
 
+  console.log(userLv);
+
   const changeTodoState: TypeChangeTodoState = (
     date,
     targetTodoId,
@@ -160,18 +164,28 @@ function App() {
       const userInfo = newData[userId]?.myInfo;
       const targetTodo = newData[userId]?.record[date]?.todoList[targetTodoId];
 
-      console.log(targetTodo.todoState, todoState);
-
       // 보상 처리 부분
       if (userInfo && targetTodo) {
         switch (handleReward(targetTodo.todoState, todoState)) {
           case 'plus':
             userInfo.coin += targetTodo.rewardCoin;
             userInfo.exp += targetTodo.rewardExp;
+            //경험치 처리 부분
+            if (userInfo.exp >= getMaxExp(userInfo.lv)) {
+              const gap = userInfo.exp - getMaxExp(userInfo.lv);
+              userInfo.exp = 0 + gap;
+              setUserLv(++userInfo.lv);
+            }
             break;
           case 'minus':
             userInfo.coin -= targetTodo.rewardCoin;
             userInfo.exp -= targetTodo.rewardExp;
+            //경험치 처리 부분
+            if (userInfo.exp < 0) {
+              setUserLv(--userInfo.lv);
+              userInfo.exp += getMaxExp(userInfo.lv);
+            }
+
             break;
           default:
             break;
