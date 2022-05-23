@@ -8,7 +8,7 @@ import SelectBox from '../../components/select_box/select_box';
 import Todo from '../../components/todo/todo';
 import styles from './todo_page.module.css';
 import btnStyles from '../../components/button/button.module.css';
-import { callToday } from '../../util/calc';
+import { callToday, isDayAfterTodayOrToday } from '../../util/calc';
 
 // constants
 const SORT_OPTION_LIST = [
@@ -114,11 +114,25 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
     }
   };
 
-  const isPossible = () => {
+  const isCompleteBtnPossible = () => {
     if (record) {
       return callToday() === date && record.satisfaction === 0;
     } else {
       return false;
+    }
+  };
+
+  const isAddBtnPossible = () => {
+    // 기록이 없으면 생성가능
+    if (record) {
+      // 기록에서 만족도가 0이면 아직 하루를 완료하지 않은 상태
+      if (record.satisfaction === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
     }
   };
 
@@ -130,10 +144,12 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
           <section className={styles.contentHeader}>
             <div className={styles.pageBtnContainer}>
               <Button text="달력 보기" onClick={() => navigate('/calendar')} />
-              <Button
-                text="할일 추가하기"
-                onClick={() => navigate(`/${date}/addTodo`)}
-              />
+              {isDayAfterTodayOrToday(date || '') && isAddBtnPossible() && (
+                <Button
+                  text="할일 추가하기"
+                  onClick={() => navigate(`/${date}/addTodo`)}
+                />
+              )}
             </div>
             <div className={styles.controlMenu}>
               <SelectBox
@@ -189,8 +205,8 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
                   );
                 })}
           </ul>
-          {!record && <div></div>}
-          {isPossible() && (
+          {!record && <div className={styles.noData}>todo를 추가하세요~!</div>}
+          {isCompleteBtnPossible() && (
             <>
               <Line />
               <section className={styles.contentFooter}>

@@ -58,3 +58,11 @@
 .contentFooter > button {
   width: 70%;
 }
+
+.noData {
+  text-align: center;
+  color: textGreen;
+  font-weight: bold;
+  background-color: mainWhite;
+  padding: 2.5em;
+}
