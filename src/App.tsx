@@ -8,7 +8,7 @@ import MyPage from './page/my_page/my_page';
 import LoginPage from './page/login_page/login_page';
 import AuthService from './service/authService';
 import AddTodoPage from './page/add_todo_page/add_todo_page';
-import { getMaxExp } from './util/calc';
+import { calcPercent, getMaxExp, handleReward } from './util/calc';
 
 export interface TypeTodoList {
   todo: string;
@@ -142,43 +142,6 @@ export type TypeChangeTodoState = (
 function App() {
   const [userId, setUserId] = useState(sessionStorage.getItem('userId') || '');
   const [data, setData] = useState(dummy[userId]);
-
-  const handleReward = (originalState: string, selectedState: string) => {
-    // 보상이 유지되는 경우
-    if (
-      originalState === selectedState ||
-      (originalState !== 'complete' && selectedState !== 'complete')
-    ) {
-      return 'stay';
-    }
-    // 보상이 회수되는 경우
-    else if (originalState === 'complete') {
-      return 'minus';
-    }
-    // 보상이 추가되는 경우
-    else {
-      return 'plus';
-    }
-  };
-
-  const calcPercent = (
-    todoList: { [todoId: string]: TypeTodoList },
-    record: {
-      todoList: {
-        [todoId: string]: TypeTodoList;
-      };
-      categoryList: Set<string>;
-      percent: number;
-      acquiredCoin: number;
-      satisfaction: number;
-    }
-  ) => {
-    const todoListCount = Object.keys(todoList).length;
-    const completeTodoCount = Object.keys(todoList).filter(
-      (key) => todoList[key].todoState === 'complete'
-    ).length;
-    record.percent = Math.floor((completeTodoCount / todoListCount) * 100);
-  };
 
   const changeTodoState: TypeChangeTodoState = (
     date,
