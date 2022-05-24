@@ -2,15 +2,9 @@ import styles from './todo.module.css';
 import React, { useContext, useState } from 'react';
 import { TypeChangeTodoState, TypeTodoList, UserIdContext } from '../../App';
 import { transClockTo12 } from '../../util/calc';
-import SelectBox from '../select_box/select_box';
 import Line from '../line/line';
 
 // constants
-const TODO_STATE_OPTION_LIST = [
-  { text: '진행중', value: 'ing' },
-  { text: '완료', value: 'complete' },
-  { text: '실패', value: 'fail' },
-];
 const TODO_STATE_LIST = ['ing', 'complete', 'fail'];
 
 // 타입

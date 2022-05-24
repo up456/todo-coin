@@ -1,7 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth } from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
-import { preProcessFile } from 'typescript';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
