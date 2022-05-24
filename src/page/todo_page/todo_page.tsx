@@ -58,21 +58,29 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
 
   const onClickCategory = () => {
     const $buttons = document.querySelectorAll('button');
-    const isReverse = $buttons[2].className.split(' ').length;
-    if (isReverse === 1) {
-      $buttons[2].click();
-    }
+    $buttons.forEach(($button) => {
+      if ($button.textContent === '전체') {
+        $button.click();
+        return;
+      }
+    });
   };
 
   const onClickAll = () => {
     const $buttons = document.querySelectorAll(`button`);
-    $buttons.forEach(($button, key) => {
-      if (key > 2) {
+    let flag = false;
+
+    $buttons.forEach(($button) => {
+      if ($button.textContent === '전체') {
+        flag = true;
+        return;
+      }
+      if (flag) {
         if (
-          $buttons[key].textContent !== '하루 완료하기' &&
-          $buttons[key].className === `${btnStyles.btn}`
+          $button.textContent !== '하루 완료하기' &&
+          $button.className === `${btnStyles.btn}`
         ) {
-          $buttons[key].click();
+          $button.click();
         }
       }
     });
