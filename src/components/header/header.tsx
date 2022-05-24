@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TypeData, UserIdContext } from '../../App';
 import { getMaxExp } from '../../util/calc';
@@ -14,23 +14,35 @@ const Header = ({ data }: TypeHeader) => {
   const today = new Date().toISOString().slice(0, 10);
   const userId: string = useContext(UserIdContext);
 
-  if (!userId) return <NonExistentUser />;
+  if (!data.record) {
+    data['record'] = {
+      [`${today}`]: {
+        todoList: {},
+        categoryList: [],
+        percent: 0,
+        acquiredCoin: 0,
+        satisfaction: 0,
+      },
+    };
+  }
   const todoListData = data?.record[today]?.todoList;
+
+  if (!userId) return <NonExistentUser />;
 
   const goToMyPage = () => {
     navigate('/mypage');
   };
   const goToTodayTodoPage = () => {
-    navigate(`/todo/${today}`);
+    navigate(`/calendar`);
     window.location.reload();
   };
   return (
     <div className={styles.headerContainer}>
       <header className={styles.header}>
         <div className={styles.itemBox}>
-          <p className={styles.itemIcon}>{`Lv${data.myInfo.lv}`}</p>
-          <p className={styles.itemInfo}>{`${data.myInfo.exp} / ${getMaxExp(
-            data.myInfo.lv
+          <p className={styles.itemIcon}>{`Lv${data?.myInfo.lv}`}</p>
+          <p className={styles.itemInfo}>{`${data?.myInfo.exp} / ${getMaxExp(
+            data?.myInfo.lv
           )}`}</p>
         </div>
         <div className={styles.itemBox} onClick={goToTodayTodoPage}>
@@ -48,7 +60,7 @@ const Header = ({ data }: TypeHeader) => {
         </div>
         <div className={styles.itemBox}>
           <p className={styles.itemIcon}>coin</p>
-          <p className={styles.itemInfo}> {`${data.myInfo.coin}`}</p>
+          <p className={styles.itemInfo}> {`${data?.myInfo.coin}`}</p>
         </div>
         <div className={styles.imageBox} onClick={goToMyPage}>
           <img src="/asset/default_profile.jpg" alt="profile" />

@@ -18,9 +18,10 @@ const MyPage = ({ data, authService, setUserId }: TypeMyPage) => {
     navigate('/');
     window.location.reload();
   };
+  console.log('data:', data);
 
-  const categoryRecord = Array.from(data.myInfo.categoryRecord);
-
+  const cate = data?.myInfo?.categoryRecord || [];
+  const categoryRecord = Array.from(cate);
   return (
     <section className={styles.myPage}>
       <Header data={data} />

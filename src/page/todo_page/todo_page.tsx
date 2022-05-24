@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { TypeData, TypeChangeTodoState } from '../../App';
+import { TypeData, TypeChangeTodoState, UserIdContext } from '../../App';
 import Button from '../../components/button/button';
 import Header from '../../components/header/header';
 import Line from '../../components/line/line';
@@ -9,6 +9,7 @@ import Todo from '../../components/todo/todo';
 import styles from './todo_page.module.css';
 import btnStyles from '../../components/button/button.module.css';
 import { callToday, isDayAfterTodayOrToday } from '../../util/calc';
+import DbService from '../../service/dbService';
 
 // constants
 const SORT_OPTION_LIST = [
@@ -25,22 +26,24 @@ const SATISFACTION_OPTION_LIST = [
 interface TypeHompPage {
   data: TypeData;
   changeTodoState: TypeChangeTodoState;
+  dbService: DbService;
 }
 
 // 컴포넌트
-const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
+const TodoPage = ({ data, changeTodoState, dbService }: TypeHompPage) => {
   const navigate = useNavigate();
   const [sort, setSort] = useState('dafault');
   const [satisfaction, setSatisfaction] = useState(3);
   const { date } = useParams();
   const dateData = date || '';
 
-  const record = data?.record[dateData];
+  let record = data?.record[dateData];
   const categoryList = record?.categoryList || [];
   const todoListData = record?.todoList;
   const [rawData, setRawData] = useState(todoListData);
   const [seletedCategoryList, setSeletedCategoryList] = useState<string[]>([]);
   const [isAll, setIsAll] = useState(true);
+  const userId = useContext(UserIdContext);
 
   const selectCategory = (category: string) => {
     if (!seletedCategoryList.includes(category)) {
@@ -117,6 +120,7 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
     if (record) {
       if (window.confirm('현재 todo의 상태로 하루를 종료하시겠습니까?')) {
         record.satisfaction = satisfaction;
+        dbService.saveRecord(userId, dateData, record);
         navigate(-1);
       }
     } else {

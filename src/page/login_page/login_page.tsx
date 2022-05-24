@@ -3,18 +3,46 @@ import React, { useContext, useEffect } from 'react';
 import Button from '../../components/button/button';
 import AuthService from '../../service/authService';
 import { useNavigate } from 'react-router-dom';
-import { UserIdContext } from '../../App';
+import { TypeRecord, UserIdContext } from '../../App';
+import DbService from '../../service/dbService';
 
 interface ILoginPage {
   authService: AuthService;
   setUserId: React.Dispatch<React.SetStateAction<string>>;
+  dbService: DbService;
+  setData: React.Dispatch<
+    React.SetStateAction<{
+      myInfo: {
+        lv: number;
+        exp: number;
+        coin: number;
+        items: {}[];
+        categoryRecord: string[];
+      };
+      record: TypeRecord;
+      shop: {};
+    }>
+  >;
 }
-const LoginPage = ({ authService, setUserId }: ILoginPage) => {
+const LoginPage = ({
+  authService,
+  setUserId,
+  dbService,
+  setData,
+}: ILoginPage) => {
   const navigate = useNavigate();
 
   const onClick = async () => {
-    await authService.login(setUserId);
-    navigate(`/calendar`);
+    const userUid = await authService.login(setUserId);
+    if (userUid) {
+      const userList = await dbService.readData('userList');
+      console.log(!userList);
+
+      if (!userList) {
+        dbService.createUser(userUid);
+      }
+      navigate(`/calendar`);
+    }
   };
   const userId = useContext(UserIdContext);
 

@@ -55,7 +55,7 @@ export const calcPercent = (
     todoList: {
       [todoId: string]: TypeTodoList;
     };
-    categoryList: Set<string>;
+    categoryList: string[];
     percent: number;
     acquiredCoin: number;
     satisfaction: number;

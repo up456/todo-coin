@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './app.module.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -9,6 +9,7 @@ import LoginPage from './page/login_page/login_page';
 import AuthService from './service/authService';
 import AddTodoPage from './page/add_todo_page/add_todo_page';
 import { calcPercent, getMaxExp, handleReward } from './util/calc';
+import DbService, { DEFAULT_DATA } from './service/dbService';
 
 export interface TypeTodoList {
   todo: string;
@@ -22,7 +23,7 @@ export interface TypeTodoList {
 export interface TypeRecord {
   [date: string]: {
     todoList: { [todoId: string]: TypeTodoList };
-    categoryList: Set<string>;
+    categoryList: string[];
     percent: number;
     acquiredCoin: number;
     satisfaction: number;
@@ -34,7 +35,7 @@ export interface TypeData {
     exp: number;
     coin: number;
     items: {}[];
-    categoryRecord: Set<string>;
+    categoryRecord: string[];
   };
   record: TypeRecord;
   shop: {};
@@ -46,7 +47,7 @@ export interface TypeDummy {
       exp: number;
       coin: number;
       items: {}[];
-      categoryRecord: Set<string>;
+      categoryRecord: string[];
     };
     record: TypeRecord;
     shop: {};
@@ -60,11 +61,11 @@ const dummy: TypeDummy = {
       exp: 2,
       coin: 20,
       items: [],
-      categoryRecord: new Set(['펫', '공부', '취미', '운동']),
+      categoryRecord: ['펫', '공부', '취미', '운동'],
     },
     record: {
       '2022-05-11': {
-        categoryList: new Set(['펫', '운동']),
+        categoryList: ['펫', '운동'],
         todoList: {
           1652765828908: {
             todo: '개 밥주기',
@@ -99,7 +100,7 @@ const dummy: TypeDummy = {
         satisfaction: 2,
       },
       '2022-05-12': {
-        categoryList: new Set(['공부', '취미']),
+        categoryList: ['공부', '취미'],
         todoList: {
           1652765828923: {
             todo: '계획짜기',
@@ -130,6 +131,7 @@ const dummy: TypeDummy = {
 };
 
 const authService = new AuthService();
+const dbService = new DbService();
 
 export const UserIdContext = React.createContext('');
 
@@ -141,7 +143,13 @@ export type TypeChangeTodoState = (
 
 function App() {
   const [userId, setUserId] = useState(sessionStorage.getItem('userId') || '');
-  const [data, setData] = useState(dummy[userId]);
+  const [data, setData] = useState(DEFAULT_DATA);
+
+  useEffect(() => {
+    if (!userId) return;
+    const stopSync = dbService.syncData(userId, (data) => setData(data));
+    return () => stopSync();
+  }, [userId]);
 
   const changeTodoState: TypeChangeTodoState = (
     date,
@@ -206,6 +214,8 @@ function App() {
       }
       // 상태 변화 후에는 반드시 todo달성률 업데이트
       calcPercent(todoList, record);
+      // db 저장
+      dbService.saveData(userId, newData);
 
       return newData;
     });
@@ -221,7 +231,7 @@ function App() {
       if (!record) {
         newData.record[date] = {
           todoList: {},
-          categoryList: new Set([]),
+          categoryList: [],
           percent: 0,
           acquiredCoin: 0,
           satisfaction: 0,
@@ -229,17 +239,21 @@ function App() {
       }
       // todo 추가
       const todoList = record.todoList;
-      const todoId = Date.now();
+      const todoId = String(Date.now());
       todoList[todoId] = inputValue;
       // 당일 카테고리 추가
-      const categoryList = record.categoryList;
-      categoryList.add(inputValue.category);
+      const SetCategoryList = new Set(record.categoryList);
+      SetCategoryList.add(inputValue.category);
+      record.categoryList = Array.from(SetCategoryList);
       // 나의 카테고리 목록 추가
-      const categoryRecord = newData.myInfo.categoryRecord;
-      categoryRecord.add(inputValue.category);
-
+      const SetCategoryRecord = new Set(newData.myInfo.categoryRecord);
+      SetCategoryRecord.add(inputValue.category);
+      newData.myInfo.categoryRecord = Array.from(SetCategoryRecord);
       // todo추가 후에는 반드시 todo달성률 업데이트
       calcPercent(todoList, record);
+      // db 저장
+
+      dbService.saveData(userId, newData);
 
       return newData;
     });
@@ -253,13 +267,22 @@ function App() {
             <Route
               path="/"
               element={
-                <LoginPage authService={authService} setUserId={setUserId} />
+                <LoginPage
+                  authService={authService}
+                  setUserId={setUserId}
+                  dbService={dbService}
+                  setData={setData}
+                />
               }
             />
             <Route
               path="/todo/:date"
               element={
-                <TodoPage data={data} changeTodoState={changeTodoState} />
+                <TodoPage
+                  data={data}
+                  changeTodoState={changeTodoState}
+                  dbService={dbService}
+                />
               }
             />
             <Route

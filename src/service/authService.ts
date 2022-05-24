@@ -15,6 +15,7 @@ class AuthService {
         if (user) {
           sessionStorage.setItem('userId', user.uid);
           setUserId(user.uid);
+          return user.uid;
         }
       }
     } catch (error) {
