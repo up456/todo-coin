@@ -27,10 +27,16 @@ interface TypeHompPage {
   data: TypeData;
   changeTodoState: TypeChangeTodoState;
   dbService: DbService;
+  deleteTodo: (date: string, todoId: string) => void;
 }
 
 // 컴포넌트
-const TodoPage = ({ data, changeTodoState, dbService }: TypeHompPage) => {
+const TodoPage = ({
+  data,
+  changeTodoState,
+  dbService,
+  deleteTodo,
+}: TypeHompPage) => {
   const navigate = useNavigate();
   const [sort, setSort] = useState('dafault');
   const [satisfaction, setSatisfaction] = useState(3);
@@ -219,6 +225,8 @@ const TodoPage = ({ data, changeTodoState, dbService }: TypeHompPage) => {
                       date={dateData}
                       todoId={key}
                       isBtnPossible={isCUDBtnPossible()}
+                      dbService={dbService}
+                      deleteTodo={deleteTodo}
                     />
                   );
                 })}

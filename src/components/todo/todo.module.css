@@ -1,3 +1,5 @@
+@value pointGreen from '/src/common/color.css';
+
 .todo {
   display: flex;
   flex-direction: column;
@@ -70,6 +72,10 @@
 }
 .todoStateIcon.onFocus > img:nth-child(3) {
   transform: translateX(50px);
+}
+.todoStateIcon.notClick {
+  pointer-events: none;
+  cursor: auto;
 }
 
 .todoDescription {
@@ -166,7 +172,15 @@
   transform: scale(0.5);
 }
 
-.todoStateIcon.notClick {
-  pointer-events: none;
-  cursor: auto;
+.iconBox {
+  margin-left: 1em;
+  cursor: pointer;
+}
+.iconImg {
+  width: 1.3em;
+  color: red;
+  transition: 250ms ease-in;
+}
+.iconImg:hover {
+  transform: scale(1.25);
 }

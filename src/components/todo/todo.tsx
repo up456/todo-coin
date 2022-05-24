@@ -1,8 +1,9 @@
 import styles from './todo.module.css';
-import React, { useContext, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { TypeChangeTodoState, TypeTodoList, UserIdContext } from '../../App';
 import { transClockTo12 } from '../../util/calc';
 import Line from '../line/line';
+import DbService from '../../service/dbService';
 
 // constants
 const TODO_STATE_LIST = ['ing', 'complete', 'fail'];
@@ -14,6 +15,8 @@ interface TypeTodo {
   changeTodoState: TypeChangeTodoState;
   todoId: string;
   isBtnPossible: boolean;
+  dbService: DbService;
+  deleteTodo: (date: string, todoId: string) => void;
 }
 
 // 컴포넌트
@@ -23,6 +26,8 @@ const Todo = ({
   changeTodoState,
   todoId,
   isBtnPossible,
+  dbService,
+  deleteTodo,
 }: TypeTodo) => {
   const [todoState, setTodoState] = useState(todo.todoState);
   const [onFocus, setOnFocus] = useState(false);
@@ -34,6 +39,10 @@ const Todo = ({
     if (!userId) return;
     changeTodoState(date, todoId, selectedState);
   };
+
+  const onDelete = useCallback(() => {
+    deleteTodo(date, todoId);
+  }, [date, deleteTodo, todoId]);
 
   return (
     <li className={styles.todo}>
@@ -48,7 +57,7 @@ const Todo = ({
                 alt="update"
               />
             </div>
-            <div className={styles.iconBox}>
+            <div className={styles.iconBox} onClick={onDelete}>
               <img
                 className={styles.iconImg}
                 src="/asset/delete.png"
@@ -139,4 +148,4 @@ const Todo = ({
   );
 };
 
-export default Todo;
+export default React.memo(Todo);

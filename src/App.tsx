@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styles from './app.module.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -163,7 +163,7 @@ function App() {
       }
       // todo 추가
       const todoList = record.todoList;
-      const todoId = String(Date.now());
+      const todoId = Date.now();
       todoList[todoId] = inputValue;
       // 당일 카테고리 추가
       const SetCategoryList = new Set(record.categoryList);
@@ -176,12 +176,44 @@ function App() {
       // todo추가 후에는 반드시 todo달성률 업데이트
       calcPercent(todoList, record);
       // db 저장
-
       dbService.saveData(userId, newData);
 
       return newData;
     });
   };
+
+  const deleteTodo = useCallback(
+    (date: string, todoId: string) => {
+      if (window.confirm('정말 삭제하시겠습니까?')) {
+        setData((prevData) => {
+          let newData = {
+            ...prevData,
+          };
+          let record = newData?.record[date];
+          let todoList = record.todoList;
+          const targetTodoCategory = todoList[todoId].category;
+
+          // 당일 카테고리 삭제
+          if (record.categoryList.length === 1) {
+            alert('마지막 할일은 삭제할 수 없습니다.');
+          } else {
+            record.categoryList = record.categoryList.filter(
+              (category) => category !== targetTodoCategory
+            );
+            //targeTodo 삭제
+            delete newData.record[date].todoList[todoId];
+          }
+
+          // todo추가 후에는 반드시 todo달성률 업데이트
+          calcPercent(todoList, record);
+          // db 저장
+          dbService.saveData(userId, newData);
+          return newData;
+        });
+      }
+    },
+    [userId]
+  );
 
   return (
     <div className={styles.app}>
@@ -206,6 +238,7 @@ function App() {
                   data={data}
                   changeTodoState={changeTodoState}
                   dbService={dbService}
+                  deleteTodo={deleteTodo}
                 />
               }
             />
@@ -231,4 +264,4 @@ function App() {
   );
 }
 
-export default App;
+export default React.memo(App);
