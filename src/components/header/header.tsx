@@ -15,7 +15,7 @@ const Header = ({ data }: TypeHeader) => {
   const userId: string = useContext(UserIdContext);
 
   if (!userId) return <NonExistentUser />;
-  const todoListData = data[userId]?.record[today]?.todoList;
+  const todoListData = data?.record[today]?.todoList;
 
   const goToMyPage = () => {
     navigate('/mypage');
@@ -28,10 +28,10 @@ const Header = ({ data }: TypeHeader) => {
     <div className={styles.headerContainer}>
       <header className={styles.header}>
         <div className={styles.itemBox}>
-          <p className={styles.itemIcon}>{`Lv${data[userId].myInfo.lv}`}</p>
-          <p className={styles.itemInfo}>{`${
-            data[userId].myInfo.exp
-          } / ${getMaxExp(data[userId].myInfo.lv)}`}</p>
+          <p className={styles.itemIcon}>{`Lv${data.myInfo.lv}`}</p>
+          <p className={styles.itemInfo}>{`${data.myInfo.exp} / ${getMaxExp(
+            data.myInfo.lv
+          )}`}</p>
         </div>
         <div className={styles.itemBox} onClick={goToTodayTodoPage}>
           <p className={styles.itemIcon}>to-do</p>
@@ -48,7 +48,7 @@ const Header = ({ data }: TypeHeader) => {
         </div>
         <div className={styles.itemBox}>
           <p className={styles.itemIcon}>coin</p>
-          <p className={styles.itemInfo}> {`${data[userId].myInfo.coin}`}</p>
+          <p className={styles.itemInfo}> {`${data.myInfo.coin}`}</p>
         </div>
         <div className={styles.imageBox} onClick={goToMyPage}>
           <img src="/asset/default_profile.jpg" alt="profile" />

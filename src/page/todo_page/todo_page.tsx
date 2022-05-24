@@ -35,8 +35,7 @@ const TodoPage = ({ data, changeTodoState }: TypeHompPage) => {
   const { date } = useParams();
   const dateData = date || '';
 
-  const userId = useContext(UserIdContext);
-  const record = data[userId]?.record[dateData];
+  const record = data?.record[dateData];
   const categoryList = record?.categoryList || [];
   const todoListData = record?.todoList;
   const [rawData, setRawData] = useState(todoListData);

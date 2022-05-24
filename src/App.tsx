@@ -29,6 +29,17 @@ export interface TypeRecord {
   };
 }
 export interface TypeData {
+  myInfo: {
+    lv: number;
+    exp: number;
+    coin: number;
+    items: {}[];
+    categoryRecord: Set<string>;
+  };
+  record: TypeRecord;
+  shop: {};
+}
+export interface TypeDummy {
   [id: string]: {
     myInfo: {
       lv: number;
@@ -41,7 +52,8 @@ export interface TypeData {
     shop: {};
   };
 }
-const dummy: TypeData = {
+
+const dummy: TypeDummy = {
   UJfZT67ctBTaTp5y3otcU94xEYH2: {
     myInfo: {
       lv: 1,
@@ -128,8 +140,8 @@ export type TypeChangeTodoState = (
 ) => void;
 
 function App() {
-  const [data, setData] = useState(dummy);
   const [userId, setUserId] = useState(sessionStorage.getItem('userId') || '');
+  const [data, setData] = useState(dummy[userId]);
 
   const handleReward = (originalState: string, selectedState: string) => {
     // 보상이 유지되는 경우
@@ -177,8 +189,8 @@ function App() {
       const newData = {
         ...prevData,
       };
-      const userInfo = newData[userId]?.myInfo;
-      const record = newData[userId]?.record[date];
+      const userInfo = newData?.myInfo;
+      const record = newData?.record[date];
       const todoList = record?.todoList;
       const targetTodo = todoList[targetTodoId];
 
@@ -208,7 +220,6 @@ function App() {
             userInfo.lv--;
             userInfo.exp += getMaxExp(userInfo.lv);
           }
-
           break;
         default:
           break;
@@ -230,7 +241,6 @@ function App() {
         default:
           throw new Error(`없는 상태입니다 ${todoState} `);
       }
-
       // 상태 변화 후에는 반드시 todo달성률 업데이트
       calcPercent(todoList, record);
 
@@ -244,9 +254,9 @@ function App() {
         ...prevData,
       };
       // 해당 날짜의 기록을 넣는 칸이 없으면 해당 날짜로 빈공간 생성
-      let record = newData[userId]?.record[date];
+      let record = newData?.record[date];
       if (!record) {
-        newData[userId].record[date] = {
+        newData.record[date] = {
           todoList: {},
           categoryList: new Set([]),
           percent: 0,
@@ -262,7 +272,7 @@ function App() {
       const categoryList = record.categoryList;
       categoryList.add(inputValue.category);
       // 나의 카테고리 목록 추가
-      const categoryRecord = newData[userId].myInfo.categoryRecord;
+      const categoryRecord = newData.myInfo.categoryRecord;
       categoryRecord.add(inputValue.category);
 
       // todo추가 후에는 반드시 todo달성률 업데이트
