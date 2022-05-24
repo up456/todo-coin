@@ -136,7 +136,7 @@ const TodoPage = ({ data, changeTodoState, dbService }: TypeHompPage) => {
     }
   };
 
-  const isAddBtnPossible = () => {
+  const isCUDBtnPossible = () => {
     // 기록이 없으면 생성가능
     if (record) {
       // 기록에서 만족도가 0이면 아직 하루를 완료하지 않은 상태
@@ -158,7 +158,7 @@ const TodoPage = ({ data, changeTodoState, dbService }: TypeHompPage) => {
           <section className={styles.contentHeader}>
             <div className={styles.pageBtnContainer}>
               <Button text="달력 보기" onClick={() => navigate('/calendar')} />
-              {isDayAfterTodayOrToday(date || '') && isAddBtnPossible() && (
+              {isDayAfterTodayOrToday(date || '') && isCUDBtnPossible() && (
                 <>
                   <div className={styles.btnGap}></div>
                   <Button
@@ -184,7 +184,7 @@ const TodoPage = ({ data, changeTodoState, dbService }: TypeHompPage) => {
                   onClickAll();
                 }}
               />
-              {Array.from(categoryList).map((category, idx) => (
+              {categoryList.map((category, idx) => (
                 <Button
                   typeReverse={true}
                   isToggle={true}
@@ -218,6 +218,7 @@ const TodoPage = ({ data, changeTodoState, dbService }: TypeHompPage) => {
                       changeTodoState={changeTodoState}
                       date={dateData}
                       todoId={key}
+                      isBtnPossible={isCUDBtnPossible()}
                     />
                   );
                 })}

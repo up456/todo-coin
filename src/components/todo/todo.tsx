@@ -13,10 +13,17 @@ interface TypeTodo {
   date: string;
   changeTodoState: TypeChangeTodoState;
   todoId: string;
+  isBtnPossible: boolean;
 }
 
 // 컴포넌트
-const Todo = ({ todo, date, changeTodoState, todoId }: TypeTodo) => {
+const Todo = ({
+  todo,
+  date,
+  changeTodoState,
+  todoId,
+  isBtnPossible,
+}: TypeTodo) => {
   const [todoState, setTodoState] = useState(todo.todoState);
   const [onFocus, setOnFocus] = useState(false);
   const deadLine = transClockTo12(todo.deadline);
@@ -32,6 +39,24 @@ const Todo = ({ todo, date, changeTodoState, todoId }: TypeTodo) => {
     <li className={styles.todo}>
       <div className={styles.todoHeader}>
         <p className={styles.deadLine}>{`데드라인: ${deadLine || '없음'}`}</p>
+        {isBtnPossible && (
+          <>
+            <div className={styles.iconBox}>
+              <img
+                className={styles.iconImg}
+                src="/asset/update.png"
+                alt="update"
+              />
+            </div>
+            <div className={styles.iconBox}>
+              <img
+                className={styles.iconImg}
+                src="/asset/delete.png"
+                alt="delete"
+              />
+            </div>
+          </>
+        )}
         <p className={styles.category}>{todo.category || '미지정'}</p>
       </div>
       <Line mT="0" />
@@ -43,13 +68,19 @@ const Todo = ({ todo, date, changeTodoState, todoId }: TypeTodo) => {
         >
           <div
             className={
-              onFocus
-                ? `${styles.todoStateIcon} ${styles.onFocus}`
-                : styles.todoStateIcon
+              isBtnPossible
+                ? onFocus
+                  ? `${styles.todoStateIcon} ${styles.onFocus}`
+                  : styles.todoStateIcon
+                : `${styles.todoStateIcon} ${styles.notClick}`
             }
             onClick={() => setOnFocus(!onFocus)}
           >
-            <img src={`/asset/${todoState}.png`} alt={todoState} />
+            <img
+              src={`/asset/${todoState}.png`}
+              alt={todoState}
+              className={styles.notClick}
+            />
             {TODO_STATE_LIST.filter((state) => state !== todoState).map(
               (imageName, idx) => (
                 <img

@@ -47,6 +47,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .todoStateIcon.onFocus {
 }
@@ -163,4 +164,9 @@
   visibility: hidden;
   opacity: 0;
   transform: scale(0.5);
+}
+
+.todoStateIcon.notClick {
+  pointer-events: none;
+  cursor: auto;
 }
