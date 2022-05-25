@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { TypeData, UserIdContext } from '../../App';
 import { getMaxExp } from '../../util/calc';
 import Line from '../line/line';
@@ -32,8 +32,12 @@ const Header = ({ data }: TypeHeader) => {
   };
 
   const goToTodayTodoPage = () => {
-    navigate(`/calendar`);
-    window.location.reload();
+    const path = window.location.pathname;
+    if (path === '/calendar') {
+      navigate(0);
+    } else {
+      navigate(`/calendar`);
+    }
   };
 
   if (!userId) return <NonExistentUser />;
