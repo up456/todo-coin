@@ -23,4 +23,4 @@ const SelectBox = ({ value, onChange, optionList }: ISelect) => {
   );
 };
 
-export default SelectBox;
+export default React.memo(SelectBox);

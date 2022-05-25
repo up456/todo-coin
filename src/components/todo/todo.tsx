@@ -40,21 +40,24 @@ const Todo = ({
   const userId = useContext(UserIdContext);
   const navigate = useNavigate();
 
-  const transTodoState = (selectedState: string) => {
-    setTodoState(selectedState);
-    if (!userId) return;
-    changeTodoState(date, todoId, selectedState);
-  };
+  const transTodoState = useCallback(
+    (selectedState: string) => {
+      setTodoState(selectedState);
+      if (!userId) return;
+      changeTodoState(date, todoId, selectedState);
+    },
+    [changeTodoState, date, todoId, userId]
+  );
 
   const onDelete = useCallback(() => {
     deleteTodo(date, todoId);
   }, [date, deleteTodo, todoId]);
 
-  const onEdit = () => {
+  const onEdit = useCallback(() => {
     navigate(`/${date}/editTodo`, {
       state: { todoId, prevTodo: todo },
     });
-  };
+  }, [date, navigate, todo, todoId]);
   return (
     <li className={styles.todo}>
       <div className={styles.todoHeader}>

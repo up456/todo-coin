@@ -1,5 +1,5 @@
 import styles from './button.module.css';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 type TypeButton = {
   text: string;
@@ -14,13 +14,14 @@ const Button = ({
   typeReverse = false,
 }: TypeButton) => {
   const [isReverse, setIsReverse] = useState(typeReverse);
-  const onSubmit = () => {
+
+  const onSubmit = useCallback(() => {
     onClick();
-  };
-  const onSubmitAndToggle = () => {
+  }, [onClick]);
+  const onSubmitAndToggle = useCallback(() => {
     setIsReverse((prevIsReverse) => !prevIsReverse);
     onClick();
-  };
+  }, [onClick]);
   return (
     <button
       className={isReverse ? `${styles.btn} ${styles.reverse}` : styles.btn}
@@ -31,4 +32,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default React.memo(Button);

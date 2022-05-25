@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { TypeData, TypeChangeTodoState, UserIdContext } from '../../App';
 import Button from '../../components/button/button';
@@ -60,21 +60,24 @@ const TodoPage = ({
     setRawData(todoListData);
   }, [rawData, todoListData]);
 
-  const selectCategory = (category: string) => {
-    if (!seletedCategoryList.includes(category)) {
-      setSeletedCategoryList((prevSeletedCategoryList) => {
-        const newSeletedCategoryList = [...prevSeletedCategoryList, category];
-        return newSeletedCategoryList;
-      });
-    } else {
-      setSeletedCategoryList((prevSeletedCategoryList) => {
-        const newSeletedCategoryList = [...prevSeletedCategoryList];
-        return newSeletedCategoryList.filter((it) => it !== category);
-      });
-    }
-  };
+  const selectCategory = useCallback(
+    (category: string) => {
+      if (!seletedCategoryList.includes(category)) {
+        setSeletedCategoryList((prevSeletedCategoryList) => {
+          const newSeletedCategoryList = [...prevSeletedCategoryList, category];
+          return newSeletedCategoryList;
+        });
+      } else {
+        setSeletedCategoryList((prevSeletedCategoryList) => {
+          const newSeletedCategoryList = [...prevSeletedCategoryList];
+          return newSeletedCategoryList.filter((it) => it !== category);
+        });
+      }
+    },
+    [seletedCategoryList]
+  );
 
-  const onClickCategory = () => {
+  const onClickCategory = useCallback(() => {
     const $buttons = document.querySelectorAll('button');
     $buttons.forEach(($button) => {
       if ($button.textContent === '전체') {
@@ -82,9 +85,9 @@ const TodoPage = ({
         return;
       }
     });
-  };
+  }, []);
 
-  const onClickAll = () => {
+  const onClickAll = useCallback(() => {
     const $buttons = document.querySelectorAll(`button`);
     let flag = false;
 
@@ -102,36 +105,39 @@ const TodoPage = ({
         }
       }
     });
-  };
+  }, []);
 
-  const getCompare = (sortType: string) => {
-    let compare: (a: string, b: string) => 1 | -1;
-    switch (sortType) {
-      case 'deadlineSort':
-        const deadlineCompare = (a: string, b: string) => {
-          if (rawData[a].deadline < rawData[b].deadline) {
-            return -1;
-          } else {
-            return 1;
-          }
-        };
-        compare = deadlineCompare;
-        break;
-      default:
-        const defaultCompare = (a: string, b: string) => {
-          if (a < b) {
-            return -1;
-          } else {
-            return 1;
-          }
-        };
-        compare = defaultCompare;
-        break;
-    }
-    return compare;
-  };
+  const getCompare = useCallback(
+    (sortType: string) => {
+      let compare: (a: string, b: string) => 1 | -1;
+      switch (sortType) {
+        case 'deadlineSort':
+          const deadlineCompare = (a: string, b: string) => {
+            if (rawData[a].deadline < rawData[b].deadline) {
+              return -1;
+            } else {
+              return 1;
+            }
+          };
+          compare = deadlineCompare;
+          break;
+        default:
+          const defaultCompare = (a: string, b: string) => {
+            if (a < b) {
+              return -1;
+            } else {
+              return 1;
+            }
+          };
+          compare = defaultCompare;
+          break;
+      }
+      return compare;
+    },
+    [rawData]
+  );
 
-  const completeToday = () => {
+  const completeToday = useCallback(() => {
     if (record) {
       if (
         window.confirm(
@@ -148,17 +154,17 @@ const TodoPage = ({
     } else {
       alert('하루를 완료 할 데이터가 없습니다.');
     }
-  };
+  }, [dateData, dbService, navigate, record, satisfaction, userId]);
 
-  const isCompleteBtnPossible = () => {
+  const isCompleteBtnPossible = useCallback(() => {
     if (record) {
       return callToday() === date && record.satisfaction === 0;
     } else {
       return false;
     }
-  };
+  }, [date, record]);
 
-  const isCUDBtnPossible = () => {
+  const isCUDBtnPossible = useCallback(() => {
     // 기록이 없으면 생성가능
     if (record) {
       // 기록에서 만족도가 0이면 아직 하루를 완료하지 않은 상태
@@ -170,7 +176,31 @@ const TodoPage = ({
     } else {
       return true;
     }
-  };
+  }, [record]);
+
+  const goToCalendar = useCallback(() => navigate('/calendar'), [navigate]);
+  const goToAddTodo = useCallback(
+    () => navigate(`/${date}/addTodo`),
+    [date, navigate]
+  );
+
+  const playClickAll = useCallback(() => {
+    setIsAll(!isAll);
+    onClickAll();
+  }, [isAll, onClickAll]);
+
+  // const playClickCategory = useCallback(() => {
+  //   if (isAll) {
+  //     setIsAll(false);
+  //     onClickCategory();
+  //   }
+  //   selectCategory(category);
+  // }, [isAll, onClickCategory, selectCategory]);
+
+  const selectSatisfaction = useCallback(
+    (starValue: string) => setSatisfaction(parseInt(starValue)),
+    []
+  );
 
   return (
     <>
@@ -179,14 +209,11 @@ const TodoPage = ({
         <div className={styles.todoContent}>
           <section className={styles.contentHeader}>
             <div className={styles.pageBtnContainer}>
-              <Button text="달력 보기" onClick={() => navigate('/calendar')} />
+              <Button text="달력 보기" onClick={goToCalendar} />
               {isDayAfterTodayOrToday(date || '') && isCUDBtnPossible() && (
                 <>
                   <div className={styles.btnGap}></div>
-                  <Button
-                    text="할일 추가하기"
-                    onClick={() => navigate(`/${date}/addTodo`)}
-                  />
+                  <Button text="할일 추가하기" onClick={goToAddTodo} />
                 </>
               )}
             </div>
@@ -198,14 +225,7 @@ const TodoPage = ({
                   setSort(item);
                 }}
               />
-              <Button
-                isToggle={true}
-                text="전체"
-                onClick={() => {
-                  setIsAll(!isAll);
-                  onClickAll();
-                }}
-              />
+              <Button isToggle={true} text="전체" onClick={playClickAll} />
               {categoryList.map((category, idx) => (
                 <Button
                   typeReverse={true}
@@ -253,7 +273,7 @@ const TodoPage = ({
               <section className={styles.contentFooter}>
                 <SelectBox
                   value={satisfaction}
-                  onChange={(starValue) => setSatisfaction(parseInt(starValue))}
+                  onChange={selectSatisfaction}
                   optionList={SATISFACTION_OPTION_LIST}
                 />
                 <Button text={'하루 완료하기'} onClick={completeToday} />
@@ -266,4 +286,4 @@ const TodoPage = ({
   );
 };
 
-export default TodoPage;
+export default React.memo(TodoPage);

@@ -27,15 +27,17 @@ const Header = ({ data }: TypeHeader) => {
   }
   const todoListData = data?.record[today]?.todoList;
 
-  if (!userId) return <NonExistentUser />;
-
   const goToMyPage = () => {
     navigate('/mypage');
   };
+
   const goToTodayTodoPage = () => {
     navigate(`/calendar`);
     window.location.reload();
   };
+
+  if (!userId) return <NonExistentUser />;
+
   return (
     <div className={styles.headerContainer}>
       <header className={styles.header}>
@@ -71,4 +73,4 @@ const Header = ({ data }: TypeHeader) => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

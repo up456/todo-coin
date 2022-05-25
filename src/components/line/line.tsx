@@ -19,4 +19,4 @@ const Line = ({ width = '100%', mT = '1em', mB = '1em' }: TypeLine) => {
   );
 };
 
-export default Line;
+export default React.memo(Line);
