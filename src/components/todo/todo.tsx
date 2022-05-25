@@ -59,7 +59,7 @@ const Todo = ({
     <li className={styles.todo}>
       <div className={styles.todoHeader}>
         <p className={styles.deadLine}>{`데드라인: ${deadLine || '없음'}`}</p>
-        {isBtnPossible && (
+        {isBtnPossible && todoState !== 'complete' && (
           <>
             <div className={styles.iconBox} onClick={onEdit}>
               <img
