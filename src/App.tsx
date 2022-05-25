@@ -54,9 +54,6 @@ export interface TypeDummy {
   };
 }
 
-const authService = new AuthService();
-const dbService = new DbService();
-
 export const UserIdContext = React.createContext('');
 
 export type TypeChangeTodoState = (
@@ -65,7 +62,13 @@ export type TypeChangeTodoState = (
   todoState: string
 ) => void;
 
-function App() {
+function App({
+  authService,
+  dbService,
+}: {
+  authService: AuthService;
+  dbService: DbService;
+}) {
   const [userId, setUserId] = useState(sessionStorage.getItem('userId') || '');
   const [data, setData] = useState(DEFAULT_DATA);
 
@@ -73,7 +76,7 @@ function App() {
     if (!userId) return;
     const stopSync = dbService.syncData(userId, (data) => setData(data));
     return () => stopSync();
-  }, [userId]);
+  }, [userId, dbService]);
 
   const changeTodoState: TypeChangeTodoState = (
     date,
@@ -264,4 +267,4 @@ function App() {
   );
 }
 
-export default React.memo(App);
+export default App;
