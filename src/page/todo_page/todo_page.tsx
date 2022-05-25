@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { TypeData, TypeChangeTodoState, UserIdContext } from '../../App';
 import Button from '../../components/button/button';
 import Header from '../../components/header/header';
@@ -30,6 +30,10 @@ interface TypeHompPage {
   deleteTodo: (date: string, todoId: string) => void;
 }
 
+export interface LocationState {
+  [date: string]: string;
+}
+
 // 컴포넌트
 const TodoPage = ({
   data,
@@ -44,6 +48,7 @@ const TodoPage = ({
   const dateData = date || '';
 
   let record = data?.record[dateData];
+
   const categoryList = record?.categoryList || [];
   const todoListData = record?.todoList;
   const [rawData, setRawData] = useState(todoListData);
