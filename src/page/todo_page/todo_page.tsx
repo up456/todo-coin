@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { TypeData, TypeChangeTodoState, UserIdContext } from '../../App';
 import Button from '../../components/button/button';
 import Header from '../../components/header/header';
@@ -55,6 +55,10 @@ const TodoPage = ({
   const [seletedCategoryList, setSeletedCategoryList] = useState<string[]>([]);
   const [isAll, setIsAll] = useState(true);
   const userId = useContext(UserIdContext);
+
+  useEffect(() => {
+    setRawData(todoListData);
+  }, [rawData, todoListData]);
 
   const selectCategory = (category: string) => {
     if (!seletedCategoryList.includes(category)) {
