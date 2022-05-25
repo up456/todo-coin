@@ -3,7 +3,6 @@ import React, { useCallback, useContext, useState } from 'react';
 import { TypeChangeTodoState, TypeTodoList, UserIdContext } from '../../App';
 import { transClockTo12 } from '../../util/calc';
 import Line from '../line/line';
-import DbService from '../../service/dbService';
 import { useNavigate } from 'react-router-dom';
 
 // constants
@@ -16,7 +15,6 @@ interface TypeTodo {
   changeTodoState: TypeChangeTodoState;
   todoId: string;
   isBtnPossible: boolean;
-  dbService: DbService;
   deleteTodo: (date: string, todoId: string) => void;
 }
 
@@ -34,7 +32,6 @@ const Todo = ({
   changeTodoState,
   todoId,
   isBtnPossible,
-  dbService,
   deleteTodo,
 }: TypeTodo) => {
   const [todoState, setTodoState] = useState(todo.todoState);

@@ -234,7 +234,6 @@ const TodoPage = ({
                       date={dateData}
                       todoId={key}
                       isBtnPossible={isCUDBtnPossible()}
-                      dbService={dbService}
                       deleteTodo={deleteTodo}
                     />
                   );
