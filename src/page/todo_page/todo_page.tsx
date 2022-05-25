@@ -133,7 +133,14 @@ const TodoPage = ({
 
   const completeToday = () => {
     if (record) {
-      if (window.confirm('현재 todo의 상태로 하루를 종료하시겠습니까?')) {
+      if (
+        window.confirm(
+          `  ━━━━━━━━━하루종료━━━━━━━━━
+   현재 todo의 상태로 하루를 종료하시겠습니까? 
+    (하루 종류 후에는 편집이 ★불가능★합니다.)
+  ━━━━━━━━━━━━━━━━━━━━━━`
+        )
+      ) {
         record.satisfaction = satisfaction;
         dbService.saveRecord(userId, dateData, record);
         navigate(-1);
