@@ -1,5 +1,5 @@
 import { TypeRecord, TypeData, TypeTodoList } from './../App';
-import { get, off, onValue, ref, remove, set } from 'firebase/database';
+import { get, off, onValue, ref, set } from 'firebase/database';
 import { myDb } from './my_firebase';
 
 export const DEFAULT_DATA: TypeData = {

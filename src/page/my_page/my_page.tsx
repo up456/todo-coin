@@ -18,7 +18,6 @@ const MyPage = ({ data, authService, setUserId }: TypeMyPage) => {
     navigate('/');
     window.location.reload();
   };
-  console.log('data:', data);
 
   const cate = data?.myInfo?.categoryRecord || [];
   const categoryRecord = Array.from(cate);
