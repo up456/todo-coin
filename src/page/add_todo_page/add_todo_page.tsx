@@ -47,7 +47,7 @@ const AddTodoPage = ({ addTodo }: TypeAddTodoPage) => {
         return;
       }
       if (inputValue.deadline === '') {
-        inputValue.deadline = '9';
+        inputValue.deadline = '23:59:59';
       }
       addTodo(date, inputValue);
       navigate(-1);

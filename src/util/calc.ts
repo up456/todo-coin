@@ -19,7 +19,7 @@ export function isDayAfterTodayOrToday(selectedDate: string) {
 
 // todo.tsx
 export function transClockTo12(time: string) {
-  if (time === '9') return;
+  if (time === '23:59:59') return;
   let hour = parseInt(time.slice(0, 2));
   const minute = parseInt(time.slice(3));
   let amPm = '오전';

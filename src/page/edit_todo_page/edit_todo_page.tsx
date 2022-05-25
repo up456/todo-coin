@@ -55,7 +55,7 @@ const EditTodoPage = ({ editTodo }: TypeEditTodoPage) => {
         return;
       }
       if (inputValue.deadline === '') {
-        inputValue.deadline = '9';
+        inputValue.deadline = '23:59:59';
       }
       editTodo(date, todoId, prevTodo.category, inputValue);
       navigate(-1);
@@ -117,7 +117,9 @@ const EditTodoPage = ({ editTodo }: TypeEditTodoPage) => {
           <input
             type="time"
             className={styles.input}
-            value={inputValue.deadline}
+            value={
+              inputValue.deadline === '23:59:59' ? '' : inputValue.deadline
+            }
             onChange={(event) => onChangeValue(event, 'deadline')}
           />
         </div>
