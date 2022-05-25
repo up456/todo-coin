@@ -189,14 +189,6 @@ const TodoPage = ({
     onClickAll();
   }, [isAll, onClickAll]);
 
-  // const playClickCategory = useCallback(() => {
-  //   if (isAll) {
-  //     setIsAll(false);
-  //     onClickCategory();
-  //   }
-  //   selectCategory(category);
-  // }, [isAll, onClickCategory, selectCategory]);
-
   const selectSatisfaction = useCallback(
     (starValue: string) => setSatisfaction(parseInt(starValue)),
     []

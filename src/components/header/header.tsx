@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { TypeData, UserIdContext } from '../../App';
 import { getMaxExp } from '../../util/calc';
 import Line from '../line/line';

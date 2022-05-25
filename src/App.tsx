@@ -181,7 +181,6 @@ function App({
       calcPercent(todoList, record);
       // db 저장
       dbService.saveData(userId, newData);
-
       return newData;
     });
   };
@@ -245,7 +244,6 @@ function App({
 
       // db 저장
       dbService.saveData(userId, newData);
-
       return newData;
     });
   };
