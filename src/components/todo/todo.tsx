@@ -3,7 +3,6 @@ import React, { useCallback, useContext, useState } from 'react';
 import { TypeChangeTodoState, TypeTodoList, UserIdContext } from '../../App';
 import { transClockTo12 } from '../../util/calc';
 import Line from '../line/line';
-import DbService from '../../service/dbService';
 import { useNavigate } from 'react-router-dom';
 
 // constants
