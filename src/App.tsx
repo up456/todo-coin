@@ -10,6 +10,7 @@ import AuthService from './service/authService';
 import AddTodoPage from './page/add_todo_page/add_todo_page';
 import { calcPercent, getMaxExp, handleReward } from './util/calc';
 import DbService, { DEFAULT_DATA } from './service/dbService';
+import EditTodoPage from './page/edit_todo_page/edit_todo_page';
 
 export interface TypeTodoList {
   todo: string;
@@ -215,8 +216,44 @@ function App({
         });
       }
     },
-    [userId]
+    [dbService, userId]
   );
+
+  const editTodo = (
+    date: string,
+    todoId: string,
+    prevCategory: string,
+    inputValue: TypeTodoList
+  ) => {
+    setData((prevData) => {
+      let newData = {
+        ...prevData,
+      };
+      let record = newData.record[date];
+
+      // todo 변경
+      const todoList = record.todoList;
+      todoList[todoId] = inputValue;
+      // 당일 변경 전 카테고리 삭제
+      let categoryList = record.categoryList;
+      console.log(categoryList);
+      categoryList = categoryList.filter((category) => {
+        console.log(prevCategory, category);
+        return prevCategory !== category;
+      });
+      console.log(categoryList);
+      // 당일 새로운 카테고리 추가
+      const SetCategoryList = new Set(categoryList);
+      SetCategoryList.add(inputValue.category);
+      categoryList = Array.from(SetCategoryList);
+      console.log(categoryList);
+
+      // db 저장
+      dbService.saveData(userId, newData);
+
+      return newData;
+    });
+  };
 
   return (
     <div className={styles.app}>
@@ -248,6 +285,10 @@ function App({
             <Route
               path="/:date/addTodo"
               element={<AddTodoPage addTodo={addTodo} />}
+            />
+            <Route
+              path="/:date/editTodo"
+              element={<EditTodoPage editTodo={editTodo} />}
             />
             <Route path="/calendar" element={<CalendarPage data={data} />} />
             <Route

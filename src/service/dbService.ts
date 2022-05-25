@@ -31,7 +31,6 @@ class DbService {
     const snapshot = await get(dbRef);
     if (snapshot.exists()) {
       const value = snapshot.val();
-      console.log(value);
       return await value;
     } else {
       console.log('No data available');

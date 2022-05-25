@@ -4,6 +4,7 @@ import { TypeChangeTodoState, TypeTodoList, UserIdContext } from '../../App';
 import { transClockTo12 } from '../../util/calc';
 import Line from '../line/line';
 import DbService from '../../service/dbService';
+import { useNavigate } from 'react-router-dom';
 
 // constants
 const TODO_STATE_LIST = ['ing', 'complete', 'fail'];
@@ -17,6 +18,13 @@ interface TypeTodo {
   isBtnPossible: boolean;
   dbService: DbService;
   deleteTodo: (date: string, todoId: string) => void;
+}
+
+export interface IEditState {
+  state: {
+    todoId: string;
+    prevTodo: TypeTodoList;
+  };
 }
 
 // 컴포넌트
@@ -33,6 +41,7 @@ const Todo = ({
   const [onFocus, setOnFocus] = useState(false);
   const deadLine = transClockTo12(todo.deadline);
   const userId = useContext(UserIdContext);
+  const navigate = useNavigate();
 
   const transTodoState = (selectedState: string) => {
     setTodoState(selectedState);
@@ -44,13 +53,18 @@ const Todo = ({
     deleteTodo(date, todoId);
   }, [date, deleteTodo, todoId]);
 
+  const onEdit = () => {
+    navigate(`/${date}/editTodo`, {
+      state: { todoId, prevTodo: todo },
+    });
+  };
   return (
     <li className={styles.todo}>
       <div className={styles.todoHeader}>
         <p className={styles.deadLine}>{`데드라인: ${deadLine || '없음'}`}</p>
         {isBtnPossible && (
           <>
-            <div className={styles.iconBox}>
+            <div className={styles.iconBox} onClick={onEdit}>
               <img
                 className={styles.iconImg}
                 src="/asset/update.png"

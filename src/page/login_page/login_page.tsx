@@ -36,7 +36,6 @@ const LoginPage = ({
     const userUid = await authService.login(setUserId);
     if (userUid) {
       const userList = await dbService.readData('userList');
-      console.log(!userList);
 
       if (!userList) {
         dbService.createUser(userUid);
