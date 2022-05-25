@@ -54,7 +54,7 @@ const Header = ({ data }: TypeHeader) => {
                     (key) => todoListData[key].completeTime
                   ).length
                 }
-            / ${Object.keys(todoListData).length || ''}`
+            / ${Object.keys(todoListData).length || 0}`
               : 'Let`s go todo'}
           </p>
         </div>
