@@ -235,18 +235,17 @@ function App({
       const todoList = record.todoList;
       todoList[todoId] = inputValue;
       // 당일 변경 전 카테고리 삭제
-      let categoryList = record.categoryList;
-      console.log(categoryList);
-      categoryList = categoryList.filter((category) => {
+      console.log(record.categoryList);
+      record.categoryList = record.categoryList.filter((category) => {
         console.log(prevCategory, category);
         return prevCategory !== category;
       });
-      console.log(categoryList);
+      console.log(record.categoryList);
       // 당일 새로운 카테고리 추가
-      const SetCategoryList = new Set(categoryList);
+      const SetCategoryList = new Set(record.categoryList);
       SetCategoryList.add(inputValue.category);
-      categoryList = Array.from(SetCategoryList);
-      console.log(categoryList);
+      record.categoryList = Array.from(SetCategoryList);
+      console.log(record.categoryList);
 
       // db 저장
       dbService.saveData(userId, newData);
