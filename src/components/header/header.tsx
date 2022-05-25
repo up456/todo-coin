@@ -32,12 +32,7 @@ const Header = ({ data }: TypeHeader) => {
   };
 
   const goToTodayTodoPage = () => {
-    const path = window.location.pathname;
-    if (path === '/calendar') {
-      navigate(0);
-    } else {
-      navigate(`/calendar`);
-    }
+    navigate(`/todo/${today}`);
   };
 
   if (!userId) return <NonExistentUser />;
