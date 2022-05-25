@@ -21,9 +21,9 @@ export function isDayAfterTodayOrToday(selectedDate: string) {
 export function transClockTo12(time: string) {
   if (time === '23:59:59') return;
   let hour = parseInt(time.slice(0, 2));
-  const minute = parseInt(time.slice(3));
+  const minute = time.slice(3);
   let amPm = '오전';
-  if (hour > 13) {
+  if (hour >= 13) {
     hour -= 12;
     amPm = '오후';
   }
