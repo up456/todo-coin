@@ -1,5 +1,5 @@
 import { TypeRecord, TypeData, TypeTodoList } from './../App';
-import { get, off, onValue, ref, set } from 'firebase/database';
+import { get, off, onValue, ref, remove, set } from 'firebase/database';
 import { myDb } from './my_firebase';
 
 export const DEFAULT_DATA: TypeData = {
@@ -73,6 +73,19 @@ class DbService {
     set(ref(this.db, `dataList/`), {
       [`${userId}`]: value,
     });
+  }
+
+  deleteTodo(userId: string, date: string, todoId: string) {
+    const dbRef = ref(
+      this.db,
+      `dataList/${userId}/record/${date}/todoList/${todoId}`
+    );
+    remove(dbRef);
+  }
+
+  deleteRecord(userId: string, date: string) {
+    const dbRef = ref(this.db, `dataList/${userId}/record/${date}`);
+    remove(dbRef);
   }
 
   syncData(

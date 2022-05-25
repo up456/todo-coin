@@ -79,174 +79,193 @@ function App({
     return () => stopSync();
   }, [userId, dbService]);
 
-  const changeTodoState: TypeChangeTodoState = (
-    date,
-    targetTodoId,
-    todoState
-  ) => {
-    setData((prevData) => {
-      const newData = {
-        ...prevData,
-      };
-      const userInfo = newData?.myInfo;
-      const record = newData?.record[date];
-      const todoList = record?.todoList;
-      const targetTodo = todoList[targetTodoId];
-
-      if (!(userInfo && todoList)) return newData;
-
-      // 보상 처리 부분
-      switch (handleReward(targetTodo.todoState, todoState)) {
-        case 'plus':
-          // 코인 처리 부분
-          userInfo.coin += targetTodo.rewardCoin;
-          record.acquiredCoin += targetTodo.rewardCoin;
-          //경험치 처리 부분
-          userInfo.exp += targetTodo.rewardExp;
-          if (userInfo.exp >= getMaxExp(userInfo.lv)) {
-            const gap = userInfo.exp - getMaxExp(userInfo.lv);
-            userInfo.exp = 0 + gap;
-            userInfo.lv++;
-          }
-          break;
-        case 'minus':
-          // 코인 처리 부분
-          userInfo.coin -= targetTodo.rewardCoin;
-          record.acquiredCoin -= targetTodo.rewardCoin;
-          //경험치 처리 부분
-          userInfo.exp -= targetTodo.rewardExp;
-          if (userInfo.exp < 0) {
-            userInfo.lv--;
-            userInfo.exp += getMaxExp(userInfo.lv);
-          }
-          break;
-        default:
-          break;
-      }
-      // 보상 처리 후 상태 및 완료시간 저장 부분
-      switch (todoState) {
-        case 'complete':
-          targetTodo.completeTime = new Date().toLocaleTimeString();
-          targetTodo.todoState = 'complete';
-          break;
-        case 'fail':
-          targetTodo.completeTime = '';
-          targetTodo.todoState = 'fail';
-          break;
-        case 'ing':
-          targetTodo.completeTime = '';
-          targetTodo.todoState = 'ing';
-          break;
-        default:
-          throw new Error(`없는 상태입니다 ${todoState} `);
-      }
-      // 상태 변화 후에는 반드시 todo달성률 업데이트
-      calcPercent(todoList, record);
-      // db 저장
-      dbService.saveData(userId, newData);
-
-      return newData;
-    });
-  };
-
-  const addTodo = (date: string, inputValue: TypeTodoList) => {
-    setData((prevData) => {
-      let newData = {
-        ...prevData,
-      };
-      // 해당 날짜의 기록을 넣는 칸이 없으면 해당 날짜로 빈공간 생성
-      let record = newData?.record[date];
-      if (!record) {
-        newData.record[date] = {
-          todoList: {},
-          categoryList: [],
-          percent: 0,
-          acquiredCoin: 0,
-          satisfaction: 0,
+  const changeTodoState: TypeChangeTodoState = useCallback(
+    (date, targetTodoId, todoState) => {
+      setData((prevData) => {
+        const newData = {
+          ...prevData,
         };
-      }
-      // todo 추가
-      const todoList = record.todoList;
-      const todoId = Date.now();
-      todoList[todoId] = inputValue;
-      // 당일 카테고리 추가
-      const SetCategoryList = new Set(record.categoryList);
-      SetCategoryList.add(inputValue.category);
-      record.categoryList = Array.from(SetCategoryList);
-      // 나의 카테고리 목록 추가
-      const SetCategoryRecord = new Set(newData.myInfo.categoryRecord);
-      SetCategoryRecord.add(inputValue.category);
-      newData.myInfo.categoryRecord = Array.from(SetCategoryRecord);
-      // todo추가 후에는 반드시 todo달성률 업데이트
-      calcPercent(todoList, record);
-      // db 저장
-      dbService.saveData(userId, newData);
-      return newData;
-    });
-  };
+        const userInfo = newData?.myInfo;
+        const record = newData?.record[date];
+        const todoList = record?.todoList;
+        const targetTodo = todoList[targetTodoId];
+
+        if (!(userInfo && todoList)) return newData;
+
+        // 보상 처리 부분
+        switch (handleReward(targetTodo.todoState, todoState)) {
+          case 'plus':
+            // 코인 처리 부분
+            userInfo.coin += targetTodo.rewardCoin;
+            record.acquiredCoin += targetTodo.rewardCoin;
+            //경험치 처리 부분
+            userInfo.exp += targetTodo.rewardExp;
+            if (userInfo.exp >= getMaxExp(userInfo.lv)) {
+              const gap = userInfo.exp - getMaxExp(userInfo.lv);
+              userInfo.exp = 0 + gap;
+              userInfo.lv++;
+            }
+            break;
+          case 'minus':
+            // 코인 처리 부분
+            userInfo.coin -= targetTodo.rewardCoin;
+            record.acquiredCoin -= targetTodo.rewardCoin;
+            //경험치 처리 부분
+            userInfo.exp -= targetTodo.rewardExp;
+            if (userInfo.exp < 0) {
+              userInfo.lv--;
+              userInfo.exp += getMaxExp(userInfo.lv);
+            }
+            break;
+          default:
+            break;
+        }
+        // 보상 처리 후 상태 및 완료시간 저장 부분
+        switch (todoState) {
+          case 'complete':
+            targetTodo.completeTime = new Date().toLocaleTimeString();
+            targetTodo.todoState = 'complete';
+            break;
+          case 'fail':
+            targetTodo.completeTime = '';
+            targetTodo.todoState = 'fail';
+            break;
+          case 'ing':
+            targetTodo.completeTime = '';
+            targetTodo.todoState = 'ing';
+            break;
+          default:
+            throw new Error(`없는 상태입니다 ${todoState} `);
+        }
+        // 상태 변화 후에는 반드시 todo달성률 업데이트
+        calcPercent(todoList, record);
+        // db 저장
+        dbService.saveData(userId, newData);
+
+        return newData;
+      });
+    },
+    [dbService, userId]
+  );
+
+  const addTodo = useCallback(
+    (date: string, inputValue: TypeTodoList) => {
+      setData((prevData) => {
+        let newData = {
+          ...prevData,
+        };
+        // 해당 날짜의 기록을 넣는 칸이 없으면 해당 날짜로 빈공간 생성
+        let record = newData?.record[date];
+        if (!record) {
+          newData.record[date] = {
+            todoList: {},
+            categoryList: [],
+            percent: 0,
+            acquiredCoin: 0,
+            satisfaction: 0,
+          };
+        }
+        // todo 추가
+        const todoList = record.todoList;
+        const todoId = Date.now();
+        todoList[todoId] = inputValue;
+        // 당일 카테고리 추가
+        const SetCategoryList = new Set(record.categoryList);
+        SetCategoryList.add(inputValue.category);
+        record.categoryList = Array.from(SetCategoryList);
+        // 나의 카테고리 목록 추가
+        const SetCategoryRecord = new Set(newData.myInfo.categoryRecord);
+        SetCategoryRecord.add(inputValue.category);
+        newData.myInfo.categoryRecord = Array.from(SetCategoryRecord);
+        // todo추가 후에는 반드시 todo달성률 업데이트
+        calcPercent(todoList, record);
+        // db 저장
+        dbService.saveData(userId, newData);
+        return newData;
+      });
+    },
+    [dbService, userId]
+  );
 
   const deleteTodo = useCallback(
     (date: string, todoId: string) => {
+      let zeroFlag = false;
       if (window.confirm('정말 삭제하시겠습니까?')) {
         setData((prevData) => {
           let newData = {
             ...prevData,
           };
+
           let record = newData?.record[date];
           let todoList = record.todoList;
+          // if (todoList[todoId]) return newData;
+          console.log(todoList);
+          console.log('삭제 실행');
+
           const targetTodoCategory = todoList[todoId].category;
 
           // 당일 카테고리 삭제
-          if (record.categoryList.length === 1) {
-            alert('마지막 할일은 삭제할 수 없습니다.');
-          } else {
+          if (record.categoryList) {
             record.categoryList = record.categoryList.filter(
               (category) => category !== targetTodoCategory
             );
-            //targeTodo 삭제
-            delete newData.record[date].todoList[todoId];
+          }
+          // db 저장
+          dbService.saveData(userId, newData);
+
+          //targeTodo 삭제
+          // delete newData.record[date].todoList[todoId];
+          if (Object.keys(todoList).length === 1) {
+            dbService.deleteRecord(userId, date);
+            zeroFlag = true;
+            return newData;
+          } else {
+            dbService.deleteTodo(userId, date, todoId);
           }
 
           // todo추가 후에는 반드시 todo달성률 업데이트
           calcPercent(todoList, record);
-          // db 저장
-          dbService.saveData(userId, newData);
+
           return newData;
         });
       }
+      return zeroFlag;
     },
     [dbService, userId]
   );
 
-  const editTodo = (
-    date: string,
-    todoId: string,
-    prevCategory: string,
-    inputValue: TypeTodoList
-  ) => {
-    setData((prevData) => {
-      let newData = {
-        ...prevData,
-      };
-      let record = newData.record[date];
+  const editTodo = useCallback(
+    (
+      date: string,
+      todoId: string,
+      prevCategory: string,
+      inputValue: TypeTodoList
+    ) => {
+      setData((prevData) => {
+        let newData = {
+          ...prevData,
+        };
+        let record = newData.record[date];
 
-      // todo 변경
-      const todoList = record.todoList;
-      todoList[todoId] = inputValue;
-      // 당일 변경 전 카테고리 삭제
-      record.categoryList = record.categoryList.filter((category) => {
-        return prevCategory !== category;
+        // todo 변경
+        const todoList = record.todoList;
+        todoList[todoId] = inputValue;
+        // 당일 변경 전 카테고리 삭제
+        record.categoryList = record.categoryList.filter((category) => {
+          return prevCategory !== category;
+        });
+        // 당일 새로운 카테고리 추가
+        const SetCategoryList = new Set(record.categoryList);
+        SetCategoryList.add(inputValue.category);
+        record.categoryList = Array.from(SetCategoryList);
+
+        // db 저장
+        dbService.saveData(userId, newData);
+        return newData;
       });
-      // 당일 새로운 카테고리 추가
-      const SetCategoryList = new Set(record.categoryList);
-      SetCategoryList.add(inputValue.category);
-      record.categoryList = Array.from(SetCategoryList);
-
-      // db 저장
-      dbService.saveData(userId, newData);
-      return newData;
-    });
-  };
+    },
+    [dbService, userId]
+  );
 
   return (
     <div className={styles.app}>
@@ -301,4 +320,4 @@ function App({
   );
 }
 
-export default App;
+export default React.memo(App);
