@@ -16,7 +16,6 @@ interface TypeTodo {
   changeTodoState: TypeChangeTodoState;
   todoId: string;
   isBtnPossible: boolean;
-  dbService: DbService;
   deleteTodo: (date: string, todoId: string) => void;
 }
 
@@ -34,7 +33,6 @@ const Todo = ({
   changeTodoState,
   todoId,
   isBtnPossible,
-  dbService,
   deleteTodo,
 }: TypeTodo) => {
   const [todoState, setTodoState] = useState(todo.todoState);
