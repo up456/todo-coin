@@ -95,8 +95,7 @@ abbr[title] {
 }
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
-  background-color: #5ede99;
-  color: #fff;
+  background-color: #e9fce9;
   border-radius: 50%;
 }
 .react-calendar__tile--now {
@@ -116,7 +115,7 @@ abbr[title] {
   background: #a9d4ff;
 }
 .react-calendar__tile--active {
-  background: #5ede99;
+  background: #e9fce9;
   border-radius: 50%;
   color: white;
 }
