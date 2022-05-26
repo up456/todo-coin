@@ -1,19 +1,19 @@
 import styles from './calendar_page.module.css';
 import { useContext, useState } from 'react';
+import Calendar from 'react-calendar';
 
 import Header from '../../components/header/header';
 import DayRecord from '../../components/day_record/day_record';
 import { TypeData, UserIdContext } from '../../App';
-import MyCalendar from '../../components/myCalendar/myCalendar';
 import { useNavigate } from 'react-router-dom';
-import { callToday } from '../../util/calc';
+import { changeDateToString } from '../../util/calc';
 
 interface TypeCalendarPage {
   data: TypeData;
 }
 const CalendarPage = ({ data }: TypeCalendarPage) => {
   const navigate = useNavigate();
-  const [date, setDate] = useState(callToday());
+  const [date, setDate] = useState(new Date());
 
   const userId = useContext(UserIdContext);
 
@@ -24,8 +24,10 @@ const CalendarPage = ({ data }: TypeCalendarPage) => {
   return (
     <section className={styles.calendarPage}>
       <Header data={data} />
-      <MyCalendar setDate={setDate} />
-      <DayRecord data={data} date={date} />
+      <div className={styles.calendarBox}>
+        <Calendar onChange={setDate} value={date} />
+      </div>
+      <DayRecord data={data} date={changeDateToString(date)} />
     </section>
   );
 };

@@ -8,6 +8,15 @@ export function getMaxExp(lv: number): number {
 export function callToday() {
   return new Date().toISOString().slice(0, 10);
 }
+// calendar.tsx
+export function changeDateToString(date: Date) {
+  const newDate = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate() + 1
+  );
+  return newDate.toISOString().slice(0, 10);
+}
 
 // day_record.tsx
 export function isDayAfterTodayOrToday(selectedDate: string) {
