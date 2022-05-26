@@ -166,11 +166,10 @@ function App({
               satisfaction: 0,
             },
           };
-          record = newData.record;
         }
         let recordDate = newData.record?.[date];
         if (!recordDate) {
-          record = {
+          newData.record = {
             ...newData.record,
             [date]: {
               todoList: {},
@@ -180,21 +179,19 @@ function App({
               satisfaction: 0,
             },
           };
-          recordDate = record?.[date];
         }
-        // todo 추가
         const todoId = Date.now();
-        recordDate.todoList[todoId] = inputValue;
+        newData.record[date].todoList[todoId] = inputValue;
         // 당일 카테고리 추가
-        const SetCategoryList = new Set(recordDate.categoryList);
+        const SetCategoryList = new Set(newData.record[date].categoryList);
         SetCategoryList.add(inputValue.category);
-        recordDate.categoryList = Array.from(SetCategoryList);
+        newData.record[date].categoryList = Array.from(SetCategoryList);
         // 나의 카테고리 목록 추가
         const SetCategoryRecord = new Set(newData.myInfo.categoryRecord);
         SetCategoryRecord.add(inputValue.category);
         newData.myInfo.categoryRecord = Array.from(SetCategoryRecord);
         // todo추가 후에는 반드시 todo달성률 업데이트
-        calcPercent(recordDate.todoList, recordDate);
+        calcPercent(newData.record[date].todoList, newData.record[date]);
         // db 저장
         dbService.saveData(userId, newData);
         return newData;
@@ -222,7 +219,12 @@ function App({
           // db 저장
           dbService.saveData(userId, newData);
           //targeTodo 삭제
-          dbService.deleteTodo(userId, date, todoId);
+          if (Object.keys(todoList).length === 1) {
+            dbService.deleteRecord(userId, date);
+            return newData;
+          } else {
+            dbService.deleteTodo(userId, date, todoId);
+          }
           // todo추가 후에는 반드시 todo달성률 업데이트
           calcPercent(todoList, record);
 

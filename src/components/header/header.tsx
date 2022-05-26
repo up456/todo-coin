@@ -14,7 +14,7 @@ const Header = ({ data }: TypeHeader) => {
   const today = new Date().toISOString().slice(0, 10);
   const userId: string = useContext(UserIdContext);
 
-  const todoListData = data?.record?.today?.todoList;
+  const todoListData = data?.record?.[today]?.todoList;
 
   const goToMyPage = () => {
     navigate('/mypage');
