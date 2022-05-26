@@ -1,6 +1,8 @@
 import styles from './calendar_page.module.css';
 import { useContext, useState } from 'react';
+
 import Calendar from 'react-calendar';
+import './Calendar.css';
 
 import Header from '../../components/header/header';
 import DayRecord from '../../components/day_record/day_record';
