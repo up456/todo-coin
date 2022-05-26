@@ -27,7 +27,7 @@ interface TypeHompPage {
   data: TypeData;
   changeTodoState: TypeChangeTodoState;
   dbService: DbService;
-  deleteTodo: (date: string, todoId: string) => boolean;
+  deleteTodo: (date: string, todoId: string) => void;
 }
 
 export interface LocationState {

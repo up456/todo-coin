@@ -14,17 +14,6 @@ const Header = ({ data }: TypeHeader) => {
   const today = new Date().toISOString().slice(0, 10);
   const userId: string = useContext(UserIdContext);
 
-  // if (!data.record) {
-  //   data['record'] = {
-  //     [`${today}`]: {
-  //       todoList: {},
-  //       categoryList: [],
-  //       percent: 0,
-  //       acquiredCoin: 0,
-  //       satisfaction: 0,
-  //     },
-  //   };
-  // }
   const todoListData = data?.record?.today?.todoList;
 
   const goToMyPage = () => {
