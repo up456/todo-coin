@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import Header from '../../components/header/header';
 import DayRecord from '../../components/day_record/day_record';
 import { TypeData, UserIdContext } from '../../App';
-import Calendar from '../../components/calendar/calendar';
+import MyCalendar from '../../components/myCalendar/myCalendar';
 import { useNavigate } from 'react-router-dom';
 import { callToday } from '../../util/calc';
 
@@ -24,7 +24,7 @@ const CalendarPage = ({ data }: TypeCalendarPage) => {
   return (
     <section className={styles.calendarPage}>
       <Header data={data} />
-      <Calendar setDate={setDate} />
+      <MyCalendar setDate={setDate} />
       <DayRecord data={data} date={date} />
     </section>
   );
