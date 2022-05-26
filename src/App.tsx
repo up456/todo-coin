@@ -155,31 +155,46 @@ function App({
           ...prevData,
         };
         // 해당 날짜의 기록을 넣는 칸이 없으면 해당 날짜로 빈공간 생성
-        let record = newData?.record[date];
+        let record = newData?.record;
         if (!record) {
-          newData.record[date] = {
-            todoList: {},
-            categoryList: [],
-            percent: 0,
-            acquiredCoin: 0,
-            satisfaction: 0,
+          newData['record'] = {
+            [date]: {
+              todoList: {},
+              categoryList: [],
+              percent: 0,
+              acquiredCoin: 0,
+              satisfaction: 0,
+            },
           };
+          record = newData.record;
         }
-        console.log('add 생성');
+        let recordDate = newData.record?.[date];
+        if (!recordDate) {
+          record = {
+            ...newData.record,
+            [date]: {
+              todoList: {},
+              categoryList: [],
+              percent: 0,
+              acquiredCoin: 0,
+              satisfaction: 0,
+            },
+          };
+          recordDate = record?.[date];
+        }
         // todo 추가
-        const todoList = record.todoList;
         const todoId = Date.now();
-        todoList[todoId] = inputValue;
+        recordDate.todoList[todoId] = inputValue;
         // 당일 카테고리 추가
-        const SetCategoryList = new Set(record.categoryList);
+        const SetCategoryList = new Set(recordDate.categoryList);
         SetCategoryList.add(inputValue.category);
-        record.categoryList = Array.from(SetCategoryList);
+        recordDate.categoryList = Array.from(SetCategoryList);
         // 나의 카테고리 목록 추가
         const SetCategoryRecord = new Set(newData.myInfo.categoryRecord);
         SetCategoryRecord.add(inputValue.category);
         newData.myInfo.categoryRecord = Array.from(SetCategoryRecord);
         // todo추가 후에는 반드시 todo달성률 업데이트
-        calcPercent(todoList, record);
+        calcPercent(recordDate.todoList, recordDate);
         // db 저장
         dbService.saveData(userId, newData);
         return newData;

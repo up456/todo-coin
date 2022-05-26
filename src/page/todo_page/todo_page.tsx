@@ -47,7 +47,7 @@ const TodoPage = ({
   const { date } = useParams();
   const dateData = date || '';
 
-  let record = data?.record[dateData];
+  let record = data?.record?.[dateData];
 
   const categoryList = record?.categoryList || [];
   const todoListData = record?.todoList;
@@ -58,7 +58,7 @@ const TodoPage = ({
 
   useEffect(() => {
     setRawData(todoListData);
-  }, [rawData, todoListData]);
+  }, [rawData, todoListData, data]);
 
   const selectCategory = useCallback(
     (category: string) => {

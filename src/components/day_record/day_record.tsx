@@ -16,7 +16,7 @@ const DayRecord = ({ data, date }: IDayRecord) => {
     navigate(`/todo/${date}`, { state: { date: date } });
   };
   const dateObj = new Date(date);
-  const recordData = data?.record[date];
+  const recordData = data?.record?.date;
 
   return (
     <section className={styles.dayRecord}>
