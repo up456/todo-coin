@@ -165,6 +165,7 @@ function App({
             satisfaction: 0,
           };
         }
+        console.log('add 생성');
         // todo 추가
         const todoList = record.todoList;
         const todoId = Date.now();
@@ -198,10 +199,6 @@ function App({
 
           let record = newData?.record[date];
           let todoList = record.todoList;
-          // if (todoList[todoId]) return newData;
-          console.log(todoList);
-          console.log('삭제 실행');
-
           const targetTodoCategory = todoList[todoId].category;
 
           // 당일 카테고리 삭제
@@ -214,7 +211,6 @@ function App({
           dbService.saveData(userId, newData);
 
           //targeTodo 삭제
-          // delete newData.record[date].todoList[todoId];
           if (Object.keys(todoList).length === 1) {
             dbService.deleteRecord(userId, date);
             zeroFlag = true;
