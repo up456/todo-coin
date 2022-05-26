@@ -15,7 +15,7 @@ interface TypeTodo {
   changeTodoState: TypeChangeTodoState;
   todoId: string;
   isBtnPossible: boolean;
-  deleteTodo: (date: string, todoId: string) => boolean;
+  deleteTodo: (date: string, todoId: string) => void;
 }
 
 export interface IEditState {
@@ -50,9 +50,8 @@ const Todo = ({
   );
 
   const onDelete = useCallback(() => {
-    const zeroFlag = deleteTodo(date, todoId);
-    if (zeroFlag) navigate('/calendar');
-  }, [date, deleteTodo, todoId, navigate]);
+    deleteTodo(date, todoId);
+  }, [date, deleteTodo, todoId]);
 
   const onEdit = useCallback(() => {
     navigate(`/${date}/editTodo`, {

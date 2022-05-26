@@ -205,17 +205,14 @@ function App({
 
   const deleteTodo = useCallback(
     (date: string, todoId: string) => {
-      let zeroFlag = false;
       if (window.confirm('정말 삭제하시겠습니까?')) {
         setData((prevData) => {
           let newData = {
             ...prevData,
           };
-
           let record = newData?.record[date];
           let todoList = record.todoList;
           const targetTodoCategory = todoList[todoId].category;
-
           // 당일 카테고리 삭제
           if (record.categoryList) {
             record.categoryList = record.categoryList.filter(
@@ -224,23 +221,14 @@ function App({
           }
           // db 저장
           dbService.saveData(userId, newData);
-
           //targeTodo 삭제
-          if (Object.keys(todoList).length === 1) {
-            dbService.deleteRecord(userId, date);
-            zeroFlag = true;
-            return newData;
-          } else {
-            dbService.deleteTodo(userId, date, todoId);
-          }
-
+          dbService.deleteTodo(userId, date, todoId);
           // todo추가 후에는 반드시 todo달성률 업데이트
           calcPercent(todoList, record);
 
           return newData;
         });
       }
-      return zeroFlag;
     },
     [dbService, userId]
   );
