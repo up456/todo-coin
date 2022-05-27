@@ -3,6 +3,7 @@
 .app {
   width: 100%;
   max-width: 570px;
+  min-width: 423px;
   min-height: 100vh;
   margin: 0 auto;
   background-color: mainBg;
