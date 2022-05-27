@@ -70,8 +70,10 @@ export const calcPercent = (
     satisfaction: number;
   }
 ) => {
+  if (todoListLength === 0) return;
   const completeTodoCount = Object.keys(record.todoList).filter(
     (key) => record.todoList[key].todoState === 'complete'
   ).length;
   record.percent = Math.floor((completeTodoCount / todoListLength) * 100);
+  return;
 };
