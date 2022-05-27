@@ -138,7 +138,7 @@ function App({
             throw new Error(`없는 상태입니다 ${todoState} `);
         }
         // 상태 변화 후에는 반드시 todo달성률 업데이트
-        calcPercent(todoList, record);
+        calcPercent(Object.keys(todoList).length, record);
         // db 저장
         dbService.saveData(userId, newData);
 
@@ -191,7 +191,10 @@ function App({
         SetCategoryRecord.add(inputValue.category);
         newData.myInfo.categoryRecord = Array.from(SetCategoryRecord);
         // todo추가 후에는 반드시 todo달성률 업데이트
-        calcPercent(newData.record[date].todoList, newData.record[date]);
+        calcPercent(
+          Object.keys(newData.record[date].todoList).length,
+          newData.record[date]
+        );
         // db 저장
         dbService.saveData(userId, newData);
         return newData;
@@ -222,7 +225,8 @@ function App({
               );
             }
           }
-
+          // todo추가 후에는 반드시 todo달성률 업데이트
+          calcPercent(Object.keys(todoList).length - 1, newData.record[date]);
           // db 저장
           dbService.saveData(userId, newData);
           //targeTodo 삭제
@@ -232,9 +236,6 @@ function App({
           } else {
             dbService.deleteTodo(userId, date, todoId);
           }
-          // todo추가 후에는 반드시 todo달성률 업데이트
-          calcPercent(todoList, record);
-
           return newData;
         });
       }

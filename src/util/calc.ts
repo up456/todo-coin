@@ -59,7 +59,7 @@ export const handleReward = (originalState: string, selectedState: string) => {
 };
 // App.tsx
 export const calcPercent = (
-  todoList: { [todoId: string]: TypeTodoList },
+  todoListLength: number,
   record: {
     todoList: {
       [todoId: string]: TypeTodoList;
@@ -70,9 +70,8 @@ export const calcPercent = (
     satisfaction: number;
   }
 ) => {
-  const todoListCount = Object.keys(todoList).length;
-  const completeTodoCount = Object.keys(todoList).filter(
-    (key) => todoList[key].todoState === 'complete'
+  const completeTodoCount = Object.keys(record.todoList).filter(
+    (key) => record.todoList[key].todoState === 'complete'
   ).length;
-  record.percent = Math.floor((completeTodoCount / todoListCount) * 100);
+  record.percent = Math.floor((completeTodoCount / todoListLength) * 100);
 };
