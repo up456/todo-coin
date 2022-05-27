@@ -1,4 +1,4 @@
-@value textGreen, textGray, mainGreen, makerBoxShadow, mainWhite, mainGray from '/src/common/color.css';
+@value textGreen, textGray, makerBoxShadow, mainGray from '/src/common/color.css';
 
 .dayRecord {
   display: flex;
@@ -84,6 +84,5 @@
   margin-bottom: 0.5em;
 }
 .createTodoBox > button {
-  width: 80%;
   margin-bottom: 0.5em;
 }
