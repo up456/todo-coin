@@ -1,5 +1,12 @@
-@value mainGray, mainGreen, mainWhite, makerBoxShadow from '/src/common/color.css';
+@value mainGray, mainGreen,mainBg, mainWhite, makerBoxShadow from '/src/common/color.css';
+.headerContainer {
+  width: 100%;
 
+  background-color: mainBg;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
 .header {
   font-size: 1.05rem;
 
