@@ -28,7 +28,7 @@ const DayRecord = ({ data, date }: IDayRecord) => {
         <>
           <div className={styles.dayInfoContainer}>
             <div className={styles.dayInfoBox}>
-              <p className={styles.infoTitle}>성공률</p>
+              <p className={styles.infoTitle}>달성률</p>
               <div className={styles.infoValue}>
                 {`${recordData.percent}`}{' '}
                 <span className={styles.percent}>%</span>
