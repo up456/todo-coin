@@ -1,3 +1,4 @@
+@value mainWhite, makerBoxShadowSpread from '/src/common/color.css';
 .calendarBox {
   display: flex;
   justify-content: center;
@@ -7,6 +8,6 @@
   padding-bottom: 1em;
 
   border-radius: 1em;
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
-  background-color: #fff;
+  box-shadow: makerBoxShadowSpread;
+  background-color: mainWhite;
 }

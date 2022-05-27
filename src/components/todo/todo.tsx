@@ -59,7 +59,7 @@ const Todo = ({
     });
   }, [date, navigate, todo, todoId]);
   return (
-    <li className={styles.todo}>
+    <li className={getTodoStyle(todoState)}>
       <div className={styles.todoHeader}>
         <p className={styles.deadLine}>{`데드라인: ${deadLine || '없음'}`}</p>
         {isBtnPossible && todoState !== 'complete' && (
@@ -163,3 +163,18 @@ const Todo = ({
 };
 
 export default React.memo(Todo);
+
+function getTodoStyle(todoState: string) {
+  let todoStyle: string;
+  switch (todoState) {
+    case 'complete':
+      todoStyle = `${styles.todo} ${styles.complete}`;
+      break;
+    case 'fail':
+      todoStyle = `${styles.todo} ${styles.fail}`;
+      break;
+    default:
+      todoStyle = `${styles.todo}`;
+  }
+  return todoStyle;
+}

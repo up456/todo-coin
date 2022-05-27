@@ -15,6 +15,9 @@
 /* Shadow */
 @value makerBoxShadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.25);
 @value makerBoxShadowGreen: 0 0 3px 4px #E9FCE9;
+@value makerBoxShadowSpread: 0 5px 7px rgba(0, 0, 0, 0.2);
 
 /* Background Color */
 @value mainBg: #f7f7f7;
+@value todoComplete: rgba(224, 255, 240, 0.5);
+@value todoFail: rgba(255, 224, 224, 0.5);

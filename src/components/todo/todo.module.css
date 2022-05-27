@@ -1,4 +1,4 @@
-@value pointGreen from '/src/common/color.css';
+@value makerBoxShadow, pointGray, todoComplete, todoFail from '/src/common/color.css';
 
 .todo {
   display: flex;
@@ -6,9 +6,24 @@
   background-color: #fff;
   margin-bottom: 1em;
   padding: 0.5em 0.8em;
+  border-radius: 0.8em;
+  box-shadow: makerBoxShadow;
   font-size: 0.8rem;
 
   position: relative;
+  transition: 300ms ease-in;
+}
+.todo.complete {
+  background-color: todoComplete;
+  color: pointGray;
+  box-shadow: none;
+  transform: scale(0.97);
+}
+.todo.fail {
+  background-color: todoFail;
+  color: pointGray;
+  box-shadow: none;
+  transform: scale(0.97);
 }
 .todoHeader {
   width: 100%;
