@@ -211,11 +211,18 @@ function App({
           let todoList = record.todoList;
           const targetTodoCategory = todoList[todoId].category;
           // 당일 카테고리 삭제
-          if (record.categoryList) {
-            record.categoryList = record.categoryList.filter(
-              (category) => category !== targetTodoCategory
-            );
+          if (todoList) {
+            if (
+              Object.keys(todoList).filter(
+                (key) => todoList[key].category === targetTodoCategory
+              ).length === 1
+            ) {
+              record.categoryList = record.categoryList.filter(
+                (category) => category !== targetTodoCategory
+              );
+            }
           }
+
           // db 저장
           dbService.saveData(userId, newData);
           //targeTodo 삭제
