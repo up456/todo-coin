@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './app.module.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
