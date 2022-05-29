@@ -165,6 +165,10 @@ const TodoPage = ({
   }, [date, record]);
 
   const isCUDBtnPossible = useCallback(() => {
+    // 오늘 미만이면 불가능
+    if (!isDayAfterTodayOrToday(date || '')) {
+      return false;
+    }
     // 기록이 없으면 생성가능
     if (record) {
       // 기록에서 만족도가 0이면 아직 하루를 완료하지 않은 상태
@@ -176,7 +180,7 @@ const TodoPage = ({
     } else {
       return true;
     }
-  }, [record]);
+  }, [date, record]);
 
   const goToCalendar = useCallback(() => navigate('/calendar'), [navigate]);
   const goToAddTodo = useCallback(
@@ -205,7 +209,7 @@ const TodoPage = ({
           <section className={styles.contentHeader}>
             <div className={styles.pageBtnContainer}>
               <Button text="달력 보기" onClick={goToCalendar} />
-              {isDayAfterTodayOrToday(date || '') && isCUDBtnPossible() && (
+              {isCUDBtnPossible() && (
                 <>
                   <div className={styles.btnGap}></div>
                   <Button text="할일 추가하기" onClick={goToAddTodo} />
