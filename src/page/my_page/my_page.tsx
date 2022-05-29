@@ -1,7 +1,6 @@
 import styles from './my_page.module.css';
 import React from 'react';
 import Button from '../../components/button/button';
-import { useNavigate } from 'react-router-dom';
 import Header from '../../components/header/header';
 import { TypeData } from '../../App';
 import AuthService from '../../service/authService';
@@ -12,11 +11,8 @@ interface TypeMyPage {
   setUserId: React.Dispatch<React.SetStateAction<string>>;
 }
 const MyPage = ({ data, authService, setUserId }: TypeMyPage) => {
-  const navigate = useNavigate();
   const onLogout = () => {
     authService.logout(setUserId);
-    navigate('/');
-    window.location.reload();
   };
 
   const cate = data?.myInfo?.categoryRecord || [];
