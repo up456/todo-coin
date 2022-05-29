@@ -210,7 +210,7 @@ function App({
         let record = newData?.record[date];
         let todoList = record.todoList;
         const targetTodoCategory = todoList[todoId].category;
-        // 당일 카테고리 삭제
+        // 당일 카테고리 삭제 (삭제하려는 카테고리가 유일할때만 삭제)
         if (todoList) {
           if (
             Object.keys(todoList).filter(
@@ -253,10 +253,18 @@ function App({
       // todo 변경
       const todoList = record.todoList;
       todoList[todoId] = inputValue;
-      // 당일 변경 전 카테고리 삭제
-      record.categoryList = record.categoryList.filter((category) => {
-        return prevCategory !== category;
-      });
+      // 당일 변경 후 카테고리 삭제 (변경 후 이전 카테고리가 남아 있지 않으면 삭제)
+      if (todoList) {
+        if (
+          Object.keys(todoList).filter(
+            (key) => todoList[key].category === prevCategory
+          ).length === 0
+        ) {
+          record.categoryList = record.categoryList.filter(
+            (category) => category !== prevCategory
+          );
+        }
+      }
       // 당일 새로운 카테고리 추가
       const SetCategoryList = new Set(record.categoryList);
       SetCategoryList.add(inputValue.category);
