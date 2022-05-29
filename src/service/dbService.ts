@@ -51,9 +51,7 @@ class DbService {
       satisfaction: number;
     }
   ) {
-    set(ref(this.db, `dataList/${userId}/record/`), {
-      [`${date}`]: value,
-    });
+    set(ref(this.db, `dataList/${userId}/record/${date}`), value);
   }
 
   saveData(
