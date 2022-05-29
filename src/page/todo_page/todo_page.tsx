@@ -137,7 +137,7 @@ const TodoPage = ({
     [rawData]
   );
 
-  const completeToday = useCallback(() => {
+  const completeToday = () => {
     if (record) {
       if (
         window.confirm(
@@ -154,7 +154,7 @@ const TodoPage = ({
     } else {
       alert('하루를 완료 할 데이터가 없습니다.');
     }
-  }, [dateData, dbService, navigate, record, satisfaction, userId]);
+  };
 
   const isCompleteBtnPossible = useCallback(() => {
     if (record) {
@@ -193,6 +193,9 @@ const TodoPage = ({
     (starValue: string) => setSatisfaction(parseInt(starValue)),
     []
   );
+  const selectSort = useCallback((sortWord: string) => {
+    setSort(sortWord);
+  }, []);
 
   return (
     <>
@@ -213,9 +216,7 @@ const TodoPage = ({
               <SelectBox
                 value={sort}
                 optionList={SORT_OPTION_LIST}
-                onChange={(item) => {
-                  setSort(item);
-                }}
+                onChange={selectSort}
               />
               <Button isToggle={true} text="전체" onClick={playClickAll} />
               {categoryList.map((category, idx) => (
@@ -278,4 +279,4 @@ const TodoPage = ({
   );
 };
 
-export default React.memo(TodoPage);
+export default TodoPage;
