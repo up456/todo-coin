@@ -81,6 +81,7 @@ const AddTodoPage = ({ addTodo }: TypeAddTodoPage) => {
             className={styles.input}
             placeholder={'reward-coin'}
             value={inputValue.rewardCoin}
+            min={0}
             onChange={(event) => onChangeValue(event, 'rewardCoin')}
           />
         </div>
@@ -91,6 +92,7 @@ const AddTodoPage = ({ addTodo }: TypeAddTodoPage) => {
             className={styles.input}
             placeholder={'reward-exp'}
             value={inputValue.rewardExp}
+            min={0}
             onChange={(event) => onChangeValue(event, 'rewardExp')}
           />
         </div>
