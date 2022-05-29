@@ -33,15 +33,13 @@ const LoginPage = ({
   const navigate = useNavigate();
 
   const onClick = async () => {
-    const userUid = await authService.login(setUserId);
-    if (userUid) {
-      const userList = await dbService.readData('userList');
-
-      if (!userList) {
-        dbService.createUser(userUid);
-      }
-      navigate(`/calendar`);
+    const userUid = (await authService.login(setUserId)) || '';
+    const userList = await dbService.readData('userList');
+    // userList에 login한 유저의 uid가 없으면 새로운 유저 생성
+    if (!Object.keys(userList).includes(userUid)) {
+      dbService.createUser(userUid);
     }
+    navigate(`/calendar`);
   };
   const userId = useContext(UserIdContext);
 

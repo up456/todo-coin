@@ -21,9 +21,7 @@ class DbService {
   }
   createUser(userId: string | undefined) {
     set(ref(this.db, `userList/${userId}`), true);
-    set(ref(this.db, 'dataList'), {
-      [`${userId}`]: DEFAULT_DATA,
-    });
+    set(ref(this.db, `dataList/${userId}`), DEFAULT_DATA);
   }
 
   async readData(path: string) {
@@ -68,9 +66,7 @@ class DbService {
       shop: {};
     }
   ) {
-    set(ref(this.db, `dataList/`), {
-      [`${userId}`]: value,
-    });
+    set(ref(this.db, `dataList/${userId}`), value);
   }
 
   deleteTodo(userId: string, date: string, todoId: string) {
