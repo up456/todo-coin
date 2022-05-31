@@ -11,7 +11,7 @@ export const DEFAULT_DATA: TypeData = {
     categoryRecord: [''],
   },
   record: {},
-  shop: {},
+  shop: [],
 };
 
 class DbService {
@@ -94,7 +94,7 @@ class DbService {
           categoryRecord: string[];
         };
         record: TypeRecord;
-        shop: {};
+        shop: [];
       }>
     >
   ) {

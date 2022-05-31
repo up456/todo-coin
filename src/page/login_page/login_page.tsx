@@ -20,7 +20,7 @@ interface ILoginPage {
         categoryRecord: string[];
       };
       record: TypeRecord;
-      shop: {};
+      shop: [];
     }>
   >;
 }

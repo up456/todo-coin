@@ -1,0 +1,21 @@
+.storeTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+}
+.storeTitleImg {
+  width: 0.95em;
+}
+.storeTitleText {
+  margin: 0 0.5em;
+}
+
+.itemCardList {
+  padding: 0 1.5em;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, auto));
+  justify-content: space-between;
+}

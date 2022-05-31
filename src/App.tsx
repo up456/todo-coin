@@ -11,6 +11,7 @@ import AddTodoPage from './page/add_todo_page/add_todo_page';
 import { calcPercent, getMaxExp, handleReward } from './util/calc';
 import DbService, { DEFAULT_DATA } from './service/dbService';
 import EditTodoPage from './page/edit_todo_page/edit_todo_page';
+import StorePage from './page/store_page/store_page';
 
 export interface TypeTodoList {
   todo: string;
@@ -39,20 +40,7 @@ export interface TypeData {
     categoryRecord: string[];
   };
   record: TypeRecord;
-  shop: {};
-}
-export interface TypeDummy {
-  [id: string]: {
-    myInfo: {
-      lv: number;
-      exp: number;
-      coin: number;
-      items: {}[];
-      categoryRecord: string[];
-    };
-    record: TypeRecord;
-    shop: {};
-  };
+  shop: [];
 }
 
 export const UserIdContext = React.createContext('');
@@ -322,6 +310,7 @@ function App({
                 />
               }
             />
+            <Route path="/store" element={<StorePage data={data} />}></Route>
           </Routes>
         </BrowserRouter>
       </UserIdContext.Provider>

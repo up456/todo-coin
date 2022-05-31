@@ -1,0 +1,117 @@
+@value textGray, textGreen, mainWhite, makerBoxShadow from '/src/common/color.css';
+
+.itemCard {
+  height: 13em;
+  list-style: none;
+  margin-bottom: 2em;
+
+  background-color: mainWhite;
+  border-radius: 5px;
+  box-shadow: makerBoxShadow;
+
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.itemBox {
+  width: 90%;
+  height: 95%;
+
+  background: linear-gradient(
+    180deg,
+    rgba(95, 91, 91, 0.4) 0%,
+    rgba(92, 86, 86, 0.2) 17.81%,
+    rgba(255, 252, 252, 0) 100%
+  );
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.plusBtn {
+  opacity: 1;
+  cursor: pointer;
+}
+.plusBtn:hover {
+  opacity: 0.85;
+}
+
+.imgBox {
+  width: 85%;
+  height: 40%;
+  background-color: transparent;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+.itemTitle {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-top: 0.4em;
+  margin-bottom: 0;
+}
+.itemLv {
+  font-size: 0.7rem;
+  font-weight: bold;
+  font-style: italic;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+  color: textGreen;
+}
+.itemPrice {
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  color: textGray;
+
+  display: flex;
+  justify-content: center;
+}
+.itemPriceText {
+  margin: 0;
+}
+.itemPriceImg {
+  width: 1.3em;
+}
+
+.itemBtns {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.itemBtns > button {
+  font-size: 0.8rem;
+  width: 90%;
+  height: 80%;
+  margin-bottom: 0;
+  margin-left: 0.5em;
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 150ms ease-in;
+}
+.itemBtns > button > img {
+  width: 0.8em;
+  margin-right: 0.2em;
+}
+.otherBtn {
+  width: 1em;
+  text-align: center;
+  cursor: pointer;
+}
+.otherBtn > img {
+  opacity: 0.8;
+  transition: transform 150ms ease-in;
+}
+.otherBtn:hover img {
+  opacity: 1;
+  transform: scale(1.3);
+}
