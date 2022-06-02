@@ -1,4 +1,4 @@
-@value textGray, textGreen, mainWhite, makerBoxShadow from '/src/common/color.css';
+@value pointGreen, mainGray, makerBoxShadow, pointGray, textGray, textGreen, mainWhite, makerBoxShadow from '/src/common/color.css';
 
 .itemCard {
   height: 13em;
@@ -84,6 +84,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  position: relative;
 }
 .itemBtns > button {
   font-size: 0.8rem;
@@ -102,16 +104,57 @@
   width: 0.8em;
   margin-right: 0.2em;
 }
-.otherBtn {
+.otherBtnToggle {
   width: 1em;
   text-align: center;
   cursor: pointer;
 }
-.otherBtn > img {
+.otherBtnToggleImg {
   opacity: 0.8;
   transition: transform 150ms ease-in;
 }
-.otherBtn:hover img {
+.otherBtnToggleImg:hover {
   opacity: 1;
   transform: scale(1.3);
+}
+.otherBtnToggleImg.onFocus {
+  width: 0.8em;
+  margin-left: 0.2em;
+}
+.btnsContainer {
+  position: absolute;
+  z-index: 10;
+
+  width: 5em;
+  background-color: mainWhite;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  border: 1px solid mainGray;
+
+  font-size: 0.8rem;
+  font-weight: bold;
+
+  transform: translate(60px, 50px);
+  transition: 200ms;
+}
+.btnsContainer.hidden {
+  opacity: 0;
+  width: 3em;
+  visibility: hidden;
+  transform: translate(60px, 0px);
+}
+.btnBox {
+  padding: 0.5em;
+  text-align: center;
+}
+.btnBox:first-child {
+  border-bottom: 2px solid pointGray;
+}
+.btnBox:hover {
+  background-color: pointGreen;
+  border-radius: 5px;
+}
+.btnBox > img {
+  width: 0.8em;
+  margin-right: 0.2em;
 }
