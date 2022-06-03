@@ -3,26 +3,14 @@ import React, { useContext, useEffect } from 'react';
 import Button from '../../components/button/button';
 import AuthService from '../../service/authService';
 import { useNavigate } from 'react-router-dom';
-import { TypeRecord, UserIdContext } from '../../App';
+import { TypeData, UserIdContext } from '../../App';
 import DbService from '../../service/dbService';
 
 interface ILoginPage {
   authService: AuthService;
   setUserId: React.Dispatch<React.SetStateAction<string>>;
   dbService: DbService;
-  setData: React.Dispatch<
-    React.SetStateAction<{
-      myInfo: {
-        lv: number;
-        exp: number;
-        coin: number;
-        items: {}[];
-        categoryRecord: string[];
-      };
-      record: TypeRecord;
-      shop: [];
-    }>
-  >;
+  setData: React.Dispatch<React.SetStateAction<TypeData>>;
 }
 const LoginPage = ({
   authService,

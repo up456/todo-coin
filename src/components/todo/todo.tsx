@@ -18,7 +18,7 @@ interface TypeTodo {
   deleteTodo: (date: string, todoId: string) => void;
 }
 
-export interface IEditState {
+export interface TypeEditTodoState {
   state: {
     todoId: string;
     prevTodo: TypeTodoList;

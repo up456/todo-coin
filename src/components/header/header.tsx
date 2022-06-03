@@ -24,8 +24,8 @@ const Header = ({ data }: TypeHeader) => {
     navigate(`/todo/${today}`);
   };
 
-  const goToStorePage = () => {
-    navigate('/store');
+  const goToShopPage = () => {
+    navigate('/shop');
   };
 
   if (!userId) return <NonExistentUser />;
@@ -52,7 +52,7 @@ const Header = ({ data }: TypeHeader) => {
               : 'Let`s go todo'}
           </p>
         </div>
-        <div className={styles.itemBox} onClick={goToStorePage}>
+        <div className={styles.itemBox} onClick={goToShopPage}>
           <p className={styles.itemIcon}>coin</p>
           <p className={styles.itemInfo}> {`${data?.myInfo.coin}`}</p>
         </div>

@@ -1,16 +1,15 @@
-import styles from './store_page.module.css';
-import React, { useContext } from 'react';
+import styles from './shop_page.module.css';
+import React from 'react';
 import Header from '../../components/header/header';
-import { TypeData, UserIdContext } from '../../App';
+import { TypeData } from '../../App';
 import ItemCard from '../../components/item_card/item_card';
 
-interface TypeStorePage {
+interface TypeShopPage {
   data: TypeData;
+  deleteItem: (targetNumber: string) => void;
 }
 
-const StorePage = ({ data }: TypeStorePage) => {
-  const userId = useContext(UserIdContext);
-
+const ShopPage = ({ data, deleteItem }: TypeShopPage) => {
   return (
     <div className={styles.storePage}>
       <Header data={data} />
@@ -29,16 +28,20 @@ const StorePage = ({ data }: TypeStorePage) => {
           />
         </h2>
         <ul className={styles.itemCardList}>
-          {data.shop && 1}
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard />
-          <ItemCard isPlus={true} />
+          {data.shop &&
+            Object.keys(data.shop).map((key) => (
+              <ItemCard
+                key={key}
+                deleteItem={deleteItem}
+                item={data.shop[key]}
+                itemNumber={key}
+              />
+            ))}
+          <ItemCard deleteItem={deleteItem} isPlus={true} />
         </ul>
       </section>
     </div>
   );
 };
 
-export default StorePage;
+export default ShopPage;

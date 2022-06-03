@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Button from '../../components/button/button';
 import { TypeTodoList, UserIdContext } from '../../App';
 import NonExistentUser from '../../components/non_existent_user/non_existent_user';
-import { IEditState } from '../../components/todo/todo';
+import { TypeEditTodoState } from '../../components/todo/todo';
 
 interface TypeEditTodoPage {
   editTodo: (
@@ -19,7 +19,7 @@ const EditTodoPage = ({ editTodo }: TypeEditTodoPage) => {
   const navigate = useNavigate();
   const { date } = useParams();
   const todoRef = useRef<HTMLInputElement>(null);
-  const { state } = useLocation() as IEditState;
+  const { state } = useLocation() as TypeEditTodoState;
   const { todoId, prevTodo } = state;
   const PREVIOUS_INPUT_VALUE = {
     todo: prevTodo.todo,

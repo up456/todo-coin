@@ -11,7 +11,9 @@ import AddTodoPage from './page/add_todo_page/add_todo_page';
 import { calcPercent, getMaxExp, handleReward } from './util/calc';
 import DbService, { DEFAULT_DATA } from './service/dbService';
 import EditTodoPage from './page/edit_todo_page/edit_todo_page';
-import StorePage from './page/store_page/store_page';
+import ShopPage from './page/shop_page/shop_page';
+import AddItemPage from './page/add_item_page/add_item_page';
+import EditItemPage from './page/edit_item_page/edit_item_page';
 
 export interface TypeTodoList {
   todo: string;
@@ -31,6 +33,12 @@ export interface TypeRecord {
     satisfaction: number;
   };
 }
+export interface TypeItem {
+  itemTitle: string;
+  itemLv: number;
+  itemPrice: number;
+  imgUrl: string;
+}
 export interface TypeData {
   myInfo: {
     lv: number;
@@ -40,7 +48,7 @@ export interface TypeData {
     categoryRecord: string[];
   };
   record: TypeRecord;
-  shop: [];
+  shop: { [itemNumber: string]: TypeItem };
 }
 
 export const UserIdContext = React.createContext('');
@@ -216,10 +224,10 @@ function App({
         dbService.saveData(userId, newData);
         //targeTodo 삭제
         if (Object.keys(todoList).length === 1) {
-          dbService.deleteRecord(userId, date);
+          dbService.removeRecord(userId, date);
           return newData;
         } else {
-          dbService.deleteTodo(userId, date, todoId);
+          dbService.removeTodo(userId, date, todoId);
         }
         return newData;
       });
@@ -262,6 +270,16 @@ function App({
       dbService.saveData(userId, newData);
       return newData;
     });
+  };
+
+  const addItem = (value: TypeItem) => {
+    dbService.saveItem(userId, value);
+  };
+  const deleteItem = (targetNumber: string) => {
+    dbService.removeItem(userId, targetNumber);
+  };
+  const editItem = (targetNumber: string, value: TypeItem) => {
+    dbService.updateItem(userId, targetNumber, value);
   };
 
   return (
@@ -310,7 +328,18 @@ function App({
                 />
               }
             />
-            <Route path="/store" element={<StorePage data={data} />}></Route>
+            <Route
+              path="/shop"
+              element={<ShopPage data={data} deleteItem={deleteItem} />}
+            ></Route>
+            <Route
+              path="/addItem"
+              element={<AddItemPage addItem={addItem} />}
+            />
+            <Route
+              path="/:itemNumber/editItem"
+              element={<EditItemPage editItem={editItem} />}
+            />
           </Routes>
         </BrowserRouter>
       </UserIdContext.Provider>

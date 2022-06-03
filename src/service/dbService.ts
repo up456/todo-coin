@@ -1,4 +1,4 @@
-import { TypeRecord, TypeData, TypeTodoList } from './../App';
+import { TypeData, TypeTodoList, TypeItem } from './../App';
 import { get, off, onValue, ref, remove, set } from 'firebase/database';
 import { myDb } from './my_firebase';
 
@@ -11,7 +11,7 @@ export const DEFAULT_DATA: TypeData = {
     categoryRecord: [''],
   },
   record: {},
-  shop: [],
+  shop: {},
 };
 
 class DbService {
@@ -19,11 +19,13 @@ class DbService {
   constructor() {
     this.db = myDb;
   }
+  // 맨처음 기본 db 설정 값
   createUser(userId: string | undefined) {
     set(ref(this.db, `userList/${userId}`), true);
     set(ref(this.db, `dataList/${userId}`), DEFAULT_DATA);
   }
 
+  // 전체 db
   async readData(path: string) {
     const dbRef = ref(this.db, path);
     const snapshot = await get(dbRef);
@@ -52,24 +54,11 @@ class DbService {
     set(ref(this.db, `dataList/${userId}/record/${date}`), value);
   }
 
-  saveData(
-    userId: string,
-    value: {
-      myInfo: {
-        lv: number;
-        exp: number;
-        coin: number;
-        items: {}[];
-        categoryRecord: string[];
-      };
-      record: TypeRecord;
-      shop: {};
-    }
-  ) {
+  saveData(userId: string, value: TypeData) {
     set(ref(this.db, `dataList/${userId}`), value);
   }
 
-  deleteTodo(userId: string, date: string, todoId: string) {
+  removeTodo(userId: string, date: string, todoId: string) {
     const dbRef = ref(
       this.db,
       `dataList/${userId}/record/${date}/todoList/${todoId}`
@@ -77,26 +66,14 @@ class DbService {
     remove(dbRef);
   }
 
-  deleteRecord(userId: string, date: string) {
+  removeRecord(userId: string, date: string) {
     const dbRef = ref(this.db, `dataList/${userId}/record/${date}`);
     remove(dbRef);
   }
 
   syncData(
     userId: string,
-    onUpdate: React.Dispatch<
-      React.SetStateAction<{
-        myInfo: {
-          lv: number;
-          exp: number;
-          coin: number;
-          items: {}[];
-          categoryRecord: string[];
-        };
-        record: TypeRecord;
-        shop: [];
-      }>
-    >
+    onUpdate: React.Dispatch<React.SetStateAction<TypeData>>
   ) {
     const dbRef = ref(this.db, `dataList/${userId}`);
     onValue(dbRef, (snapshot) => {
@@ -104,6 +81,19 @@ class DbService {
       data && onUpdate(data);
     });
     return () => off(dbRef);
+  }
+
+  // shop 관련 db
+  saveItem(userId: string, value: TypeItem) {
+    const itemNumber = Date.now();
+    set(ref(this.db, `dataList/${userId}/shop/${itemNumber}`), value);
+  }
+  removeItem(userId: string, targetNumber: string) {
+    const dbRef = ref(this.db, `dataList/${userId}/shop/${targetNumber}`);
+    remove(dbRef);
+  }
+  updateItem(userId: string, targetNumber: string, value: TypeItem) {
+    set(ref(this.db, `dataList/${userId}/shop/${targetNumber}`), value);
   }
 }
 
