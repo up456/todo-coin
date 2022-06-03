@@ -5,7 +5,7 @@
 
 ## 버전 정보
 <details>
-<summary>v1.0.9</summary>
+<summary>v1.0.0</summary>
 <div markdown="1">
   
     최초 배포
