@@ -46,15 +46,16 @@ const AddItemPage = ({ addItem, imageUploader }: TypeAddItemPage) => {
 
   const onSubmit = () => {
     if (inputValue.itemTitle.length < 1) {
-      return itemRef.current?.focus();
+      itemRef.current?.focus();
+    } else {
+      const finalInputValue = {
+        ...inputValue,
+        imgUrl: file.url || icon.url,
+        imgName: file.name || icon.name,
+      };
+      addItem(finalInputValue);
+      navigate(-1);
     }
-    const finalInputValue = {
-      ...inputValue,
-      imgUrl: file.url || icon.url,
-      imgName: file.name || icon.name,
-    };
-    addItem(finalInputValue);
-    navigate(-1);
   };
 
   return (

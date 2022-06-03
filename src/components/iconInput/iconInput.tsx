@@ -78,7 +78,7 @@ const IconInput = ({ setFile, setIcon, name }: TypeFileInput) => {
         <button className={styles.IconInputBtn} onClick={onClickIconInputBtn}>
           {name === '' ? `아이콘 선택` : name}
         </button>
-        <ul className={styles.iconList} ref={itemListRef}>
+        <ul className={`${styles.iconList} ${styles.hidden}`} ref={itemListRef}>
           {ICON_LIST.map((icon, idx) => (
             <li className={styles.iconBox} key={idx}>
               <img
@@ -95,4 +95,4 @@ const IconInput = ({ setFile, setIcon, name }: TypeFileInput) => {
   );
 };
 
-export default IconInput;
+export default React.memo(IconInput);
