@@ -141,7 +141,7 @@ const ItemCard = ({
               <div className={styles.itemBtns}>
                 {isMyItem ? (
                   <Button
-                    img="/asset/cart.png"
+                    img="/asset/use.png"
                     text="사용하기"
                     onClick={onClickUseBtn}
                   />
