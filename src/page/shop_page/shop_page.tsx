@@ -8,9 +8,10 @@ interface TypeShopPage {
   data: TypeData;
   deleteItem: (targetNumber: string) => void;
   buyItem: (targetNumber: string, value: TypeItem) => void;
+  editMyCoin: (coin: number) => void;
 }
 
-const ShopPage = ({ data, deleteItem, buyItem }: TypeShopPage) => {
+const ShopPage = ({ data, deleteItem, buyItem, editMyCoin }: TypeShopPage) => {
   return (
     <div className={styles.storePage}>
       <Header data={data} />
@@ -34,9 +35,11 @@ const ShopPage = ({ data, deleteItem, buyItem }: TypeShopPage) => {
               <ItemCard
                 key={key}
                 deleteItem={deleteItem}
+                editMyCoin={editMyCoin}
                 buyItem={buyItem}
                 item={data.shop[key]}
                 itemNumber={key}
+                myInfo={{ myLv: data.myInfo.lv, myCoin: data.myInfo.coin }}
               />
             ))}
           <ItemCard isPlus={true} />

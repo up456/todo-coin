@@ -2,7 +2,7 @@ import styles from './my_page.module.css';
 import React from 'react';
 import Button from '../../components/button/button';
 import Header from '../../components/header/header';
-import { TypeData, TypeItem } from '../../App';
+import { TypeData } from '../../App';
 import AuthService from '../../service/authService';
 import ItemCard from '../../components/item_card/item_card';
 
@@ -11,8 +11,15 @@ interface TypeMyPage {
   authService: AuthService;
   setUserId: React.Dispatch<React.SetStateAction<string>>;
   deleteMyItem: (targetNumber: string) => void;
+  editMyCoin: (coin: number) => void;
 }
-const MyPage = ({ data, authService, setUserId, deleteMyItem }: TypeMyPage) => {
+const MyPage = ({
+  data,
+  authService,
+  setUserId,
+  deleteMyItem,
+  editMyCoin,
+}: TypeMyPage) => {
   const onLogout = () => {
     authService.logout(setUserId);
   };
@@ -39,6 +46,7 @@ const MyPage = ({ data, authService, setUserId, deleteMyItem }: TypeMyPage) => {
               item={data.myInfo.items[key]}
               itemNumber={key}
               isMyItem={true}
+              editMyCoin={editMyCoin}
             />
           ))}
       </ul>

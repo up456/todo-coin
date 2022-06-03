@@ -108,6 +108,9 @@ class DbService {
     );
     remove(dbRef);
   }
+  saveMyCoin(userId: string, coin: number) {
+    set(ref(this.db, `dataList/${userId}/myInfo/coin`), coin);
+  }
 }
 
 export default DbService;

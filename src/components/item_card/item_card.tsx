@@ -16,10 +16,12 @@ interface TypeItemCard {
   deleteItem?: (targetNumber: string) => void;
   buyItem?: (targetNumber: string, value: TypeItem) => void;
   deleteMyItem?: (targetNumber: string) => void;
+  editMyCoin?: (coin: number) => void;
   item?: TypeItem;
   isPlus?: boolean;
   itemNumber?: string;
   isMyItem?: boolean;
+  myInfo?: { myLv: number; myCoin: number };
 }
 export interface TypeEditItemState {
   state: {
@@ -32,10 +34,12 @@ const ItemCard = ({
   deleteItem,
   buyItem,
   deleteMyItem,
+  editMyCoin,
   item = NON_EXIST_ITEM,
   isPlus = false,
   itemNumber = '',
   isMyItem = false,
+  myInfo = { myLv: 0, myCoin: 0 },
 }: TypeItemCard) => {
   const otherBtnToggleRef = useRef<HTMLDivElement>(null);
   const btnsContainerRef = useRef<HTMLDivElement>(null);
@@ -58,8 +62,30 @@ const ItemCard = ({
     navigate(`/${itemNumber}/editItem`, { state: { itemNumber, item } });
   };
   const onClickBuyBtn = () => {
-    if (buyItem && window.confirm('정말 구매하시겠습까?')) {
-      buyItem(itemNumber, item);
+    const newCoin = myInfo.myCoin - item.itemPrice;
+
+    if (item.itemLv <= myInfo.myLv && item.itemPrice <= myInfo.myCoin) {
+      if (buyItem && editMyCoin && window.confirm('정말 구매하시겠습까?')) {
+        editMyCoin(newCoin);
+        buyItem(itemNumber, item);
+      }
+    } else if (item.itemLv <= myInfo.myLv) {
+      alert(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  소지금이 ${-newCoin}coin 부족합니다~!
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+    } else if (item.itemPrice <= myInfo.myCoin) {
+      alert(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  레벨이 ${item.itemLv - myInfo.myLv}Lv 부족합니다~!
+  아이템Lv: ${item.itemLv} > 현재Lv: ${myInfo.myLv}
+      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+`);
+    } else {
+      alert(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  소지금이 ${-newCoin}coin 부족합니다~!
+  레벨이 ${item.itemLv - myInfo.myLv}Lv 부족합니다~!
+  아이템Lv: ${item.itemLv} > 현재Lv: ${myInfo.myLv}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+`);
     }
   };
   const onClickUseBtn = () => {

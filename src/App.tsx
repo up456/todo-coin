@@ -294,6 +294,9 @@ function App({
   const deleteMyItem = (targetNumber: string) => {
     dbService.removeMyItem(userId, targetNumber);
   };
+  const editMyCoin = (coin: number) => {
+    dbService.saveMyCoin(userId, coin);
+  };
 
   return (
     <div className={styles.app}>
@@ -339,6 +342,7 @@ function App({
                   authService={authService}
                   setUserId={setUserId}
                   deleteMyItem={deleteMyItem}
+                  editMyCoin={editMyCoin}
                 />
               }
             />
@@ -348,6 +352,7 @@ function App({
                 <ShopPage
                   data={data}
                   deleteItem={deleteItem}
+                  editMyCoin={editMyCoin}
                   buyItem={buyItem}
                 />
               }
