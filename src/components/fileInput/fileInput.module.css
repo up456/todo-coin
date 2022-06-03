@@ -1,0 +1,16 @@
+@value mainGreen,makerBoxShadowGreen, mainWhite from '/src/common/color.css';
+.inputTag {
+  display: none;
+}
+.fileInputBtn {
+  width: 100%;
+  height: 3em;
+  border: none;
+  border-radius: 0.5em;
+  background-color: #fff;
+  box-shadow: inset hoff voff blur #000;
+}
+.fileInputBtn:focus {
+  border: 1px solid mainGreen;
+  box-shadow: makerBoxShadowGreen;
+}

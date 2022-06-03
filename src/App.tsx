@@ -14,6 +14,7 @@ import EditTodoPage from './page/edit_todo_page/edit_todo_page';
 import ShopPage from './page/shop_page/shop_page';
 import AddItemPage from './page/add_item_page/add_item_page';
 import EditItemPage from './page/edit_item_page/edit_item_page';
+import ImageUploader from './service/ImageUploader';
 
 export interface TypeTodoList {
   todo: string;
@@ -38,6 +39,7 @@ export interface TypeItem {
   itemLv: number;
   itemPrice: number;
   imgUrl: string;
+  imgName: string;
 }
 export interface TypeData {
   myInfo: {
@@ -62,9 +64,11 @@ export type TypeChangeTodoState = (
 function App({
   authService,
   dbService,
+  imageUploader,
 }: {
   authService: AuthService;
   dbService: DbService;
+  imageUploader: ImageUploader;
 }) {
   const [userId, setUserId] = useState(sessionStorage.getItem('userId') || '');
   const [data, setData] = useState(DEFAULT_DATA);
@@ -334,7 +338,9 @@ function App({
             ></Route>
             <Route
               path="/addItem"
-              element={<AddItemPage addItem={addItem} />}
+              element={
+                <AddItemPage addItem={addItem} imageUploader={imageUploader} />
+              }
             />
             <Route
               path="/:itemNumber/editItem"

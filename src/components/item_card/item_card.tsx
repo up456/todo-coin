@@ -9,6 +9,7 @@ const NON_EXIST_ITEM = {
   itemLv: 0,
   itemPrice: 0,
   imgUrl: '',
+  imgName: '',
 };
 
 interface TypeItemCard {
@@ -69,6 +70,13 @@ const ItemCard = ({
     }
   };
 
+  const getImgStyle = () => {
+    if (item.imgUrl.includes('icon_list')) {
+      return `${styles.itemImg} ${styles.iconCase}`;
+    }
+    return styles.itemImg;
+  };
+
   useEffect(() => {
     window.addEventListener('click', outsideClick);
     return () => {
@@ -92,7 +100,12 @@ const ItemCard = ({
         <>
           <li className={styles.itemCard}>
             <div className={styles.itemBox}>
-              <div className={styles.imgBox}></div>
+              <div className={styles.imgBox}>
+                <div
+                  className={getImgStyle()}
+                  style={{ backgroundImage: `url(${item.imgUrl})` }}
+                ></div>
+              </div>
               <p className={styles.itemTitle}>{item.itemTitle}</p>
               <p className={styles.itemLv}>
                 Lv제한 - {item.itemLv === 0 ? '없음' : item.itemLv}

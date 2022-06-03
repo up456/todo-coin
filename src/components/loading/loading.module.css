@@ -1,0 +1,32 @@
+@value mainGreen, pointGray, makerBoxShadowGreen from '/src/common/color.css';
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 2.5em;
+
+  background: #fff;
+  border: 1px solid mainGreen;
+  box-shadow: makerBoxShadowGreen;
+}
+.loading {
+  width: 1.5em;
+  height: 1.5em;
+  border: 4px solid pointGray;
+  border-bottom: 4px solid mainGreen;
+  border-radius: 50%;
+
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
