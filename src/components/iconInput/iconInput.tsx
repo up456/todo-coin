@@ -65,7 +65,6 @@ const IconInput = ({ setFile, setIcon, name }: TypeFileInput) => {
   ) => {
     const name = event.currentTarget.getAttribute('alt');
     const url = event.currentTarget.getAttribute('src');
-    console.log(url);
 
     if (name && url) {
       setIcon({ name, url });

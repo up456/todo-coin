@@ -344,7 +344,12 @@ function App({
             />
             <Route
               path="/:itemNumber/editItem"
-              element={<EditItemPage editItem={editItem} />}
+              element={
+                <EditItemPage
+                  editItem={editItem}
+                  imageUploader={imageUploader}
+                />
+              }
             />
           </Routes>
         </BrowserRouter>
