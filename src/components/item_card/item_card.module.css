@@ -1,4 +1,4 @@
-@value pointGreen, mainGray, makerBoxShadow, pointGray, textGray, textGreen, mainWhite, makerBoxShadow from '/src/common/color.css';
+@value pointGreen, mainGray, makerBoxShadow, pointGray, textGray, textGreen, mainWhite from '/src/common/color.css';
 
 .itemCard {
   height: 13em;

@@ -13,10 +13,13 @@ const NON_EXIST_ITEM = {
 };
 
 interface TypeItemCard {
-  deleteItem: (targetNumber: string) => void;
+  deleteItem?: (targetNumber: string) => void;
+  buyItem?: (targetNumber: string, value: TypeItem) => void;
+  deleteMyItem?: (targetNumber: string) => void;
   item?: TypeItem;
   isPlus?: boolean;
   itemNumber?: string;
+  isMyItem?: boolean;
 }
 export interface TypeEditItemState {
   state: {
@@ -27,9 +30,12 @@ export interface TypeEditItemState {
 
 const ItemCard = ({
   deleteItem,
+  buyItem,
+  deleteMyItem,
   item = NON_EXIST_ITEM,
   isPlus = false,
   itemNumber = '',
+  isMyItem = false,
 }: TypeItemCard) => {
   const otherBtnToggleRef = useRef<HTMLDivElement>(null);
   const btnsContainerRef = useRef<HTMLDivElement>(null);
@@ -44,10 +50,22 @@ const ItemCard = ({
     setOnfocus(!onFocus);
   };
   const onClickDeleteBtn = () => {
-    deleteItem(itemNumber);
+    if (deleteItem) {
+      deleteItem(itemNumber);
+    }
   };
   const onClickEditBtn = () => {
     navigate(`/${itemNumber}/editItem`, { state: { itemNumber, item } });
+  };
+  const onClickBuyBtn = () => {
+    if (buyItem && window.confirm('정말 구매하시겠습까?')) {
+      buyItem(itemNumber, item);
+    }
+  };
+  const onClickUseBtn = () => {
+    if (deleteMyItem && window.confirm('정말 사용하시겠습까?')) {
+      deleteMyItem(itemNumber);
+    }
   };
 
   const outsideClick = (event: MouseEvent) => {
@@ -121,26 +139,36 @@ const ItemCard = ({
                 />
               </div>
               <div className={styles.itemBtns}>
-                <Button
-                  img="/asset/cart.png"
-                  text="구입하기"
-                  onClick={() => {}}
-                />
-                <div
-                  className={styles.otherBtnToggle}
-                  ref={otherBtnToggleRef}
-                  onClick={onClickOtherBtn}
-                >
-                  <img
-                    className={
-                      onFocus
-                        ? `${styles.otherBtnToggleImg} ${styles.onFocus}`
-                        : styles.otherBtnToggleImg
-                    }
-                    src={`/asset/${onFocus ? 'x' : 'other_btn'}.png`}
-                    alt="기타 버튼"
+                {isMyItem ? (
+                  <Button
+                    img="/asset/cart.png"
+                    text="사용하기"
+                    onClick={onClickUseBtn}
                   />
-                </div>
+                ) : (
+                  <Button
+                    img="/asset/cart.png"
+                    text="구입하기"
+                    onClick={onClickBuyBtn}
+                  />
+                )}
+                {!isMyItem && (
+                  <div
+                    className={styles.otherBtnToggle}
+                    ref={otherBtnToggleRef}
+                    onClick={onClickOtherBtn}
+                  >
+                    <img
+                      className={
+                        onFocus
+                          ? `${styles.otherBtnToggleImg} ${styles.onFocus}`
+                          : styles.otherBtnToggleImg
+                      }
+                      src={`/asset/${onFocus ? 'x' : 'other_btn'}.png`}
+                      alt="기타 버튼"
+                    />
+                  </div>
+                )}
 
                 <div
                   className={

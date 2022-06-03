@@ -1,15 +1,16 @@
 import styles from './shop_page.module.css';
 import React from 'react';
 import Header from '../../components/header/header';
-import { TypeData } from '../../App';
+import { TypeData, TypeItem } from '../../App';
 import ItemCard from '../../components/item_card/item_card';
 
 interface TypeShopPage {
   data: TypeData;
   deleteItem: (targetNumber: string) => void;
+  buyItem: (targetNumber: string, value: TypeItem) => void;
 }
 
-const ShopPage = ({ data, deleteItem }: TypeShopPage) => {
+const ShopPage = ({ data, deleteItem, buyItem }: TypeShopPage) => {
   return (
     <div className={styles.storePage}>
       <Header data={data} />
@@ -33,11 +34,12 @@ const ShopPage = ({ data, deleteItem }: TypeShopPage) => {
               <ItemCard
                 key={key}
                 deleteItem={deleteItem}
+                buyItem={buyItem}
                 item={data.shop[key]}
                 itemNumber={key}
               />
             ))}
-          <ItemCard deleteItem={deleteItem} isPlus={true} />
+          <ItemCard isPlus={true} />
         </ul>
       </section>
     </div>

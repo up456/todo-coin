@@ -46,7 +46,7 @@ export interface TypeData {
     lv: number;
     exp: number;
     coin: number;
-    items: {}[];
+    items: { [itemNumber: string]: TypeItem };
     categoryRecord: string[];
   };
   record: TypeRecord;
@@ -276,6 +276,7 @@ function App({
     });
   };
 
+  // shop 관련
   const addItem = (value: TypeItem) => {
     dbService.saveItem(userId, value);
   };
@@ -284,6 +285,14 @@ function App({
   };
   const editItem = (targetNumber: string, value: TypeItem) => {
     dbService.updateItem(userId, targetNumber, value);
+  };
+  const buyItem = (targetNumber: string, value: TypeItem) => {
+    dbService.saveMyItem(userId, targetNumber, value);
+  };
+
+  // item사용
+  const deleteMyItem = (targetNumber: string) => {
+    dbService.removeMyItem(userId, targetNumber);
   };
 
   return (
@@ -329,12 +338,21 @@ function App({
                   data={data}
                   authService={authService}
                   setUserId={setUserId}
+                  deleteItem={deleteItem}
+                  buyItem={buyItem}
+                  deleteMyItem={deleteMyItem}
                 />
               }
             />
             <Route
               path="/shop"
-              element={<ShopPage data={data} deleteItem={deleteItem} />}
+              element={
+                <ShopPage
+                  data={data}
+                  deleteItem={deleteItem}
+                  buyItem={buyItem}
+                />
+              }
             ></Route>
             <Route
               path="/addItem"

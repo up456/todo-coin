@@ -7,7 +7,7 @@ export const DEFAULT_DATA: TypeData = {
     lv: 1,
     exp: 0,
     coin: 0,
-    items: [''],
+    items: {},
     categoryRecord: [''],
   },
   record: {},
@@ -94,6 +94,19 @@ class DbService {
   }
   updateItem(userId: string, targetNumber: string, value: TypeItem) {
     set(ref(this.db, `dataList/${userId}/shop/${targetNumber}`), value);
+  }
+
+  // item구매 & 사용
+  saveMyItem(userId: string, targetNumber: string, value: TypeItem) {
+    set(ref(this.db, `dataList/${userId}/myInfo/items/${targetNumber}`), value);
+    this.removeItem(userId, targetNumber);
+  }
+  removeMyItem(userId: string, targetNumber: string) {
+    const dbRef = ref(
+      this.db,
+      `dataList/${userId}/myInfo/items/${targetNumber}`
+    );
+    remove(dbRef);
   }
 }
 
