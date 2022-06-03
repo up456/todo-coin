@@ -72,3 +72,8 @@
 .imageBox > img {
   visibility: hidden;
 }
+
+.tippyBox {
+  background-color: mainGreen;
+  color: mainWhite;
+}
