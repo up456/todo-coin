@@ -338,8 +338,6 @@ function App({
                   data={data}
                   authService={authService}
                   setUserId={setUserId}
-                  deleteItem={deleteItem}
-                  buyItem={buyItem}
                   deleteMyItem={deleteMyItem}
                 />
               }

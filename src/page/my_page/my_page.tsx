@@ -10,18 +10,9 @@ interface TypeMyPage {
   data: TypeData;
   authService: AuthService;
   setUserId: React.Dispatch<React.SetStateAction<string>>;
-  deleteItem: (targetNumber: string) => void;
-  buyItem: (targetNumber: string, value: TypeItem) => void;
   deleteMyItem: (targetNumber: string) => void;
 }
-const MyPage = ({
-  data,
-  authService,
-  setUserId,
-  deleteItem,
-  buyItem,
-  deleteMyItem,
-}: TypeMyPage) => {
+const MyPage = ({ data, authService, setUserId, deleteMyItem }: TypeMyPage) => {
   const onLogout = () => {
     authService.logout(setUserId);
   };
