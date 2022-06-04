@@ -138,9 +138,17 @@ const MyPage = ({
             type="file"
             className={styles.fileInput}
           />
-          <button className={styles.editImgBtn} onClick={onClickEditImgBtn}>
-            <img src="asset/my_page/profile_img_Edit_btn.svg" alt="editImg" />
-          </button>
+          <Tippy
+            render={(attrs) => (
+              <div className={styles.fileInputTooltip} tabIndex={1} {...attrs}>
+                프로필 사진 수정
+              </div>
+            )}
+          >
+            <button className={styles.editImgBtn} onClick={onClickEditImgBtn}>
+              <img src="asset/my_page/profile_img_Edit_btn.svg" alt="editImg" />
+            </button>
+          </Tippy>
         </div>
       </section>
       <section className={styles.nowInfoContainer}>
