@@ -41,7 +41,7 @@ const MyPage = ({
         <div className={styles.logoutBtn} onClick={onLogout}>
           <img
             className={styles.logoutBtnImg}
-            src="/asset/logout.svg"
+            src="/asset/my_page/logout.svg"
             alt="logout"
           />
         </div>
@@ -59,13 +59,13 @@ const MyPage = ({
             style={{ backgroundImage: `url('asset/default_profile.jpg')` }}
           ></div>
           <button className={styles.imgEditBtn}>
-            <img src="asset/profileImgEditBtn.svg" alt="" />
+            <img src="asset/my_page/profile_img_Edit_btn.svg" alt="" />
           </button>
         </div>
       </section>
       <section className={styles.nowInfoContainer}>
         <div className={styles.nowInfoBox}>
-          <img src="asset/nowLv.svg" alt="현재Lv" />
+          <img src="asset/my_page/now_lv.svg" alt="현재Lv" />
           <div className={`${styles.nowInfoKey} ${styles.firstKey}`}>
             현재 Lv
           </div>
@@ -75,21 +75,41 @@ const MyPage = ({
         </div>
         <Line heigt="0.1px" width="80%" mT="0.5em" mB="0.5em" />
         <div className={styles.nowInfoBox}>
-          <img src="asset/nowCoin.svg" alt="현재Coin" />
+          <img src="asset/my_page/now_coin.svg" alt="현재Coin" />
           <div className={styles.nowInfoKey}>현재 Coin</div>
           <div className={styles.nowInfoValue}>
             20 <b className={styles.keyText}>코인</b>
           </div>
         </div>
       </section>
+      <section className={styles.totalInfoContainer}>
+        <div className={styles.totalInfoBox}>
+          <p className={styles.totalInfokey}>누적 완료 todo</p>
+          <div className={styles.totalInfoValue}>
+            <img src="/asset/my_page/total_todo.svg" alt="total-todo" />
+            <span>{data.total.totalTodo}</span>
+          </div>
+        </div>
+        <div className={styles.totalInfoBox}>
+          <p className={styles.totalInfokey}>누적 획득 coin</p>
+          <div className={styles.totalInfoValue}>
+            <img src="/asset/my_page/total_coin.svg" alt="total-coin" />
+            <span>{data.total.totalCoin}</span>
+          </div>
+        </div>
+        <div className={styles.totalInfoBox}>
+          <p className={styles.totalInfokey}>누적 구매 item</p>
+          <div className={styles.totalInfoValue}>
+            <img src="/asset/my_page/total_item.svg" alt="total-item" />
+            <span>{data.total.totalItem}</span>
+          </div>
+        </div>
+      </section>
 
-      <h4>누적 todo:{data.total.totalTodo}</h4>
-      <h4>누적 coin:{data.total.totalCoin}</h4>
-      <h4>누적 item:{data.total.totalItem}</h4>
-      <h3>나의 카테고리</h3>
+      {/* <h3>나의 카테고리</h3>
       {categoryRecord.map((category, idx) => (
         <p key={idx}>{category}</p>
-      ))}
+      ))} */}
       <h3>나의 아이템</h3>
       <ul className={styles.itemCardList}>
         {data.myInfo.items &&
