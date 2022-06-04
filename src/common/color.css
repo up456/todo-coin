@@ -21,3 +21,4 @@
 @value mainBg: #f7f7f7;
 @value todoComplete: rgba(224, 255, 240, 0.5);
 @value todoFail: rgba(255, 224, 224, 0.5);
+@value myPageBg: linear-gradient(0deg, rgba(105,218,188,1) 0%, rgba(95,190,122,1) 100%);

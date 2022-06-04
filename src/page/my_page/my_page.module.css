@@ -1,5 +1,104 @@
-.myPage > button {
-  width: 60%;
+@value mainWhite, myPageBg, makerBoxShadow from '/src/common/color.css';
+.myPage {
+  background: myPageBg;
+  width: 100%;
+  height: 35em;
+
+  border-radius: 0 0 50px 50px;
+}
+/* 로그아웃 버튼 */
+.logoutBtn {
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1em;
+
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.logoutBtn:hover {
+  box-shadow: makerBoxShadow;
+}
+.logoutTooltip {
+  transform: translate(5px, 80px);
+  color: #fff;
+  font-weight: bold;
+}
+
+/* 프로필 부분 */
+.profileContainer {
+  /* background: red; */
+  padding: 0 2.5em;
+  margin: 0 3em;
+
+  display: flex;
+  justify-content: space-between;
+}
+.nicknameBox {
+}
+.nickname {
+  margin: 0;
+  font-size: 2rem;
+  color: mainWhite;
+}
+.nicknameEditBtn {
+  background-color: rgba(192, 212, 200, 0.7);
+  border: none;
+  border-radius: 10px;
+  padding: 0.3em 0.8em;
+  color: mainWhite;
+  cursor: pointer;
+}
+.ImgBox {
+  position: relative;
+}
+.img {
+  width: 7em;
+  height: 7em;
+  border-radius: 50%;
+  border: 4px solid mainWhite;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.imgEditBtn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  transform: translate(70px, -32px);
+}
+
+/* 현재 정보 부분 */
+.nowInfoContainer {
+}
+.nowInfoBox {
+  margin: 0 5em;
+
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: mainWhite;
+
+  display: flex;
+  align-items: center;
+}
+.nowInfoKey {
+  margin-left: 0.2em;
+}
+.firstKey {
+  margin-left: 0.3em;
+}
+.nowInfoValue {
+  font-size: 1.8rem;
+  margin-left: auto;
+  text-align: left;
+}
+.keyText {
+  font-size: 1.2rem;
 }
 
 .itemCardList {

@@ -9,4 +9,6 @@
   background-color: mainBg;
 
   overflow: hidden auto;
+
+  position: relative;
 }
