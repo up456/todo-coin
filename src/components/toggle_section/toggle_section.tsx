@@ -1,5 +1,5 @@
 import styles from './toggle_section.module.css';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 interface TypeToggleSection {
   title: string;
@@ -14,9 +14,9 @@ const ToggleSection = ({
 }: TypeToggleSection) => {
   const [onFocus, setOnFocus] = useState(defaultType);
 
-  const onClickHeader = () => {
+  const onClickHeader = useCallback(() => {
     setOnFocus(!onFocus);
-  };
+  }, [onFocus]);
 
   return (
     <section
@@ -55,4 +55,4 @@ const ToggleSection = ({
   );
 };
 
-export default ToggleSection;
+export default React.memo(ToggleSection);
