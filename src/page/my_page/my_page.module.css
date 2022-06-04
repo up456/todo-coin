@@ -47,7 +47,7 @@
 }
 .logoutTooltip {
   transform: translate(62px, 45px);
-  color: #fff;
+  color: #000;
   font-weight: bold;
   animation: slide 300ms linear 1;
 }
