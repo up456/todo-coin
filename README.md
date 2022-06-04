@@ -3,6 +3,13 @@
 ### [📓프로젝트 보드 (노션)](https://gold-route-090.notion.site/To-do-Coin-b75b3b4bb3de4b16a4341878154c37ae)
 ### [[⚡todo-coin]할일 작성하러 가기](https://todo-coin.netlify.app/)
 
+<br/>
+
+## 공지 사항
+v2.0.0버전의 업데이트에서 새로운 기능의 많이 추가되어 기존 db의 모양이 변경되어 기존 데이터가 초기화되었음을 알려드립니다~!
+
+<br/>
+
 ## 버전 정보
 <details>
 <summary>v2.0.0</summary>
