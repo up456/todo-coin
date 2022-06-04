@@ -8,6 +8,7 @@ import Tippy from '@tippyjs/react/headless';
 import Line from '../../components/line/line';
 import ToggleSection from '../../components/toggle_section/toggle_section';
 import MyCategory from '../../components/my_category/my_category';
+import Loading from '../../components/loading/loading';
 
 interface TypeMyPage {
   data: TypeData;
@@ -17,7 +18,7 @@ interface TypeMyPage {
   editMyInfo: (coin: number, itemCount: number) => void;
   deleteMyCategory: (targetCategory: string) => void;
   editMyNickname: (newNickname: string) => void;
-  editMyProfileImg: (newProfileImgUrl: string) => void;
+  editMyProfileImg: (file: File) => Promise<void>;
 }
 const MyPage = ({
   data,
@@ -30,7 +31,12 @@ const MyPage = ({
   editMyProfileImg,
 }: TypeMyPage) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [onFocus, setOnFocus] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const cate = data?.myInfo?.categoryRecord || [];
+  const categoryRecord = Array.from(cate);
+
   const onLogout = () => {
     authService.logout(setUserId);
   };
@@ -63,8 +69,19 @@ const MyPage = ({
     }
   };
 
-  const cate = data?.myInfo?.categoryRecord || [];
-  const categoryRecord = Array.from(cate);
+  const onClickEditImgBtn = () => {
+    fileInputRef.current?.click();
+  };
+  const onChangeProfileImgInput = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setIsLoading(true);
+    const file = event.target.files?.item(0);
+    if (file) {
+      await editMyProfileImg(file);
+    }
+    setIsLoading(false);
+  };
 
   return (
     <section className={styles.myPage}>
@@ -105,12 +122,24 @@ const MyPage = ({
           />
         </div>
         <div className={styles.imgBox}>
-          <div
-            className={styles.img}
-            style={{ backgroundImage: `url('${data.myInfo.profileImgUrl}')` }}
-          ></div>
-          <button className={styles.imgEditBtn}>
-            <img src="asset/my_page/profile_img_Edit_btn.svg" alt="" />
+          {isLoading ? (
+            <div className={styles.loadingBox}>
+              <Loading />
+            </div>
+          ) : (
+            <div
+              className={styles.img}
+              style={{ backgroundImage: `url('${data.myInfo.profileImgUrl}')` }}
+            ></div>
+          )}
+          <input
+            ref={fileInputRef}
+            onChange={onChangeProfileImgInput}
+            type="file"
+            className={styles.fileInput}
+          />
+          <button className={styles.editImgBtn} onClick={onClickEditImgBtn}>
+            <img src="asset/my_page/profile_img_Edit_btn.svg" alt="editImg" />
           </button>
         </div>
       </section>

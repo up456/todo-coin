@@ -63,8 +63,12 @@ const Header = ({ data }: TypeHeader) => {
           </div>
         </Tippy>
         <Tippy content="마이페이지로 이동">
-          <div className={styles.imageBox} onClick={goToMyPage}>
-            <img src="/asset/default_profile.jpg" alt="profile" />
+          <div
+            className={styles.imageBox}
+            onClick={goToMyPage}
+            style={{ backgroundImage: `url('${data.myInfo.profileImgUrl}')` }}
+          >
+            <img src={data.myInfo.profileImgUrl} alt="profile" />
           </div>
         </Tippy>
       </header>

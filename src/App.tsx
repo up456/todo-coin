@@ -325,7 +325,9 @@ function App({
   const editMyNickname = (newNickname: string) => {
     dbService.saveMyNickname(userId, newNickname);
   };
-  const editMyProfileImg = (newProfileImgUrl: string) => {
+  const editMyProfileImg = async (file: File) => {
+    const result = await imageUploader.upload(file);
+    const newProfileImgUrl = result.url;
     dbService.saveMyProfileImg(userId, newProfileImgUrl);
   };
 
