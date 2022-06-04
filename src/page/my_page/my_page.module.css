@@ -145,11 +145,6 @@
 /* 토글 섹션 부분 */
 .categoryList {
   padding: 0;
-
-  /* display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20%, auto));
-  gap: 0 0.5em;
-  grid-auto-flow: dense; */
   display: flex;
   flex-wrap: wrap;
 }

@@ -15,6 +15,7 @@ interface TypeMyPage {
   setUserId: React.Dispatch<React.SetStateAction<string>>;
   deleteMyItem: (targetNumber: string) => void;
   editMyInfo: (coin: number, itemCount: number) => void;
+  deleteMyCategory: (targetCategory: string) => void;
 }
 const MyPage = ({
   data,
@@ -22,6 +23,7 @@ const MyPage = ({
   setUserId,
   deleteMyItem,
   editMyInfo,
+  deleteMyCategory,
 }: TypeMyPage) => {
   const onLogout = () => {
     authService.logout(setUserId);
@@ -111,7 +113,11 @@ const MyPage = ({
       <ToggleSection title={'나의 카테고리'} defaultType={true}>
         <ul className={styles.categoryList}>
           {categoryRecord.map((category, idx) => (
-            <MyCategory key={idx} category={category} />
+            <MyCategory
+              key={idx}
+              category={category}
+              deleteMyCategory={deleteMyCategory}
+            />
           ))}
         </ul>
       </ToggleSection>

@@ -119,6 +119,14 @@ class DbService {
   saveTotalItem(userId: string, itemCount: number) {
     set(ref(this.db, `dataList/${userId}/total/totalItem`), itemCount);
   }
+
+  // 나의 카테고리 저장
+  saveMyCategory(userId: string, newCategoryRecord: string[]) {
+    set(
+      ref(this.db, `dataList/${userId}/myInfo/categoryRecord`),
+      newCategoryRecord
+    );
+  }
 }
 
 export default DbService;

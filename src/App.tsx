@@ -311,6 +311,14 @@ function App({
     dbService.removeMyItem(userId, targetNumber);
   };
 
+  // 나의 카테고리 삭제
+  const deleteMyCategory = (targetCategory: string) => {
+    const newCategoryRecord = data.myInfo.categoryRecord.filter(
+      (category) => category !== targetCategory
+    );
+    dbService.saveMyCategory(userId, newCategoryRecord);
+  };
+
   return (
     <div className={styles.app}>
       <UserIdContext.Provider value={userId}>
@@ -356,6 +364,7 @@ function App({
                   setUserId={setUserId}
                   deleteMyItem={deleteMyItem}
                   editMyInfo={editMyInfo}
+                  deleteMyCategory={deleteMyCategory}
                 />
               }
             />
