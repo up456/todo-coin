@@ -22,9 +22,11 @@
   margin-bottom: 0.8em;
   cursor: pointer;
 }
+
 .checkIcon {
   margin-right: 0.5em;
 }
+
 .sectionTitle {
   font-size: 1.2rem;
   font-weight: bold;
@@ -41,6 +43,9 @@
   font-size: 0.6rem;
   font-style: italic;
   cursor: pointer;
+}
+.toggleBtn:hover {
+  background-color: pointGreen;
 }
 .toggleBtn.onFocus {
   background-color: pointGreen;
