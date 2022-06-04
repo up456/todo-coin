@@ -7,6 +7,7 @@ import ItemCard from '../../components/item_card/item_card';
 import Tippy from '@tippyjs/react/headless';
 import Line from '../../components/line/line';
 import ToggleSection from '../../components/toggle_section/toggle_section';
+import MyCategory from '../../components/my_category/my_category';
 
 interface TypeMyPage {
   data: TypeData;
@@ -108,9 +109,11 @@ const MyPage = ({
       </section>
 
       <ToggleSection title={'나의 카테고리'} defaultType={true}>
-        {categoryRecord.map((category, idx) => (
-          <p key={idx}>{category}</p>
-        ))}
+        <ul className={styles.categoryList}>
+          {categoryRecord.map((category, idx) => (
+            <MyCategory key={idx} category={category} />
+          ))}
+        </ul>
       </ToggleSection>
 
       <ToggleSection title={'나의 아이템'}>

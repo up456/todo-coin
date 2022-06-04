@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 interface TypeToggleSection {
   title: string;
-  children: JSX.Element | any;
+  children: JSX.Element;
   defaultType?: boolean;
 }
 

@@ -1,0 +1,37 @@
+@value mainGreen, mainWhite,textGreen from '/src/common/color.css';
+
+.categoryBox {
+  background: mainGreen;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border-radius: 20px;
+
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: mainWhite;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.xBtn {
+  border: none;
+  border-radius: 50%;
+  width: 1.7em;
+  height: 1.7em;
+  margin-left: 0.8em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(234, 234, 234, 0.56);
+
+  transition: 300ms;
+  cursor: pointer;
+}
+.xBtn:hover {
+  transform: rotateZ(180deg);
+  background-color: rgba(234, 234, 234, 1);
+  background-color: textGreen;
+}
