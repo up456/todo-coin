@@ -9,6 +9,8 @@ export const DEFAULT_DATA: TypeData = {
     totalItem: 0,
   },
   myInfo: {
+    nickname: '이름 없음',
+    profileImgUrl: 'asset/default_profile.jpg',
     lv: 1,
     exp: 0,
     coin: 0,
@@ -125,6 +127,17 @@ class DbService {
     set(
       ref(this.db, `dataList/${userId}/myInfo/categoryRecord`),
       newCategoryRecord
+    );
+  }
+
+  // 닉네임, 프로필 사진 저장
+  saveMyNickname(userId: string, newNickname: string) {
+    set(ref(this.db, `dataList/${userId}/myInfo/nickname`), newNickname);
+  }
+  saveMyProfileImg(userId: string, newProfileImgUrl: string) {
+    set(
+      ref(this.db, `dataList/${userId}/myInfo/profileImgUrl`),
+      newProfileImgUrl
     );
   }
 }

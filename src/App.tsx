@@ -48,6 +48,8 @@ export interface TypeData {
     totalItem: number;
   };
   myInfo: {
+    nickname: string;
+    profileImgUrl: string;
     lv: number;
     exp: number;
     coin: number;
@@ -319,6 +321,14 @@ function App({
     dbService.saveMyCategory(userId, newCategoryRecord);
   };
 
+  // 마이페이지 관련
+  const editMyNickname = (newNickname: string) => {
+    dbService.saveMyNickname(userId, newNickname);
+  };
+  const editMyProfileImg = (newProfileImgUrl: string) => {
+    dbService.saveMyProfileImg(userId, newProfileImgUrl);
+  };
+
   return (
     <div className={styles.app}>
       <UserIdContext.Provider value={userId}>
@@ -365,6 +375,8 @@ function App({
                   deleteMyItem={deleteMyItem}
                   editMyInfo={editMyInfo}
                   deleteMyCategory={deleteMyCategory}
+                  editMyNickname={editMyNickname}
+                  editMyProfileImg={editMyProfileImg}
                 />
               }
             />

@@ -1,5 +1,5 @@
 import styles from './my_page.module.css';
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import Header from '../../components/header/header';
 import { TypeData } from '../../App';
 import AuthService from '../../service/authService';
@@ -16,6 +16,8 @@ interface TypeMyPage {
   deleteMyItem: (targetNumber: string) => void;
   editMyInfo: (coin: number, itemCount: number) => void;
   deleteMyCategory: (targetCategory: string) => void;
+  editMyNickname: (newNickname: string) => void;
+  editMyProfileImg: (newProfileImgUrl: string) => void;
 }
 const MyPage = ({
   data,
@@ -24,9 +26,41 @@ const MyPage = ({
   deleteMyItem,
   editMyInfo,
   deleteMyCategory,
+  editMyNickname,
+  editMyProfileImg,
 }: TypeMyPage) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [onFocus, setOnFocus] = useState(false);
   const onLogout = () => {
     authService.logout(setUserId);
+  };
+
+  const onClickEditNicknameBtn = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    if (onFocus) {
+      const current = inputRef.current;
+      if (current && current.value) {
+        editMyNickname(current.value);
+        current.value = '';
+      }
+    }
+    setOnFocus(!onFocus);
+  };
+
+  const onKeyDownNicknameInput = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (event.key === 'Enter') {
+      if (onFocus) {
+        const current = inputRef.current;
+        if (current && current.value) {
+          editMyNickname(current.value);
+          current.value = '';
+        }
+      }
+      setOnFocus(false);
+    }
   };
 
   const cate = data?.myInfo?.categoryRecord || [];
@@ -52,15 +86,28 @@ const MyPage = ({
       </Tippy>
       <section className={styles.profileContainer}>
         <div className={styles.nicknameBox}>
-          <h2 className={styles.nickname}>피카츄</h2>
+          <h2 className={styles.nickname}>{data.myInfo.nickname}</h2>
           <button
             className={styles.nicknameEditBtn}
-          >{`닉네임 변경하기>`}</button>
+            onClick={onClickEditNicknameBtn}
+          >
+            {onFocus ? '작성 완료' : `닉네임 변경하기>`}
+          </button>
+          <input
+            ref={inputRef}
+            onKeyDown={onKeyDownNicknameInput}
+            className={
+              onFocus
+                ? `${styles.nicknameEditInput} ${styles.visible}`
+                : styles.nicknameEditInput
+            }
+            type="text"
+          />
         </div>
         <div className={styles.imgBox}>
           <div
             className={styles.img}
-            style={{ backgroundImage: `url('asset/default_profile.jpg')` }}
+            style={{ backgroundImage: `url('${data.myInfo.profileImgUrl}')` }}
           ></div>
           <button className={styles.imgEditBtn}>
             <img src="asset/my_page/profile_img_Edit_btn.svg" alt="" />
