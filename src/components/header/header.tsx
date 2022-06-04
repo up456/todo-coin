@@ -41,7 +41,7 @@ const Header = ({ data }: TypeHeader) => {
             data?.myInfo.lv
           )}`}</p>
         </div>
-        <Tippy content="오늘의 To-do로 이동" className={styles.tippyBox}>
+        <Tippy content="오늘의 To-do로 이동">
           <div className={styles.itemBox} onClick={goToTodayTodoPage}>
             <p className={styles.itemIcon}>to-do</p>
             <p className={styles.itemInfo}>
@@ -56,13 +56,13 @@ const Header = ({ data }: TypeHeader) => {
             </p>
           </div>
         </Tippy>
-        <Tippy content="상점으로 이동" className={styles.tippyBox}>
+        <Tippy content="상점으로 이동">
           <div className={styles.itemBox} onClick={goToShopPage}>
             <p className={styles.itemIcon}>coin</p>
             <p className={styles.itemInfo}> {`${data?.myInfo.coin}`}</p>
           </div>
         </Tippy>
-        <Tippy content="마이페이지로 이동" className={styles.tippyBox}>
+        <Tippy content="마이페이지로 이동">
           <div className={styles.imageBox} onClick={goToMyPage}>
             <img src="/asset/default_profile.jpg" alt="profile" />
           </div>
