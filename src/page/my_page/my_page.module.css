@@ -23,11 +23,41 @@
 }
 .logoutBtn:hover {
   box-shadow: makerBoxShadow;
+  animation: shake 200ms linear infinite;
+}
+@keyframes shake {
+  0% {
+    border-left: 2px solid rgba(0, 0, 0, 0);
+  }
+  25% {
+    border-left: 2px solid rgba(0, 0, 0, 0);
+    border-top: 2px solid rgba(0, 0, 0, 0);
+  }
+  75% {
+    border-left: 2px solid rgba(0, 0, 0, 0);
+    border-top: 2px solid rgba(0, 0, 0, 0);
+    border-right: 2px solid rgba(0, 0, 0, 0);
+  }
+  100% {
+    border-left: 2px solid rgba(0, 0, 0, 0);
+    border-top: 2px solid rgba(0, 0, 0, 0);
+    border-right: 2px solid rgba(0, 0, 0, 0);
+    border-bottom: 2px solid rgba(0, 0, 0, 0);
+  }
 }
 .logoutTooltip {
-  transform: translate(5px, 80px);
+  transform: translate(62px, 45px);
   color: #fff;
   font-weight: bold;
+  animation: slide 300ms linear 1;
+}
+@keyframes slide {
+  0% {
+    transform: translate(5px, 45px);
+  }
+  100% {
+    transform: translate(62px, 45px);
+  }
 }
 
 /* 프로필 부분 */
