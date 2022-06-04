@@ -4,7 +4,7 @@ export function getMaxExp(lv: number): number {
   return Math.floor((lv * lv) / 3) + 4;
 }
 
-// calendar.tsx, todo_page.tsx
+// calendar.tsx, todo_page.tsx, header.tsx
 export function callToday() {
   return new Date().toISOString().slice(0, 10);
 }

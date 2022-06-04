@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TypeData, UserIdContext } from '../../App';
-import { getMaxExp } from '../../util/calc';
+import { callToday, getMaxExp } from '../../util/calc';
 import Line from '../line/line';
 import NonExistentUser from '../non_existent_user/non_existent_user';
 import styles from './header.module.css';
@@ -13,7 +13,7 @@ interface TypeHeader {
 }
 const Header = ({ data }: TypeHeader) => {
   const navigate = useNavigate();
-  const today = new Date().toISOString().slice(0, 10);
+  const today = callToday();
   const userId: string = useContext(UserIdContext);
 
   const todoListData = data?.record?.[today]?.todoList;
