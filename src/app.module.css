@@ -4,11 +4,9 @@
   width: 100%;
   max-width: 570px;
   min-width: 423px;
-  min-height: 100vh;
+  min-height: 80vmax;
   margin: 0 auto;
   background-color: mainBg;
-
-  overflow: hidden auto;
 
   position: relative;
 }
