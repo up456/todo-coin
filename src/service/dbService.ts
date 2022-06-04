@@ -3,6 +3,11 @@ import { get, off, onValue, ref, remove, set } from 'firebase/database';
 import { myDb } from './my_firebase';
 
 export const DEFAULT_DATA: TypeData = {
+  total: {
+    totalTodo: 0,
+    totalCoin: 0,
+    totalItem: 0,
+  },
   myInfo: {
     lv: 1,
     exp: 0,
@@ -110,6 +115,9 @@ class DbService {
   }
   saveMyCoin(userId: string, coin: number) {
     set(ref(this.db, `dataList/${userId}/myInfo/coin`), coin);
+  }
+  saveTotalItem(userId: string, itemCount: number) {
+    set(ref(this.db, `dataList/${userId}/total/totalItem`), itemCount);
   }
 }
 

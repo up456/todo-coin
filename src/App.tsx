@@ -42,6 +42,11 @@ export interface TypeItem {
   imgName: string;
 }
 export interface TypeData {
+  total: {
+    totalTodo: number;
+    totalCoin: number;
+    totalItem: number;
+  };
   myInfo: {
     lv: number;
     exp: number;
@@ -89,6 +94,7 @@ function App({
         ...prevData,
       };
       const userInfo = newData?.myInfo;
+      const total = newData?.total;
       const record = newData?.record[date];
       const todoList = record?.todoList;
       const targetTodo = todoList[targetTodoId];
@@ -108,6 +114,9 @@ function App({
             userInfo.exp = 0 + gap;
             userInfo.lv++;
           }
+          // total 처리부분
+          total.totalCoin += targetTodo.rewardCoin;
+          total.totalTodo += 1;
           break;
         case 'minus':
           // 코인 처리 부분
@@ -119,6 +128,9 @@ function App({
             userInfo.lv--;
             userInfo.exp += getMaxExp(userInfo.lv);
           }
+          // total 처리부분
+          total.totalCoin -= targetTodo.rewardCoin;
+          total.totalTodo -= 1;
           break;
         default:
           break;
@@ -289,13 +301,14 @@ function App({
   const buyItem = (targetNumber: string, value: TypeItem) => {
     dbService.saveMyItem(userId, targetNumber, value);
   };
+  const editMyInfo = (coin: number, itemCount: number) => {
+    dbService.saveMyCoin(userId, coin);
+    dbService.saveTotalItem(userId, itemCount);
+  };
 
   // item사용
   const deleteMyItem = (targetNumber: string) => {
     dbService.removeMyItem(userId, targetNumber);
-  };
-  const editMyCoin = (coin: number) => {
-    dbService.saveMyCoin(userId, coin);
   };
 
   return (
@@ -342,7 +355,7 @@ function App({
                   authService={authService}
                   setUserId={setUserId}
                   deleteMyItem={deleteMyItem}
-                  editMyCoin={editMyCoin}
+                  editMyInfo={editMyInfo}
                 />
               }
             />
@@ -352,7 +365,7 @@ function App({
                 <ShopPage
                   data={data}
                   deleteItem={deleteItem}
-                  editMyCoin={editMyCoin}
+                  editMyInfo={editMyInfo}
                   buyItem={buyItem}
                 />
               }

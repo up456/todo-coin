@@ -16,12 +16,12 @@ interface TypeItemCard {
   deleteItem?: (targetNumber: string) => void;
   buyItem?: (targetNumber: string, value: TypeItem) => void;
   deleteMyItem?: (targetNumber: string) => void;
-  editMyCoin?: (coin: number) => void;
+  editMyInfo?: (coin: number, itemCount: number) => void;
   item?: TypeItem;
   isPlus?: boolean;
   itemNumber?: string;
   isMyItem?: boolean;
-  myInfo?: { myLv: number; myCoin: number };
+  myInfo?: { myLv: number; myCoin: number; myTotalItem: number };
 }
 export interface TypeEditItemState {
   state: {
@@ -34,12 +34,12 @@ const ItemCard = ({
   deleteItem,
   buyItem,
   deleteMyItem,
-  editMyCoin,
+  editMyInfo,
   item = NON_EXIST_ITEM,
   isPlus = false,
   itemNumber = '',
   isMyItem = false,
-  myInfo = { myLv: 0, myCoin: 0 },
+  myInfo = { myLv: 0, myCoin: 0, myTotalItem: 0 },
 }: TypeItemCard) => {
   const otherBtnToggleRef = useRef<HTMLDivElement>(null);
   const btnsContainerRef = useRef<HTMLDivElement>(null);
@@ -65,8 +65,8 @@ const ItemCard = ({
     const newCoin = myInfo.myCoin - item.itemPrice;
 
     if (item.itemLv <= myInfo.myLv && item.itemPrice <= myInfo.myCoin) {
-      if (buyItem && editMyCoin && window.confirm('정말 구매하시겠습까?')) {
-        editMyCoin(newCoin);
+      if (buyItem && editMyInfo && window.confirm('정말 구매하시겠습까?')) {
+        editMyInfo(newCoin, ++myInfo.myTotalItem);
         buyItem(itemNumber, item);
       }
     } else if (item.itemLv <= myInfo.myLv) {

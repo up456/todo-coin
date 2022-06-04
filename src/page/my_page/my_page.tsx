@@ -11,14 +11,14 @@ interface TypeMyPage {
   authService: AuthService;
   setUserId: React.Dispatch<React.SetStateAction<string>>;
   deleteMyItem: (targetNumber: string) => void;
-  editMyCoin: (coin: number) => void;
+  editMyInfo: (coin: number, itemCount: number) => void;
 }
 const MyPage = ({
   data,
   authService,
   setUserId,
   deleteMyItem,
-  editMyCoin,
+  editMyInfo,
 }: TypeMyPage) => {
   const onLogout = () => {
     authService.logout(setUserId);
@@ -32,6 +32,9 @@ const MyPage = ({
       <Header data={data} />
       <h2>마이 페이지입니다.</h2>
       <Button text="로그아웃" onClick={onLogout} />
+      <h4>누적 todo:{data.total.totalTodo}</h4>
+      <h4>누적 coin:{data.total.totalCoin}</h4>
+      <h4>누적 item:{data.total.totalItem}</h4>
       <h3>나의 카테고리</h3>
       {categoryRecord.map((category, idx) => (
         <p key={idx}>{category}</p>
@@ -46,7 +49,7 @@ const MyPage = ({
               item={data.myInfo.items[key]}
               itemNumber={key}
               isMyItem={true}
-              editMyCoin={editMyCoin}
+              editMyInfo={editMyInfo}
             />
           ))}
       </ul>
