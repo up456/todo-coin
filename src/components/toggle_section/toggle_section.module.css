@@ -1,0 +1,51 @@
+@value mainWhite, mainGray,pointGreen textGray, makerBoxShadow, textGray from '/src/common/color.css';
+
+.toggleSection {
+  background-color: mainWhite;
+  width: 85%;
+  height: 3.7em;
+  margin: 2.5em auto;
+  padding: 1.5em;
+  border-radius: 10px;
+  box-shadow: makerBoxShadow;
+
+  overflow: hidden;
+}
+.toggleSection.onFocus {
+  height: auto;
+}
+.sectionHeader {
+  display: flex;
+  align-items: center;
+
+  margin-top: -0.3em;
+  margin-bottom: 0.8em;
+  cursor: pointer;
+}
+.checkIcon {
+  margin-right: 0.5em;
+}
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: textGray;
+}
+.toggleBtn {
+  border: none;
+  border-radius: 10px;
+  background-color: mainGray;
+  color: textGray;
+  padding: 0.3em 1em;
+  margin-left: 1em;
+
+  font-size: 0.6rem;
+  font-style: italic;
+  cursor: pointer;
+}
+.toggleBtn.onFocus {
+  background-color: pointGreen;
+}
+.sectionContent {
+  max-height: 17em;
+  overflow: auto;
+}

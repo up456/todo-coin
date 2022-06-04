@@ -6,6 +6,7 @@ import AuthService from '../../service/authService';
 import ItemCard from '../../components/item_card/item_card';
 import Tippy from '@tippyjs/react/headless';
 import Line from '../../components/line/line';
+import ToggleSection from '../../components/toggle_section/toggle_section';
 
 interface TypeMyPage {
   data: TypeData;
@@ -106,24 +107,27 @@ const MyPage = ({
         </div>
       </section>
 
-      {/* <h3>나의 카테고리</h3>
-      {categoryRecord.map((category, idx) => (
-        <p key={idx}>{category}</p>
-      ))} */}
-      <h3>나의 아이템</h3>
-      <ul className={styles.itemCardList}>
-        {data.myInfo.items &&
-          Object.keys(data.myInfo.items).map((key) => (
-            <ItemCard
-              key={key}
-              deleteMyItem={deleteMyItem}
-              item={data.myInfo.items[key]}
-              itemNumber={key}
-              isMyItem={true}
-              editMyInfo={editMyInfo}
-            />
-          ))}
-      </ul>
+      <ToggleSection title={'나의 카테고리'} defaultType={true}>
+        {categoryRecord.map((category, idx) => (
+          <p key={idx}>{category}</p>
+        ))}
+      </ToggleSection>
+
+      <ToggleSection title={'나의 아이템'}>
+        <ul className={styles.itemCardList}>
+          {data.myInfo.items &&
+            Object.keys(data.myInfo.items).map((key) => (
+              <ItemCard
+                key={key}
+                deleteMyItem={deleteMyItem}
+                item={data.myInfo.items[key]}
+                itemNumber={key}
+                isMyItem={true}
+                editMyInfo={editMyInfo}
+              />
+            ))}
+        </ul>
+      </ToggleSection>
     </section>
   );
 };
