@@ -72,7 +72,7 @@ const MyPage = ({
             현재 Lv
           </div>
           <div className={styles.nowInfoValue}>
-            12 <b className={styles.keyText}>레벨</b>
+            {data.myInfo.lv} <b className={styles.keyText}>레벨</b>
           </div>
         </div>
         <Line heigt="0.1px" width="80%" mT="0.5em" mB="0.5em" />
@@ -80,7 +80,7 @@ const MyPage = ({
           <img src="asset/my_page/now_coin.svg" alt="현재Coin" />
           <div className={styles.nowInfoKey}>현재 Coin</div>
           <div className={styles.nowInfoValue}>
-            20 <b className={styles.keyText}>코인</b>
+            {data.myInfo.coin} <b className={styles.keyText}>코인</b>
           </div>
         </div>
       </section>
