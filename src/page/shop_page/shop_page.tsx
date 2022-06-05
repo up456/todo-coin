@@ -7,7 +7,7 @@ import ItemCard from '../../components/item_card/item_card';
 interface TypeShopPage {
   data: TypeData;
   deleteItem: (targetNumber: string) => void;
-  buyItem: (targetNumber: string, value: TypeItem) => void;
+  buyItem: (value: TypeItem) => void;
   editMyInfo: (coin: number, itemCount: number) => void;
 }
 

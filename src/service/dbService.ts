@@ -104,9 +104,9 @@ class DbService {
   }
 
   // item구매 & 사용
-  saveMyItem(userId: string, targetNumber: string, value: TypeItem) {
-    set(ref(this.db, `dataList/${userId}/myInfo/items/${targetNumber}`), value);
-    this.removeItem(userId, targetNumber);
+  saveMyItem(userId: string, value: TypeItem) {
+    const myItemNumber = Date.now();
+    set(ref(this.db, `dataList/${userId}/myInfo/items/${myItemNumber}`), value);
   }
   removeMyItem(userId: string, targetNumber: string) {
     const dbRef = ref(

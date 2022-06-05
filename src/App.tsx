@@ -300,8 +300,8 @@ function App({
   const editItem = (targetNumber: string, value: TypeItem) => {
     dbService.updateItem(userId, targetNumber, value);
   };
-  const buyItem = (targetNumber: string, value: TypeItem) => {
-    dbService.saveMyItem(userId, targetNumber, value);
+  const buyItem = (value: TypeItem) => {
+    dbService.saveMyItem(userId, value);
   };
   const editMyInfo = (coin: number, itemCount: number) => {
     dbService.saveMyCoin(userId, coin);

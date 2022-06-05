@@ -14,7 +14,7 @@ const NON_EXIST_ITEM = {
 
 interface TypeItemCard {
   deleteItem?: (targetNumber: string) => void;
-  buyItem?: (targetNumber: string, value: TypeItem) => void;
+  buyItem?: (value: TypeItem) => void;
   deleteMyItem?: (targetNumber: string) => void;
   editMyInfo?: (coin: number, itemCount: number) => void;
   item?: TypeItem;
@@ -67,7 +67,7 @@ const ItemCard = ({
     if (item.itemLv <= myInfo.myLv && item.itemPrice <= myInfo.myCoin) {
       if (buyItem && editMyInfo && window.confirm('정말 구매하시겠습까?')) {
         editMyInfo(newCoin, ++myInfo.myTotalItem);
-        buyItem(itemNumber, item);
+        buyItem(item);
       }
     } else if (item.itemLv <= myInfo.myLv) {
       alert(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
