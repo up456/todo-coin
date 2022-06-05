@@ -13,9 +13,9 @@ interface ILoginPage {
 }
 const LoginPage = ({ authService, setUserId, dbService }: ILoginPage) => {
   const navigate = useNavigate();
+  const userId = useContext(UserIdContext);
 
-  const onClick = async () => {
-    const userUid = (await authService.login(setUserId)) || '';
+  const onLogin = async (userUid: string) => {
     const userList = await dbService.readData('userList');
     // userList에 login한 유저의 uid가 없으면 새로운 유저 생성
     if (!Object.keys(userList).includes(userUid)) {
@@ -23,7 +23,15 @@ const LoginPage = ({ authService, setUserId, dbService }: ILoginPage) => {
     }
     navigate(`/calendar`);
   };
-  const userId = useContext(UserIdContext);
+
+  const onClickGoogleLoginBtn = async () => {
+    const userUid = (await authService.googleLogin(setUserId)) || '';
+    onLogin(userUid);
+  };
+  const onClickMasterLoginBtn = () => {
+    const userUid = authService.masterLogin(setUserId);
+    onLogin(userUid);
+  };
 
   useEffect(() => {
     if (userId) navigate(`/calendar`);
@@ -40,7 +48,8 @@ const LoginPage = ({ authService, setUserId, dbService }: ILoginPage) => {
         <p className={styles.subText}>Welcome to To-do Coin</p>
       </div>
 
-      <Button text="Google Login" onClick={onClick} />
+      <Button text="Google Login" onClick={onClickGoogleLoginBtn} />
+      <Button text="공용 계정으로 체험하기" onClick={onClickMasterLoginBtn} />
     </section>
   );
 };
