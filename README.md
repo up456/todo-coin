@@ -1,8 +1,8 @@
 # Todo-Coin 프로젝트
 
 ### [📓프로젝트 보드 (노션)](https://gold-route-090.notion.site/To-do-Coin-b75b3b4bb3de4b16a4341878154c37ae)
+### [✨figma 초기 디자인](https://www.figma.com/file/wPBJm0gWJUiY7PQVi2YqiA/To-do-Coin)
 ### [[⚡todo-coin]할일 작성하러 가기](https://todo-coin.netlify.app/)
-
 <br/>
 
 ## 공지 사항
