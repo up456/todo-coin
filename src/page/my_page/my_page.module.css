@@ -1,4 +1,4 @@
-@value mainWhite, myPageBg, makerBoxShadow from '/src/common/color.css';
+@value mainWhite, myPageBg, textGreen, makerBoxShadow from '/src/common/color.css';
 @value doHyeonFont from '/src/common/font.css';
 @value mobileSize from '/src/common/size.css';
 
@@ -83,6 +83,9 @@
   padding: 0.3em 0.8em;
   color: mainWhite;
   cursor: pointer;
+}
+.nicknameEditBtn.onFocus {
+  background-color: textGreen;
 }
 
 .nicknameEditInput {

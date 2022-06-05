@@ -111,7 +111,11 @@ const MyPage = ({
         <div className={styles.nicknameBox}>
           <h2 className={styles.nickname}>{data.myInfo.nickname}</h2>
           <button
-            className={styles.nicknameEditBtn}
+            className={
+              onFocus
+                ? `${styles.nicknameEditBtn} ${styles.onFocus}`
+                : styles.nicknameEditBtn
+            }
             onClick={onClickEditNicknameBtn}
           >
             {onFocus ? '작성 완료' : `닉네임 변경하기>`}
@@ -119,6 +123,7 @@ const MyPage = ({
           <input
             ref={inputRef}
             onKeyDown={onKeyDownNicknameInput}
+            placeholder={'원하는 닉네임 입력!'}
             className={
               onFocus
                 ? `${styles.nicknameEditInput} ${styles.visible}`
