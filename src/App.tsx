@@ -343,7 +343,6 @@ function App({
                   authService={authService}
                   setUserId={setUserId}
                   dbService={dbService}
-                  setData={setData}
                 />
               }
             />

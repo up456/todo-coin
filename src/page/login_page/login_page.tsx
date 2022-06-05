@@ -3,21 +3,15 @@ import React, { useContext, useEffect } from 'react';
 import Button from '../../components/button/button';
 import AuthService from '../../service/authService';
 import { useNavigate } from 'react-router-dom';
-import { TypeData, UserIdContext } from '../../App';
+import { UserIdContext } from '../../App';
 import DbService from '../../service/dbService';
 
 interface ILoginPage {
   authService: AuthService;
   setUserId: React.Dispatch<React.SetStateAction<string>>;
   dbService: DbService;
-  setData: React.Dispatch<React.SetStateAction<TypeData>>;
 }
-const LoginPage = ({
-  authService,
-  setUserId,
-  dbService,
-  setData,
-}: ILoginPage) => {
+const LoginPage = ({ authService, setUserId, dbService }: ILoginPage) => {
   const navigate = useNavigate();
 
   const onClick = async () => {
