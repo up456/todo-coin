@@ -1,5 +1,6 @@
 @value mainWhite, myPageBg, makerBoxShadow from '/src/common/color.css';
 @value doHyeonFont from '/src/common/font.css';
+@value mobileSize from '/src/common/size.css';
 
 .myPage {
   background: myPageBg;
@@ -254,6 +255,16 @@
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(45%, auto));
-  gap: 0 2em;
   justify-content: space-between;
+}
+
+@media (max-width: mobileSize) {
+  .itemCardList {
+    padding-left: 0;
+    padding-right: 1em;
+    justify-content: space-around;
+  }
+  .myPage {
+    height: 38em;
+  }
 }

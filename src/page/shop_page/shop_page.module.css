@@ -1,3 +1,5 @@
+@value mobileSize from '/src/common/size.css';
+
 .storeTitle {
   display: flex;
   justify-content: center;
@@ -18,4 +20,11 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30%, auto));
   justify-content: space-between;
+}
+
+@media (max-width: mobileSize) {
+  .itemCardList {
+    grid-template-columns: repeat(auto-fill, minmax(45%, auto));
+    justify-content: space-around;
+  }
 }
