@@ -168,6 +168,7 @@
   border-top: 0;
   margin-left: -20px;
   margin-top: -10px;
+  z-index: -1;
 }
 
 .loadingBox > article {
@@ -259,12 +260,12 @@
 }
 
 @media (max-width: mobileSize) {
+  .myPage {
+    height: 38em;
+  }
   .itemCardList {
     padding-left: 0;
     padding-right: 1em;
     justify-content: space-around;
-  }
-  .myPage {
-    height: 38em;
   }
 }
