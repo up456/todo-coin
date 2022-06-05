@@ -12,7 +12,7 @@ v2.0.0버전의 업데이트에서 새로운 기능의 많이 추가되어 기�
 
 ## 버전 정보
 <details>
-<summary>v2.1.0</summary>
+<summary>v2.2.0</summary>
 <div markdown="1">
 
 ## 기능 추가 ✔
