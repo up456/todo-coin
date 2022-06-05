@@ -66,6 +66,19 @@
   font-weight: bold;
   margin-top: 0.4em;
   margin-bottom: 0;
+  text-align: center;
+
+  max-width: 120px;
+  cursor: zoom-out;
+}
+.default {
+  cursor: auto;
+}
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: zoom-in;
 }
 .itemLv {
   font-size: 0.7rem;

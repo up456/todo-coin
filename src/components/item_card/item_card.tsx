@@ -41,6 +41,7 @@ const ItemCard = ({
   isMyItem = false,
   myInfo = { myLv: 0, myCoin: 0, myTotalItem: 0 },
 }: TypeItemCard) => {
+  const titleRef = useRef<HTMLParagraphElement>(null);
   const otherBtnToggleRef = useRef<HTMLDivElement>(null);
   const btnsContainerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
@@ -93,6 +94,12 @@ const ItemCard = ({
       deleteMyItem(itemNumber);
     }
   };
+  const onClickTitle = () => {
+    const current = titleRef.current;
+    if (current && current.getBoundingClientRect().width >= 120) {
+      current.classList.toggle(styles.ellipsis);
+    }
+  };
 
   const outsideClick = (event: MouseEvent) => {
     if (
@@ -119,6 +126,13 @@ const ItemCard = ({
       return `${styles.itemImg} ${styles.iconCase}`;
     }
     return styles.itemImg;
+  };
+  const getTitleStyle = () => {
+    if (item.itemTitle.length >= 10) {
+      return `${styles.itemTitle} ${styles.ellipsis}`;
+    } else {
+      return `${styles.itemTitle} ${styles.default}`;
+    }
   };
 
   useEffect(() => {
@@ -150,7 +164,13 @@ const ItemCard = ({
                   style={{ backgroundImage: `url(${item.imgUrl})` }}
                 ></div>
               </div>
-              <p className={styles.itemTitle}>{item.itemTitle}</p>
+              <p
+                ref={titleRef}
+                className={getTitleStyle()}
+                onClick={onClickTitle}
+              >
+                {item.itemTitle}
+              </p>
               <p className={styles.itemLv}>
                 Lv제한 - {item.itemLv === 0 ? '없음' : item.itemLv}
               </p>
