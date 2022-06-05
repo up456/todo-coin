@@ -179,8 +179,6 @@
 }
 
 /* 현재 정보 부분 */
-.nowInfoContainer {
-}
 .nowInfoBox {
   margin: 0 5em;
 
@@ -261,7 +259,21 @@
 
 @media (max-width: mobileSize) {
   .myPage {
-    height: 38em;
+    height: 38.5em;
+  }
+  .profileContainer {
+    margin: 0.5em;
+    margin-top: 1.2em;
+  }
+  .nowInfoBox {
+    margin: 0 2em;
+  }
+  .totalInfoContainer {
+    margin: 0 0.5em;
+    margin-top: 1.5em;
+
+    justify-content: space-between;
+    gap: 1em;
   }
   .itemCardList {
     padding-left: 0;

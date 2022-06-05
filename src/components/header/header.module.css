@@ -1,4 +1,5 @@
 @value mainGray, mainGreen,mainBg, mainWhite, makerBoxShadow from '/src/common/color.css';
+@value mobileSize from '/src/common/size.css';
 
 .headerContainer {
   width: 100%;
@@ -72,4 +73,11 @@
 }
 .imageBox > img {
   visibility: hidden;
+}
+
+@media (max-width: mobileSize) {
+  .header {
+    font-size: 0.85rem;
+    padding-top: 1em;
+  }
 }
