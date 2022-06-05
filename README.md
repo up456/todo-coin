@@ -16,6 +16,25 @@ v2.0.0버전의 업데이트에서 새로운 기능의 많이 추가되어 기�
 <div markdown="1">
 
 ## 기능 추가 ✔
+    1. pwa사이트로 사이트로 진화하였습니다.
+      - 다운로드 받아서 바탕화면 & 홈화면에 두고 사용이 가능합니다.
+      - 오프라인에서 사용 시 오프라인임을 알려주는 페이지가 출력됩니다.
+![image](https://user-images.githubusercontent.com/79118046/172061559-cb9e2e42-bd4e-4728-aa0e-71af5f3bf557.png)
+
+![image](https://user-images.githubusercontent.com/79118046/172061539-86517357-98d3-4490-967f-785c3d4efa8f.png)
+
+![image](https://user-images.githubusercontent.com/79118046/172061621-8a4e288f-0829-476d-942e-0df9de886f35.png)
+
+
+
+</div>
+</details>
+
+<details>
+<summary>v2.1.0</summary>
+<div markdown="1">
+
+## 기능 추가 ✔
     1. item의 이름이 축약기능 추가되었습니다.
        item의 이름이 길어지면 아이템들의 모양이 일관되지 않아 깔끔한 디자인이 아니었습니다.
        그래서 item의 이름이 길어지면 축약되고 이름을 다시 클릭해서 전체이름을 볼 수있는 기능을 추가했습니다.
