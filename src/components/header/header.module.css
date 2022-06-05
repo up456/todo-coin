@@ -16,7 +16,7 @@
   justify-content: space-evenly;
   align-items: center;
 
-  padding-top: 0.3em;
+  padding-top: 1em;
 }
 .itemBox {
   display: flex;
@@ -78,6 +78,5 @@
 @media (max-width: mobileSize) {
   .header {
     font-size: 0.85rem;
-    padding-top: 1em;
   }
 }
