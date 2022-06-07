@@ -10,6 +10,7 @@ import styles from './todo_page.module.css';
 import btnStyles from '../../components/button/button.module.css';
 import { callToday, isDayAfterTodayOrToday } from '../../util/calc';
 import DbService from '../../service/dbService';
+import UseTitle from '../../hook/useTitle';
 
 // constants
 const SORT_OPTION_LIST = [
@@ -46,7 +47,7 @@ const TodoPage = ({
   const [satisfaction, setSatisfaction] = useState(3);
   const { date } = useParams();
   const dateData = date || '';
-
+  const titleUpdator = UseTitle(`${date} 할일`);
   let record = data?.record?.[dateData];
 
   const categoryList = record?.categoryList || [];

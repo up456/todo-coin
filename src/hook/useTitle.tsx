@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const UseTitle = (initialTitle: string) => {
-  const [title, setTitle] = useState(initialTitle);
+  const [title, setTitle] = useState(`To-do Coin <${initialTitle}>`);
 
   const updateTitle = () => {
     const $title = document.querySelector('title');

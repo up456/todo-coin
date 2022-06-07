@@ -2,10 +2,12 @@ import styles from './non_existent_user.module.css';
 import React, { useCallback, useEffect, useState } from 'react';
 import Button from '../button/button';
 import { useNavigate } from 'react-router-dom';
+import UseTitle from '../../hook/useTitle';
 
 const NonExistentUser = () => {
   const navigate = useNavigate();
   const [time, setTime] = useState(5);
+  const titleUpdator = UseTitle(`유저 정보 없음`);
 
   const goToHome = useCallback(() => {
     navigate('/');

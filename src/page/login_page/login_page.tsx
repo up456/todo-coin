@@ -5,6 +5,7 @@ import AuthService from '../../service/authService';
 import { useNavigate } from 'react-router-dom';
 import { UserIdContext } from '../../App';
 import DbService from '../../service/dbService';
+import UseTitle from '../../hook/useTitle';
 
 interface ILoginPage {
   authService: AuthService;
@@ -12,6 +13,7 @@ interface ILoginPage {
   dbService: DbService;
 }
 const LoginPage = ({ authService, setUserId, dbService }: ILoginPage) => {
+  const titleUpdator = UseTitle('로그인 페이지');
   const navigate = useNavigate();
   const userId = useContext(UserIdContext);
 

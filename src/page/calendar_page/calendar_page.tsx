@@ -9,6 +9,7 @@ import DayRecord from '../../components/day_record/day_record';
 import { TypeData, UserIdContext } from '../../App';
 import { useNavigate } from 'react-router-dom';
 import { changeDateToString } from '../../util/calc';
+import UseTitle from '../../hook/useTitle';
 
 interface TypeCalendarPage {
   data: TypeData;
@@ -16,7 +17,7 @@ interface TypeCalendarPage {
 const CalendarPage = ({ data }: TypeCalendarPage) => {
   const navigate = useNavigate();
   const [date, setDate] = useState(new Date());
-
+  const titleUpdator = UseTitle(`달력`);
   const userId = useContext(UserIdContext);
 
   if (!userId) {

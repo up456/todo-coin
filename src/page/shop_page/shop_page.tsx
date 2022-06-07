@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '../../components/header/header';
 import { TypeData, TypeItem } from '../../App';
 import ItemCard from '../../components/item_card/item_card';
+import UseTitle from '../../hook/useTitle';
 
 interface TypeShopPage {
   data: TypeData;
@@ -12,6 +13,7 @@ interface TypeShopPage {
 }
 
 const ShopPage = ({ data, deleteItem, buyItem, editMyInfo }: TypeShopPage) => {
+  const titleUpdator = UseTitle(`상점`);
   return (
     <div className={styles.storePage}>
       <Header data={data} />

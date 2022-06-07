@@ -9,6 +9,7 @@ import Line from '../../components/line/line';
 import ToggleSection from '../../components/toggle_section/toggle_section';
 import MyCategory from '../../components/my_category/my_category';
 import Loading from '../../components/loading/loading';
+import UseTitle from '../../hook/useTitle';
 
 interface TypeMyPage {
   data: TypeData;
@@ -30,6 +31,7 @@ const MyPage = ({
   editMyNickname,
   editMyProfileImg,
 }: TypeMyPage) => {
+  const titleUpdator = UseTitle(`마이 페이지`);
   const inputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [onFocus, setOnFocus] = useState(false);
