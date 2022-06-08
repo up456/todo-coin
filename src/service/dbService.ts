@@ -10,7 +10,7 @@ export const DEFAULT_DATA: TypeData = {
   },
   myInfo: {
     nickname: '이름 없음',
-    profileImgUrl: 'asset/default_profile.jpg',
+    profileImgUrl: 'asset/default_profile.png',
     lv: 1,
     exp: 0,
     coin: 0,
