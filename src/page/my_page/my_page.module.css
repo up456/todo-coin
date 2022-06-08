@@ -2,6 +2,9 @@
 @value doHyeonFont from '/src/common/font.css';
 @value mobileSize from '/src/common/size.css';
 
+.myPageContainer {
+  overflow: hidden auto;
+}
 .myPage {
   background: myPageBg;
   width: 100%;
@@ -246,12 +249,14 @@
 }
 
 /* 토글 섹션 부분 */
+.toggleMenus {
+  margin-top: -4em;
+}
 .categoryList {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
 }
-
 .itemCardList {
   padding: 0 1.5em;
 

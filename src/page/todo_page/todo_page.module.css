@@ -2,18 +2,16 @@
 @value mobileSize from '/src/common/size.css';
 
 .todoPage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 105vh;
+  display: grid;
+  grid-template-rows: 10% 72% 8%;
+  overflow: hidden;
 }
 .todoContent {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 100%;
   padding: 0.7em 1.3em;
 }
-
 .pageBtnContainer {
   width: 100%;
   display: flex;
@@ -45,12 +43,16 @@
 .todoList {
   list-style: none;
   padding: 0;
+  padding-right: 0.5em;
   margin: 0;
+
+  overflow: hidden auto;
 }
 
 .contentFooter {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding: 0 0.9em;
 }
 .contentFooter > select {
   background-color: mainWhite;
@@ -71,6 +73,12 @@
 }
 
 @media (max-width: mobileSize) {
+  .todoPage {
+    height: 100vh;
+  }
+  .todoList {
+    padding-right: 1em;
+  }
   .contentFooter > select {
     font-size: 0.7rem;
   }

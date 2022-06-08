@@ -203,84 +203,83 @@ const TodoPage = ({
   }, []);
 
   return (
-    <>
-      <section className={styles.todoPage}>
-        <Header data={data} />
-        <div className={styles.todoContent}>
-          <section className={styles.contentHeader}>
-            <div className={styles.pageBtnContainer}>
-              <Button text="달력 보기" onClick={goToCalendar} />
-              {isCUDBtnPossible() && (
-                <>
-                  <div className={styles.btnGap}></div>
-                  <Button text="할일 추가하기" onClick={goToAddTodo} />
-                </>
-              )}
-            </div>
-            <div className={styles.controlMenu}>
-              <SelectBox
-                value={sort}
-                optionList={SORT_OPTION_LIST}
-                onChange={selectSort}
-              />
-              <Button isToggle={true} text="전체" onClick={playClickAll} />
-              {categoryList.map((category, idx) => (
-                <Button
-                  typeReverse={true}
-                  isToggle={true}
-                  key={idx}
-                  text={category || '미지정'}
-                  onClick={() => {
-                    if (isAll) {
-                      setIsAll(false);
-                      onClickCategory();
-                    }
-                    selectCategory(category);
-                  }}
-                />
-              ))}
-            </div>
-          </section>
-          <Line />
-          <ul className={styles.todoList}>
-            {rawData &&
-              Object.keys(rawData)
-                .sort(getCompare(sort))
-                .map((key) => {
-                  if (!isAll) {
-                    if (!seletedCategoryList.includes(rawData[key].category))
-                      return null;
+    <section className={styles.todoPage}>
+      <Header data={data} />
+      <div className={styles.todoContent}>
+        <section className={styles.contentHeader}>
+          <div className={styles.pageBtnContainer}>
+            <Button text="달력 보기" onClick={goToCalendar} />
+            {isCUDBtnPossible() && (
+              <>
+                <div className={styles.btnGap}></div>
+                <Button text="할일 추가하기" onClick={goToAddTodo} />
+              </>
+            )}
+          </div>
+          <div className={styles.controlMenu}>
+            <SelectBox
+              value={sort}
+              optionList={SORT_OPTION_LIST}
+              onChange={selectSort}
+            />
+            <Button isToggle={true} text="전체" onClick={playClickAll} />
+            {categoryList.map((category, idx) => (
+              <Button
+                typeReverse={true}
+                isToggle={true}
+                key={idx}
+                text={category || '미지정'}
+                onClick={() => {
+                  if (isAll) {
+                    setIsAll(false);
+                    onClickCategory();
                   }
-                  return (
-                    <Todo
-                      key={key}
-                      todo={rawData[key]}
-                      changeTodoState={changeTodoState}
-                      date={dateData}
-                      todoId={key}
-                      isBtnPossible={isCUDBtnPossible()}
-                      deleteTodo={deleteTodo}
-                    />
-                  );
-                })}
-          </ul>
-          {!record && <div className={styles.noData}>todo를 추가하세요~!</div>}
-          {isCompleteBtnPossible() && (
-            <>
-              <Line />
-              <section className={styles.contentFooter}>
-                <SelectBox
-                  value={satisfaction}
-                  onChange={selectSatisfaction}
-                  optionList={SATISFACTION_OPTION_LIST}
-                />
-                <Button text={'하루 완료하기'} onClick={completeToday} />
-              </section>
-            </>
-          )}
+                  selectCategory(category);
+                }}
+              />
+            ))}
+          </div>
+          <Line mB="6px" />
+        </section>
+
+        <ul className={styles.todoList}>
+          {rawData &&
+            Object.keys(rawData)
+              .sort(getCompare(sort))
+              .map((key) => {
+                if (!isAll) {
+                  if (!seletedCategoryList.includes(rawData[key].category))
+                    return null;
+                }
+                return (
+                  <Todo
+                    key={key}
+                    todo={rawData[key]}
+                    changeTodoState={changeTodoState}
+                    date={dateData}
+                    todoId={key}
+                    isBtnPossible={isCUDBtnPossible()}
+                    deleteTodo={deleteTodo}
+                  />
+                );
+              })}
+        </ul>
+        {!record && <div className={styles.noData}>todo를 추가하세요~!</div>}
+      </div>
+      {isCompleteBtnPossible() && (
+        <div className={styles.footerContainer}>
+          <Line mT="-6px" />
+          <section className={styles.contentFooter}>
+            <SelectBox
+              value={satisfaction}
+              onChange={selectSatisfaction}
+              optionList={SATISFACTION_OPTION_LIST}
+            />
+            <Button text={'하루 완료하기'} onClick={completeToday} />
+          </section>
         </div>
-      </section>
-    </>
+      )}
+    </section>
   );
 };
 
