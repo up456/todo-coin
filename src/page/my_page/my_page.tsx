@@ -10,6 +10,7 @@ import ToggleSection from '../../components/toggle_section/toggle_section';
 import MyCategory from '../../components/my_category/my_category';
 import Loading from '../../components/loading/loading';
 import UseTitle from '../../hook/useTitle';
+import AddCategory from '../../components/add_category/add_category';
 
 interface TypeMyPage {
   data: TypeData;
@@ -219,15 +220,18 @@ const MyPage = ({
       </section>
       <section className={styles.toggleMenus}>
         <ToggleSection title={'나의 카테고리'} defaultType={true}>
-          <ul className={styles.categoryList}>
-            {categoryRecord.map((category, idx) => (
-              <MyCategory
-                key={idx}
-                category={category}
-                deleteMyCategory={deleteMyCategory}
-              />
-            ))}
-          </ul>
+          <>
+            <AddCategory />
+            <ul className={styles.categoryList}>
+              {categoryRecord.map((category, idx) => (
+                <MyCategory
+                  key={idx}
+                  category={category}
+                  deleteMyCategory={deleteMyCategory}
+                />
+              ))}
+            </ul>
+          </>
         </ToggleSection>
 
         <ToggleSection title={'나의 아이템'}>
