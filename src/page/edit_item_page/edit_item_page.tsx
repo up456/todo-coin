@@ -8,6 +8,7 @@ import { TypeEditItemState } from '../../components/item_card/item_card';
 import FileInput from '../../components/fileInput/fileInput';
 import IconInput from '../../components/iconInput/iconInput';
 import ImageUploader from '../../service/ImageUploader';
+import UseTitle from '../../hook/useTitle';
 
 interface TypeEditItemPage {
   editItem: (targetNumber: string, value: TypeItem) => void;
@@ -15,6 +16,7 @@ interface TypeEditItemPage {
 }
 
 const EditItemPage = ({ editItem, imageUploader }: TypeEditItemPage) => {
+  UseTitle('아이템 변환');
   const navigate = useNavigate();
   const itemRef = useRef<HTMLInputElement>(null);
   const { state } = useLocation() as TypeEditItemState;
@@ -66,7 +68,7 @@ const EditItemPage = ({ editItem, imageUploader }: TypeEditItemPage) => {
         <div className={styles.backArrow} onClick={() => navigate(-1)}>
           <img src="/asset/arrow_left.png" alt="arrow_left" />
         </div>
-        <h2 className={styles.headerTitle}>{`아이템 제작`}</h2>
+        <h2 className={styles.headerTitle}>{`아이템 변환`}</h2>
       </section>
       <form className={styles.addItemBody}>
         <div className={styles.inputBox}>
@@ -130,7 +132,7 @@ const EditItemPage = ({ editItem, imageUploader }: TypeEditItemPage) => {
         </div>
       </form>
       <section className={styles.addItemFooter}>
-        <Button text="제작하기" onClick={onSubmit} />
+        <Button text="변환하기" onClick={onSubmit} />
       </section>
     </section>
   );

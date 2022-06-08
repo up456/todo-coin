@@ -7,7 +7,7 @@ import UseTitle from '../../hook/useTitle';
 const NonExistentUser = () => {
   const navigate = useNavigate();
   const [time, setTime] = useState(5);
-  const titleUpdator = UseTitle(`유저 정보 없음`);
+  UseTitle(`유저 정보 없음`);
 
   const goToHome = useCallback(() => {
     navigate('/');

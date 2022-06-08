@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Button from '../../components/button/button';
 import { TypeTodoList, UserIdContext } from '../../App';
 import NonExistentUser from '../../components/non_existent_user/non_existent_user';
+import UseTitle from '../../hook/useTitle';
 
 const DEFAULT_INPUT_VALUE = {
   todo: '',
@@ -19,6 +20,7 @@ interface TypeAddTodoPage {
 }
 
 const AddTodoPage = ({ addTodo }: TypeAddTodoPage) => {
+  UseTitle('todo 작성');
   const navigate = useNavigate();
   const { date } = useParams();
   const todoRef = useRef<HTMLInputElement>(null);

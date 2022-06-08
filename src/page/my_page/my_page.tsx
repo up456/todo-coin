@@ -31,7 +31,7 @@ const MyPage = ({
   editMyNickname,
   editMyProfileImg,
 }: TypeMyPage) => {
-  const titleUpdator = UseTitle(`마이 페이지`);
+  UseTitle(`마이 페이지`);
   const inputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [onFocus, setOnFocus] = useState(false);

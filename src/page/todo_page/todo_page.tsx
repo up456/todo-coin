@@ -47,7 +47,7 @@ const TodoPage = ({
   const [satisfaction, setSatisfaction] = useState(3);
   const { date } = useParams();
   const dateData = date || '';
-  const titleUpdator = UseTitle(`${date} 할일`);
+  UseTitle(`${date} 할일`);
   let record = data?.record?.[dateData];
 
   const categoryList = record?.categoryList || [];

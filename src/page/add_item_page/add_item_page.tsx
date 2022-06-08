@@ -7,6 +7,7 @@ import NonExistentUser from '../../components/non_existent_user/non_existent_use
 import FileInput from '../../components/fileInput/fileInput';
 import ImageUploader from '../../service/ImageUploader';
 import IconInput from '../../components/iconInput/iconInput';
+import UseTitle from '../../hook/useTitle';
 
 const DEFAULT_INPUT_VALUE = {
   itemTitle: '',
@@ -22,6 +23,7 @@ interface TypeAddItemPage {
 }
 
 const AddItemPage = ({ addItem, imageUploader }: TypeAddItemPage) => {
+  UseTitle('아이템 제작');
   const navigate = useNavigate();
   const itemRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState(DEFAULT_INPUT_VALUE);

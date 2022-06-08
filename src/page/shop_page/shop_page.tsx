@@ -13,7 +13,7 @@ interface TypeShopPage {
 }
 
 const ShopPage = ({ data, deleteItem, buyItem, editMyInfo }: TypeShopPage) => {
-  const titleUpdator = UseTitle(`상점`);
+  UseTitle(`상점`);
   return (
     <div className={styles.storePage}>
       <Header data={data} />

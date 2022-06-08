@@ -17,7 +17,7 @@ interface TypeCalendarPage {
 const CalendarPage = ({ data }: TypeCalendarPage) => {
   const navigate = useNavigate();
   const [date, setDate] = useState(new Date());
-  const titleUpdator = UseTitle(`달력`);
+  UseTitle(`달력`);
   const userId = useContext(UserIdContext);
 
   if (!userId) {

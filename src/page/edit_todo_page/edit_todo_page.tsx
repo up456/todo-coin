@@ -5,6 +5,7 @@ import Button from '../../components/button/button';
 import { TypeTodoList, UserIdContext } from '../../App';
 import NonExistentUser from '../../components/non_existent_user/non_existent_user';
 import { TypeEditTodoState } from '../../components/todo/todo';
+import UseTitle from '../../hook/useTitle';
 
 interface TypeEditTodoPage {
   editTodo: (
@@ -16,6 +17,7 @@ interface TypeEditTodoPage {
 }
 
 const EditTodoPage = ({ editTodo }: TypeEditTodoPage) => {
+  UseTitle('todo 수정');
   const navigate = useNavigate();
   const { date } = useParams();
   const todoRef = useRef<HTMLInputElement>(null);
@@ -68,7 +70,7 @@ const EditTodoPage = ({ editTodo }: TypeEditTodoPage) => {
         <div className={styles.backArrow} onClick={() => navigate(-1)}>
           <img src="/asset/arrow_left.png" alt="arrow_left" />
         </div>
-        <h2 className={styles.headerTitle}>{`${date} To-do 작성`}</h2>
+        <h2 className={styles.headerTitle}>{`${date} To-do 수정`}</h2>
       </section>
       <form className={styles.addTodoBody}>
         <div className={styles.inputBox}>
@@ -127,7 +129,7 @@ const EditTodoPage = ({ editTodo }: TypeEditTodoPage) => {
         </div>
       </form>
       <section className={styles.addTodoFooter}>
-        <Button text="작성하기" onClick={onSubmit} />
+        <Button text="수정하기" onClick={onSubmit} />
       </section>
     </section>
   );
