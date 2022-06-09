@@ -19,6 +19,24 @@ v2.0.0버전의 업데이트에서 새로운 기능의 많이 추가되어 기�
 
 ## 버전 정보
 <details>
+<summary>v2.3.1</summary>
+<div markdown="1">
+
+## 수정된 버그 🛠️🐞
+    1. 오후 12시입력 했는데 오전으로 표시되는 버그 -2022.06.09 발견
+        오전 오후로 변환하는 함수에서 12시부분을 고려하지 못해서 수정했습니다.
+  ![image](https://user-images.githubusercontent.com/79118046/172862059-165ca225-3d7a-4ace-a623-30748ba63945.png)
+    
+    2. 카테고리 추가 메뉴에서 입력창에서 지우기가 안 됨 -2022.06.09 발견
+       preventDefault() 함수로 인한 문제였습니다. 이제 정상적으로 작동합니다.
+    
+[해결 상세보기](https://www.notion.so/To-do-Coin-b75b3b4bb3de4b16a4341878154c37ae#6b65addf60b042458b8923a304595d6b)
+
+
+</div>
+</details>
+
+<details>
 <summary>v2.3.0</summary>
 <div markdown="1">
 
