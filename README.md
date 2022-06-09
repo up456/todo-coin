@@ -30,7 +30,7 @@ v2.0.0버전의 업데이트에서 새로운 기능의 많이 추가되어 기�
     2. 카테고리 추가 메뉴에서 입력창에서 지우기가 안 됨 -2022.06.09 발견
        preventDefault() 함수로 인한 문제였습니다. 이제 정상적으로 작동합니다.
     
-[해결 상세보기](https://www.notion.so/To-do-Coin-b75b3b4bb3de4b16a4341878154c37ae#6b65addf60b042458b8923a304595d6b)
+[해결 상세보기](https://www.notion.so](https://gold-route-090.notion.site/To-do-Coin-b75b3b4bb3de4b16a4341878154c37ae#6b65addf60b042458b8923a304595d6b)
 
 
 </div>
