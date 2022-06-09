@@ -1,5 +1,5 @@
 import styles from './add_category.module.css';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 interface TypeAddCategory {
   addMyCategory: (newCategory: string) => void;
 }
@@ -19,17 +19,19 @@ const AddCategory = ({ addMyCategory }: TypeAddCategory) => {
   ) => {
     setCategoryValue(event.target.value);
   };
-  const onClickCreate = (event: React.MouseEvent) => {
-    event.preventDefault();
+  const plyaCreate = () => {
     addMyCategory(categoryValue);
     setCategoryValue('');
+    setOnFocus(false);
+  };
+  const onClickCreate = (event: React.MouseEvent) => {
+    event.preventDefault();
+    plyaCreate();
   };
   const onKeyDownCreate = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.preventDefault();
     if (event.key === 'Enter') {
-      addMyCategory(categoryValue);
-      setCategoryValue('');
-      setOnFocus(false);
+      plyaCreate();
     }
   };
   return (
