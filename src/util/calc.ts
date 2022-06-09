@@ -32,10 +32,12 @@ export function transClockTo12(time: string) {
   let hour = parseInt(time.slice(0, 2));
   const minute = time.slice(3);
   let amPm = '오전';
-  if (hour >= 13) {
+  if (hour >= 12) {
     hour -= 12;
     amPm = '오후';
+    if (hour === 0) hour = 12;
   }
+
   return `${amPm} ${hour}:${minute}`;
 }
 
