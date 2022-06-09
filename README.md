@@ -12,6 +12,48 @@ v2.0.0버전의 업데이트에서 새로운 기능의 많이 추가되어 기�
 
 ## 버전 정보
 <details>
+<summary>v2.3.0</summary>
+<div markdown="1">
+
+## 기능 추가 ✔
+    1. 웹사이트 탭창에서 페이지 제목이 출력됩니다.
+ ![image](https://user-images.githubusercontent.com/79118046/172830714-e6e2062d-0fec-4bd3-9c95-8bda8b01ceb8.png)
+    
+    
+## 기능 변경 ♻
+    1. 카테고리 기능이 변경됩니다.
+      기존 카테고리 입력방식은 수정 시에 활용이 불가하고, 또한 재사용성이 떨어져서 아래와 같이 기능을 수정하였습니다.
+    
+      * 나의 카테고리 등록 방식 변경
+       기존: todo생성 시 입력된 카테고리는 나의 카테고리에 추가 (수정 시에는 불가했음)
+       변경: 카테고리 추가하기 메뉴에서 나의 카테고리 추가. (카테고리 추가메뉴는 todo생성&수정 및 마이페이지에 있습니다.)
+      
+      * 카테고리 입력 방식 변경
+       기존: 아무 제약없이 막 등록 가능
+       변경: 나의 카테고리에 있는 카테고리만 등록가능
+![image](https://user-images.githubusercontent.com/79118046/172832382-7ff0caa3-5e49-4b30-aee3-8c9843ede348.png)
+
+    2. Ui가 개선 되었습니다.
+       * todo_page
+         todoPage에서 고정부분을 헤더뿐만아니라 추가로 (컨트롤 버튼들 + 하단 footer)까지 고정시키고 
+         중간에 todo리스트 부분을 스크롤로 변경하여
+         사용의 편의성을 높였습니다.
+![image](https://user-images.githubusercontent.com/79118046/172833558-334729a8-b59a-413a-943f-42c75dcb44ed.png)
+
+       * todo_card
+         할일에서 상태를 변경하는 부분이 눈에 띄지 않아서 입체감을 추가했습니다.
+![image](https://user-images.githubusercontent.com/79118046/172833619-c6a9f54d-b2e3-4714-866e-57a350574436.png)
+       
+     3. 기본 디폴트 프로필 사진을 변경했습니다.
+        조금더 컨셉에 맞는 기본사진으로 변경했습니다.
+ ![image](https://user-images.githubusercontent.com/79118046/172833995-3d9371ff-ef5a-48fe-906a-6d0dc4198849.png)
+    
+     4. 웹사이트 기본 폰트를 주아체로 변경했습니다.
+   
+</div>
+</details>
+
+<details>
 <summary>v2.2.0</summary>
 <div markdown="1">
 
