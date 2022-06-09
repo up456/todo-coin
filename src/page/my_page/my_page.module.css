@@ -189,7 +189,6 @@
   margin: 0 5em;
 
   font-size: 1.2rem;
-  font-weight: bold;
   color: mainWhite;
 
   display: flex;
@@ -203,11 +202,13 @@
 }
 .nowInfoValue {
   font-size: 1.8rem;
+  font-weight: bold;
   margin-left: auto;
   text-align: left;
 }
 .keyText {
   font-size: 1.2rem;
+  font-weight: normal;
 }
 
 /* 누적 정보 부분 */

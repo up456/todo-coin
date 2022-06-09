@@ -62,7 +62,7 @@
 }
 
 .itemTitle {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: bold;
   margin-top: 0.4em;
   margin-bottom: 0;
@@ -82,14 +82,15 @@
 }
 .itemLv {
   font-size: 0.7rem;
-  font-weight: bold;
+  font-family: serif;
+  font-family: bold;
   font-style: italic;
-  margin-top: 0.4em;
-  margin-bottom: 0.4em;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
   color: textGreen;
 }
 .itemPrice {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   font-weight: bold;
   margin-top: 0.3em;
   margin-bottom: 0.3em;
