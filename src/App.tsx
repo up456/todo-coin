@@ -375,7 +375,13 @@ function App({
             />
             <Route
               path="/:date/editTodo"
-              element={<EditTodoPage editTodo={editTodo} />}
+              element={
+                <EditTodoPage
+                  editTodo={editTodo}
+                  addMyCategory={addMyCategory}
+                  myCategory={data.myInfo.categoryRecord}
+                />
+              }
             />
             <Route path="/calendar" element={<CalendarPage data={data} />} />
             <Route

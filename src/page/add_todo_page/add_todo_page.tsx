@@ -32,6 +32,7 @@ const AddTodoPage = ({
   const navigate = useNavigate();
   const { date } = useParams();
   const todoRef = useRef<HTMLInputElement>(null);
+  const categoryRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState(DEFAULT_INPUT_VALUE);
 
   const userId = useContext(UserIdContext);
@@ -60,6 +61,7 @@ const AddTodoPage = ({
         alert(
           '없는 카테고리입니다. \n카테고리를 추가하거나 다른 카테고리를 선택하세요~!'
         );
+        categoryRef.current?.focus();
         return;
       }
       if (inputValue.deadline === '') {
@@ -116,6 +118,7 @@ const AddTodoPage = ({
           <label className={styles.inputLable}>카테고리</label>
           <div className={styles.inputCategoryBox}>
             <input
+              ref={categoryRef}
               list="category"
               type="text"
               className={`${styles.input} ${styles.categoryInput}`}

@@ -1,5 +1,6 @@
 @value pointGreen, mainGray, mainGreen, makerBoxShadowGreen maker from '/src/common/color.css';
 @value juaFont from '/src/common/font.css';
+@value mobileSize from '/src/common/size.css';
 
 /* 버튼 부분 */
 .hidden {
@@ -43,7 +44,7 @@
   border-radius: 0.5em;
   padding: 0.7em;
   box-shadow: 3px 3px 10px 4px mainGray;
-  margin-left: -0.7em;
+  margin-left: -1.8em;
 
   transition: 300ms;
 }
@@ -52,6 +53,7 @@
 }
 .input {
   flex-grow: 1;
+  flex-shrink: 1;
   padding: 0.6em 1em;
   border: 1px solid mainGray;
   border-radius: 0.5em;
@@ -60,6 +62,9 @@
   outline: none;
   border: 1px solid mainGreen;
   box-shadow: makerBoxShadowGreen;
+}
+.addCategoryBox {
+  margin-left: -1em;
 }
 .addCategoryBtn.onCreate {
   background-color: mainGreen;
@@ -70,3 +75,13 @@
   height: 2.5em;
   border: none;
 } */
+
+@media (max-width: mobileSize) {
+  .input {
+    width: 50%;
+  }
+  .addCategoryForm {
+    position: absolute;
+    left: 3em;
+  }
+}

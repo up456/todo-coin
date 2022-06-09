@@ -62,8 +62,10 @@
 }
 .categoryInput {
   flex-basis: 30%;
+  flex-shrink: 1;
 }
 .addCategoryBox {
+  margin-left: 1em;
   flex-shrink: 0;
 }
 

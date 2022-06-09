@@ -11,6 +11,7 @@ const AddCategory = ({ addMyCategory }: TypeAddCategory) => {
   const toggleFocus = (event: React.MouseEvent) => {
     event.preventDefault();
     setOnFocus(!onFocus);
+    setCategoryValue('');
   };
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement>,
