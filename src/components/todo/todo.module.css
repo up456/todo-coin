@@ -1,5 +1,6 @@
-@value makerBoxShadow, pointGray, todoComplete, todoFail from '/src/common/color.css';
+@value textGray, makerBoxShadow, pointGray, todoComplete, todoFail from '/src/common/color.css';
 @value mobileSize from '/src/common/size.css';
+@value juaFont from '/src/common/font.css';
 
 .todo {
   display: flex;
@@ -9,7 +10,7 @@
   padding: 0.5em 0.8em;
   border-radius: 0.8em;
   box-shadow: makerBoxShadow;
-  font-size: 0.8rem;
+  font-size: 1rem;
 
   position: relative;
   transition: 300ms ease-in;
@@ -34,6 +35,9 @@
 }
 .deadLine {
   margin: 0.5em;
+  font-size: 0.8rem;
+  font-family: juaFont;
+  color: textGray;
 }
 .category {
   background-color: lightyellow;
@@ -43,6 +47,7 @@
 
   margin: 0.5em;
   margin-left: auto;
+  font-size: 0.9rem;
 }
 
 .todoBody {
@@ -103,8 +108,8 @@
 .title {
   margin: 0;
   margin-bottom: 0.2em;
-  font-size: 1rem;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-family: juaFont;
 }
 
 .rewardContainer {
@@ -128,7 +133,7 @@
 }
 
 .completeBox {
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   flex-shrink: 1;
 
   display: flex;
@@ -144,7 +149,7 @@
   font-weight: bold;
 }
 .completeTime {
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   margin-top: 0.2em;
 }
 

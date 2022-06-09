@@ -40,7 +40,7 @@
 }
 .inputLable {
   margin-bottom: 0.5em;
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   font-weight: bold;
 }
 .input {
@@ -55,6 +55,16 @@
   outline: none;
   border: 1px solid mainGreen;
   box-shadow: makerBoxShadowGreen;
+}
+
+.inputCategoryBox {
+  display: flex;
+}
+.categoryInput {
+  flex-basis: 30%;
+}
+.addCategoryBox {
+  flex-shrink: 0;
 }
 
 .addTodoFooter {
