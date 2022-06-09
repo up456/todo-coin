@@ -8,17 +8,20 @@ const AddCategory = ({ addMyCategory }: TypeAddCategory) => {
   const [onFocus, setOnFocus] = useState(false);
   const [categoryValue, setCategoryValue] = useState('');
 
-  const toggleFocus = (event: React.MouseEvent) => {
+  const toggleOnFocus = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     event.preventDefault();
     setOnFocus(!onFocus);
     setCategoryValue('');
   };
-  const onChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    key: string
+
+  const onChangeCategoryValue = (
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setCategoryValue(event.target.value);
+    setCategoryValue((preValue) => event.target.value);
   };
+
   const plyaCreate = () => {
     addMyCategory(categoryValue);
     setCategoryValue('');
@@ -29,7 +32,6 @@ const AddCategory = ({ addMyCategory }: TypeAddCategory) => {
     plyaCreate();
   };
   const onKeyDownCreate = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    event.preventDefault();
     if (event.key === 'Enter') {
       plyaCreate();
     }
@@ -43,7 +45,7 @@ const AddCategory = ({ addMyCategory }: TypeAddCategory) => {
               ? `${styles.addCategoryBtn} ${styles.hidden} ${styles.transLeft}`
               : styles.addCategoryBtn
           }
-          onClick={toggleFocus}
+          onClick={toggleOnFocus}
         >
           카테고리 추가하기
         </button>
@@ -57,7 +59,7 @@ const AddCategory = ({ addMyCategory }: TypeAddCategory) => {
         >
           <button
             className={`${styles.addCategoryBtn} ${styles.onFocus}`}
-            onClick={toggleFocus}
+            onClick={toggleOnFocus}
           >
             닫기 X
           </button>
@@ -65,7 +67,7 @@ const AddCategory = ({ addMyCategory }: TypeAddCategory) => {
             className={styles.input}
             value={categoryValue}
             type="text"
-            onChange={(event) => onChange(event, 'name')}
+            onChange={onChangeCategoryValue}
             onKeyDown={onKeyDownCreate}
             placeholder="카테고리 이름"
           />
