@@ -69,7 +69,6 @@ const AddCategory = ({ addMyCategory }: TypeAddCategory) => {
             onKeyDown={onKeyDownCreate}
             placeholder="카테고리 이름"
           />
-          {/* <input type="color" onChange={(event) => onChange(event, 'color')} /> */}
           <button
             className={`${styles.addCategoryBtn} ${styles.onCreate}`}
             onClick={onClickCreate}

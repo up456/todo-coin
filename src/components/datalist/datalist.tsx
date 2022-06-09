@@ -1,4 +1,4 @@
-import styles from './datalist.module.css';
+// import styles from './datalist.module.css';
 import React from 'react';
 
 interface TypeDatalist {

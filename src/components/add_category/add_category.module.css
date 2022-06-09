@@ -44,8 +44,9 @@
   border-radius: 0.5em;
   padding: 0.7em;
   box-shadow: 3px 3px 10px 4px mainGray;
-  margin-left: -1.8em;
+  margin-left: -0.5em;
 
+  position: absolute;
   transition: 300ms;
 }
 .addCategoryBtn.onFocus {
@@ -70,18 +71,11 @@
   background-color: mainGreen;
 }
 
-/* input[type='color'] {
-  width: 2.5em;
-  height: 2.5em;
-  border: none;
-} */
-
 @media (max-width: mobileSize) {
   .input {
     width: 50%;
   }
   .addCategoryForm {
-    position: absolute;
-    left: 3em;
+    left: 2.8em;
   }
 }
