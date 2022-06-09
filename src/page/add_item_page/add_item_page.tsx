@@ -75,7 +75,7 @@ const AddItemPage = ({ addItem, imageUploader }: TypeAddItemPage) => {
             ref={itemRef}
             type="text"
             className={styles.input}
-            placeholder={'to-do'}
+            placeholder={'아이템 이름'}
             value={inputValue.itemTitle}
             onChange={(event) => onChangeValue(event, 'itemTitle')}
           />
