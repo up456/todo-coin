@@ -40,7 +40,7 @@
 }
 .inputLable {
   margin-bottom: 0.5em;
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   font-weight: bold;
 }
 .input {
@@ -73,7 +73,7 @@
 }
 .inputContainer > label:nth-child(2) {
   display: block;
-  margin-top: 1.4em;
+  margin-top: 1.1em;
   margin-bottom: 0.7em;
 }
 .previewImgBox {

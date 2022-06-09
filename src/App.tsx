@@ -359,7 +359,12 @@ function App({
             />
             <Route
               path="/:date/addTodo"
-              element={<AddTodoPage addTodo={addTodo} />}
+              element={
+                <AddTodoPage
+                  addTodo={addTodo}
+                  myCategory={data.myInfo.categoryRecord}
+                />
+              }
             />
             <Route
               path="/:date/editTodo"

@@ -3,22 +3,17 @@ import React, { useState } from 'react';
 
 const AddCategory = () => {
   const [onFocus, setOnFocus] = useState(false);
-  const [categoryValue, setCategoryValue] = useState({
-    name: '',
-    color: '#ffffe0',
-  });
+  const [categoryValue, setCategoryValue] = useState('');
 
-  const toggleFocus = () => {
+  const toggleFocus = (event: React.MouseEvent) => {
+    event.preventDefault();
     setOnFocus(!onFocus);
   };
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     key: string
   ) => {
-    setCategoryValue((prevCategoryValue) => ({
-      ...prevCategoryValue,
-      [key]: event.target.value,
-    }));
+    setCategoryValue(event.target.value);
   };
   const onCreate = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -28,40 +23,41 @@ const AddCategory = () => {
     <>
       <div className={`${styles.addCategory} ${styles.onFocus}`}>
         <button
-          className={onFocus ? ` ${styles.hidden}` : styles.addCategoryBtn}
+          className={
+            onFocus
+              ? `${styles.addCategoryBtn} ${styles.hidden} ${styles.transLeft}`
+              : styles.addCategoryBtn
+          }
           onClick={toggleFocus}
         >
           카테고리 추가하기
         </button>
-        <button
-          className={
-            onFocus
-              ? `${styles.addCategoryBtn} ${styles.onFocus}`
-              : `${styles.hidden}`
-          }
-          onClick={toggleFocus}
-        >
-          닫기 X
-        </button>
+
         <form
           className={
             onFocus
-              ? styles.addCategoryForm
-              : `${styles.addCategoryForm} ${styles.hidden}`
+              ? `${styles.addCategoryForm} `
+              : `${styles.addCategoryForm} ${styles.hidden} ${styles.transRight}`
           }
         >
+          <button
+            className={`${styles.addCategoryBtn} ${styles.onFocus}`}
+            onClick={toggleFocus}
+          >
+            닫기 X
+          </button>
           <input
             className={styles.input}
             type="text"
             onChange={(event) => onChange(event, 'name')}
             placeholder="카테고리 이름"
           />
-          <input type="color" onChange={(event) => onChange(event, 'color')} />
+          {/* <input type="color" onChange={(event) => onChange(event, 'color')} /> */}
           <button
             className={`${styles.addCategoryBtn} ${styles.onCreate}`}
             onClick={onCreate}
           >
-            생성하기
+            추가
           </button>
         </form>
       </div>

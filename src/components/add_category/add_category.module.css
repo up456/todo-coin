@@ -1,41 +1,72 @@
-@value pointGreen, mainGray, textGreen from '/src/common/color.css';
+@value pointGreen, mainGray, mainGreen, makerBoxShadowGreen maker from '/src/common/color.css';
+@value juaFont from '/src/common/font.css';
 
-.addCategoryBtn {
-  border: none;
-  border-radius: 10px;
-  padding: 0.3em 0.7em;
-  cursor: pointer;
-}
-
-.addCategoryBtn.onFocus {
-  background-color: pointGreen;
-}
-.addCategoryBtn.onCreate {
-  background-color: textGreen;
-}
-
+/* 버튼 부분 */
 .hidden {
   opacity: 0;
   width: 0;
   visibility: hidden;
 }
+.transleft {
+  transform: translateX(-300px);
+}
+.transRight {
+  transform: translateX(300px);
+}
+.addCategoryBtn {
+  opacity: 1;
+  background-color: pointGreen;
+  border: none;
+  border-radius: 10px;
+  padding: 0.3em 0.7em;
 
+  font-family: juaFont;
+
+  cursor: pointer;
+}
+
+/* 추가 컨텐츠 부분 */
 .addCategory {
   height: 3em;
   display: flex;
   align-items: center;
+
+  margin-top: 0.3em;
 }
 .addCategoryForm {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  gap: 0.3em;
+
+  border: 1px solid mainGray;
+  border-radius: 0.5em;
+  padding: 0.7em;
+  box-shadow: 3px 3px 10px 4px mainGray;
+  margin-left: -0.7em;
+
+  transition: 300ms;
 }
-.inputBox {
-  display: flex;
-  flex-direction: column;
+.addCategoryBtn.onFocus {
+  background-color: pointGreen;
 }
-input[type='color'] {
+.input {
+  flex-grow: 1;
+  padding: 0.6em 1em;
+  border: 1px solid mainGray;
+  border-radius: 0.5em;
+}
+.input:focus {
+  outline: none;
+  border: 1px solid mainGreen;
+  box-shadow: makerBoxShadowGreen;
+}
+.addCategoryBtn.onCreate {
+  background-color: mainGreen;
+}
+
+/* input[type='color'] {
   width: 2.5em;
   height: 2.5em;
   border: none;
-}
+} */
