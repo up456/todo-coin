@@ -19,10 +19,15 @@ const DEFAULT_INPUT_VALUE = {
 };
 interface TypeAddTodoPage {
   addTodo: (date: string, inputValue: TypeTodoList) => void;
+  addMyCategory: (newCategory: string) => void;
   myCategory: string[];
 }
 
-const AddTodoPage = ({ addTodo, myCategory }: TypeAddTodoPage) => {
+const AddTodoPage = ({
+  addTodo,
+  addMyCategory,
+  myCategory,
+}: TypeAddTodoPage) => {
   UseTitle('todo 작성');
   const navigate = useNavigate();
   const { date } = useParams();
@@ -119,7 +124,7 @@ const AddTodoPage = ({ addTodo, myCategory }: TypeAddTodoPage) => {
               onChange={(event) => onChangeValue(event, 'category')}
             />
             <div className={styles.addCategoryBox}>
-              <AddCategory />
+              <AddCategory addMyCategory={addMyCategory} />
             </div>
           </div>
           <Datalist inputId="category" opitons={myCategory} />

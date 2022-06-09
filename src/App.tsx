@@ -320,6 +320,12 @@ function App({
     );
     dbService.saveMyCategory(userId, newCategoryRecord);
   };
+  const addMyCategory = (newCategory: string) => {
+    const SetCategoryRecord = new Set(data.myInfo.categoryRecord);
+    SetCategoryRecord.add(newCategory);
+    const newCategoryRecord = Array.from(SetCategoryRecord);
+    dbService.saveMyCategory(userId, newCategoryRecord);
+  };
 
   // 마이페이지 관련
   const editMyNickname = (newNickname: string) => {
@@ -363,6 +369,7 @@ function App({
                 <AddTodoPage
                   addTodo={addTodo}
                   myCategory={data.myInfo.categoryRecord}
+                  addMyCategory={addMyCategory}
                 />
               }
             />
@@ -383,6 +390,7 @@ function App({
                   deleteMyCategory={deleteMyCategory}
                   editMyNickname={editMyNickname}
                   editMyProfileImg={editMyProfileImg}
+                  addMyCategory={addMyCategory}
                 />
               }
             />

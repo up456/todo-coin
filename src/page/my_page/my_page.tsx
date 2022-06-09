@@ -21,6 +21,7 @@ interface TypeMyPage {
   deleteMyCategory: (targetCategory: string) => void;
   editMyNickname: (newNickname: string) => void;
   editMyProfileImg: (file: File) => Promise<void>;
+  addMyCategory: (newCategory: string) => void;
 }
 const MyPage = ({
   data,
@@ -31,6 +32,7 @@ const MyPage = ({
   deleteMyCategory,
   editMyNickname,
   editMyProfileImg,
+  addMyCategory,
 }: TypeMyPage) => {
   UseTitle(`마이 페이지`);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -221,7 +223,7 @@ const MyPage = ({
       <section className={styles.toggleMenus}>
         <ToggleSection title={'나의 카테고리'} defaultType={true}>
           <>
-            <AddCategory />
+            <AddCategory addMyCategory={addMyCategory} />
             <ul className={styles.categoryList}>
               {categoryRecord.map((category, idx) => (
                 <MyCategory
