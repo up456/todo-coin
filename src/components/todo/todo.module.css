@@ -1,4 +1,4 @@
-@value textGray, makerBoxShadow, pointGray, todoComplete, todoFail from '/src/common/color.css';
+@value mainGray, textGray, makerBoxShadow, pointGray, todoComplete, todoFail from '/src/common/color.css';
 @value mobileSize from '/src/common/size.css';
 @value juaFont from '/src/common/font.css';
 
@@ -55,7 +55,7 @@
   margin-bottom: 0.5em;
 }
 .todoState {
-  flex-basis: 15%;
+  flex-basis: 20%;
 
   display: flex;
   justify-content: center;
@@ -78,9 +78,11 @@
 .todoStateIcon > img {
   position: absolute;
   transition: 300ms ease-in;
-  padding-right: 1.5em;
+  margin-right: 1.5em;
 }
 .todoStateIcon > img:nth-child(1) {
+  box-shadow: makerBoxShadow;
+  border-radius: 0.5em;
   z-index: 3;
 }
 .todoStateIcon > img:nth-child(2) {
@@ -159,7 +161,7 @@
   position: absolute;
   z-index: 4;
 
-  transform: translate(200px, -5px) scale(1.15);
+  transform: translate(200px, 10px) scale(1.15);
   background-image: url('/public/asset/fail_result.png');
   background-size: contain;
   background-repeat: no-repeat;
@@ -180,7 +182,7 @@
   position: absolute;
   z-index: 4;
 
-  transform: translate(205px, -5px) rotate(20deg) scale(1.4);
+  transform: translate(205px, 10px) rotate(20deg) scale(1.4);
   background-image: url('/public/asset/complete_result.png');
   background-size: contain;
   background-repeat: no-repeat;
@@ -209,6 +211,10 @@
 }
 
 @media (max-width: mobileSize) {
+  .todoState {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
   .todoState.onFocus {
     flex-basis: 42%;
   }
@@ -216,12 +222,12 @@
   .resultFail {
     width: 80px;
     height: 80px;
-    transform: translate(150px, 8px) scale(1.15);
+    transform: translate(150px, 25px) scale(1.15);
   }
 
   .resultComplete {
     width: 80px;
     height: 80px;
-    transform: translate(150px, 8px) rotate(20deg) scale(1.4);
+    transform: translate(150px, 25px) rotate(20deg) scale(1.4);
   }
 }
