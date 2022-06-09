@@ -1,11 +1,12 @@
 @value mainGreen,makerBoxShadow,  mainWhite from '/src/common/color.css';
+@value juaFont from '/src/common/font.css';
 
 .btn {
   width: 100%;
   border: none;
   border-radius: 0.3em;
+  font-family: juaFont;
   font-size: 1.2rem;
-  font-weight: bold;
   padding: 0.4em 0;
 
   background-color: mainGreen;

@@ -1,4 +1,5 @@
 @value mainBg from '/src/common/color.css';
+@value doHyeonFont from '/src/common/font.css';
 
 .app {
   width: 100%;
@@ -6,6 +7,8 @@
   min-height: 100vh;
   margin: 0 auto;
   background-color: mainBg;
+
+  font-family: doHyeonFont;
 
   position: relative;
 }

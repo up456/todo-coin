@@ -21,6 +21,7 @@
 .date {
   align-self: start;
   margin: 0;
+  font-size: 1rem;
 }
 
 .dayInfoContainer {
@@ -48,7 +49,7 @@
 }
 .infoTitle {
   margin: 0;
-  font-size: 0.5rem;
+  font-size: 0.8rem;
   color: textGray;
   font-weight: bold;
 }

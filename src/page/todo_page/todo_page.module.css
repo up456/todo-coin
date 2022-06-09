@@ -19,7 +19,7 @@
   padding-bottom: 1.1em;
 }
 .pageBtnContainer > button {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
 }
 .pageBtnContainer > button:hover {
   box-shadow: makerBoxShadowGreen;
@@ -34,7 +34,7 @@
   gap: 0.5em;
 }
 .controlMenu > button {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 .controlMenu > button:hover {
   box-shadow: makerBoxShadowGreen;
