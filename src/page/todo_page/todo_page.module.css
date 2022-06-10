@@ -2,10 +2,10 @@
 @value mobileSize from '/src/common/size.css';
 
 .todoPage {
-  height: 105vh;
+  height: 100vh;
   display: grid;
-  grid-template-rows: 10% 72% 8%;
-  overflow: hidden;
+  grid-template-rows: 10% 80% 3%;
+  overflow: hidden auto;
 }
 .todoContent {
   display: flex;

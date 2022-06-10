@@ -1,4 +1,8 @@
 @value mainWhite, makerBoxShadowSpread from '/src/common/color.css';
+.calendarPage {
+  height: 100vh;
+  overflow: hidden;
+}
 .calendarBox {
   display: flex;
   justify-content: center;

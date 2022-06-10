@@ -72,7 +72,7 @@ const Header = ({ data }: TypeHeader) => {
           </div>
         </Tippy>
       </header>
-      <Line />
+      <Line mB="0" />
     </div>
   );
 };

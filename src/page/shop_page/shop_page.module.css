@@ -1,5 +1,14 @@
 @value mobileSize from '/src/common/size.css';
 
+.storePage {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 10% 90%;
+  overflow: hidden;
+}
+.store {
+  overflow: hidden auto;
+}
 .storeTitle {
   display: flex;
   justify-content: center;

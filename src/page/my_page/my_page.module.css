@@ -3,15 +3,17 @@
 @value mobileSize from '/src/common/size.css';
 
 .myPageContainer {
-  overflow: hidden auto;
+  height: 100vh;
 }
 .myPage {
   background: myPageBg;
   width: 100%;
-  height: 36em;
+  height: 31em;
+  padding-top: 1em;
 
   border-radius: 0 0 50px 50px;
 }
+
 /* 로그아웃 버튼 */
 .logoutBtn {
   width: 3em;
@@ -268,7 +270,7 @@
 
 @media (max-width: mobileSize) {
   .myPage {
-    height: 38.5em;
+    height: 32.5em;
   }
   .profileContainer {
     margin: 0.5em;
