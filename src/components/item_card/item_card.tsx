@@ -71,21 +71,21 @@ const ItemCard = ({
         buyItem(item);
       }
     } else if (item.itemLv <= myInfo.myLv) {
-      alert(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      alert(`━━━━━━━━━━━━━━━━━━━
   소지금이 ${-newCoin}coin 부족합니다~!
-      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+━━━━━━━━━━━━━━━━━━━`);
     } else if (item.itemPrice <= myInfo.myCoin) {
-      alert(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      alert(`━━━━━━━━━━━━━━━━━━━
   레벨이 ${item.itemLv - myInfo.myLv}Lv 부족합니다~!
   아이템Lv: ${item.itemLv} > 현재Lv: ${myInfo.myLv}
-      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━
 `);
     } else {
-      alert(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      alert(`━━━━━━━━━━━━━━━━━━━
   소지금이 ${-newCoin}coin 부족합니다~!
   레벨이 ${item.itemLv - myInfo.myLv}Lv 부족합니다~!
   아이템Lv: ${item.itemLv} > 현재Lv: ${myInfo.myLv}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━
 `);
     }
   };
