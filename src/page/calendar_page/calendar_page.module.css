@@ -2,6 +2,12 @@
 .calendarPage {
   height: 100vh;
   overflow: hidden;
+  display: grid;
+  grid-template-rows: 10% 90%;
+}
+.calendarBody {
+  margin-top: 1.5em;
+  overflow: hidden auto;
 }
 .calendarBox {
   display: flex;

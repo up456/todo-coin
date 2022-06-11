@@ -4,6 +4,15 @@
 
 .myPageContainer {
   height: 100vh;
+
+  display: grid;
+  grid-template-rows: 10% 90%;
+
+  overflow: hidden;
+}
+.myPageBody {
+  margin-top: 1em;
+  overflow: hidden auto;
 }
 .myPage {
   background: myPageBg;
@@ -269,6 +278,9 @@
 }
 
 @media (max-width: mobileSize) {
+  .myPageBody {
+    margin-top: 0;
+  }
   .myPage {
     height: 32.5em;
   }

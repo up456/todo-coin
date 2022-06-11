@@ -27,10 +27,12 @@ const CalendarPage = ({ data }: TypeCalendarPage) => {
   return (
     <section className={styles.calendarPage}>
       <Header data={data} />
-      <div className={styles.calendarBox}>
-        <Calendar onChange={setDate} value={date} />
+      <div className={styles.calendarBody}>
+        <div className={styles.calendarBox}>
+          <Calendar onChange={setDate} value={date} />
+        </div>
+        <DayRecord data={data} date={changeDateToString(date)} />
       </div>
-      <DayRecord data={data} date={changeDateToString(date)} />
     </section>
   );
 };

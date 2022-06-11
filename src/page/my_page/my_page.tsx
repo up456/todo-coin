@@ -96,8 +96,8 @@ const MyPage = ({
 
   return (
     <div className={styles.myPageContainer}>
+      <Header data={data} />
       <section className={styles.myPageBody}>
-        <Header data={data} />
         <section className={styles.myPage}>
           <Tippy
             render={(attrs) => (
