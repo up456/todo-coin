@@ -6,7 +6,7 @@
 <br/>
 
 ### pwa 모바일 화면
-![Video Label](http://img.youtube.com/vi/gMMsuNhXjdU/0.jpg)
+![Video Label](http://img.youtube.com/vi/gMMsuNhXjdU/0.jpg)(https://www.youtube.com/watch?v=gMMsuNhXjdU)
 
 ## 공지 사항
 v2.0.0버전의 업데이트에서 새로운 기능의 많이 추가되어 기존 db의 모양이 변경되어 기존 데이터가 초기화되었음을 알려드립니다~!
