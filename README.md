@@ -5,6 +5,10 @@
 ### [[⚡todo-coin]할일 작성하러 가기](https://todo-coin.netlify.app/)
 <br/>
 
+<video width="100%" height="100%" controls="controls">
+  <source src="화면.mp4" type="video/mp4">
+</video>
+
 ## 공지 사항
 v2.0.0버전의 업데이트에서 새로운 기능의 많이 추가되어 기존 db의 모양이 변경되어 기존 데이터가 초기화되었음을 알려드립니다~!
 
